@@ -1,0 +1,113 @@
+.book {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    cursor: pointer;
+    width: calc(25% - 10px);
+    height: 235px;
+    position: relative;
+}
+
+.book:hover .cover {
+    transform: rotateX(10deg) rotateY(-180deg);
+}
+
+.book:hover .last-page {
+    transition: background 0.3s, background-position 3s;
+    background-position: 0 0;
+}
+
+.cover {
+    z-index: 1;
+    transition: all 3s;
+    transform-style: preserve-3d;
+}
+
+.back-cover {
+    z-index: -2;
+    box-shadow: 2px 2px 5px #009da0, 2px 2px 10px #2377a9, 2px 2px 15px #00a1feaa;
+}
+
+.book .cover,
+.book .back-cover {
+    height: 100%;
+    width: 100%;
+    border-radius: 0px 10px 10px 0px;
+    position: absolute;
+    transform: rotateX(10deg);
+    transform-origin: center left;
+}
+
+.book .page,
+.book .last-page {
+    height: 95%;
+    width: 95%;
+    background: #fff;
+    position: absolute;
+    border-radius: 0px 10px 10px 0px;
+    transform: rotateX(10deg);
+    position: relative;
+    z-index: -1;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    transform-style: preserve-3d;
+    box-shadow: 1px 1px 3px black;
+}
+
+.last-page .action {
+    position: absolute;
+    top: 5%;
+    right: 2px;
+    display: flex;
+    gap: 8px;
+    font-size: 20px;
+}
+
+.last-page .nbpage {
+    position: absolute;
+    top: 88%;
+    width: 90%;
+    text-align: right;
+    font-size: 14px;
+}
+
+.page:nth-child(2) {
+    transition-duration: 3s;
+}
+
+.book:hover .page:nth-child(2) {
+    transition-duration: 6s;
+}
+
+.last-page span {
+    font-size: 25px;
+    color: #2b2b2bdd;
+    font-weight: 800;
+}
+
+.contentBook {
+    margin-top: 10px;
+    height: 120%;
+}
+
+.contentBook .btnLeftRight {
+    display: none;
+    top: 205px;
+}
+
+contentBook:hover .btnLeftRight {
+    display: flex;
+}
+
+/* Ajoutez une classe CSS pour masquer le cover lorsque le z-index est -1 */
+.book:hover .hide-cover .cover {
+    z-index: -1;
+    transform: rotateX(10deg) rotateY(-180deg);
+}
+
+.contentBook .hide-cover .last-page {
+    z-index: 1;
+    cursor: auto;
+}

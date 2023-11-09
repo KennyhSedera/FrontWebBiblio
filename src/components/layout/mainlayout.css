@@ -1,0 +1,163 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.layout{
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(to top left, 
+    #0059ffaf, #00fbff85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.animate{
+    animation: mymove 55s infinite;
+    background-image: linear-gradient(to top left,
+        #0059ffaf, #00fbff85);
+    border-radius: 50%;
+}
+.animate1{
+    animation: cardcircle 55s infinite;
+    background-image: linear-gradient(to bottom right,
+        #0059ffaf, #00fbff85);
+    border-radius: 50%;
+}
+.layout .card6{
+    position: absolute;
+    left: 2%;
+    width: 80px;
+    height: 80px;
+}
+.layout .card5{
+    position: absolute;
+    left: 90%;
+    transform: rotate(45deg);
+    width: 80px;
+    height: 80px;
+}
+.layout .card1{
+    position: absolute;
+    left: 20%;
+    transform: rotate(45deg);
+    width: 40px;
+    height:40px;
+}
+.layout .card2{
+    position: absolute;
+    left: 40%;
+    width: 60px;
+    height: 60px;
+}
+.layout .card4{
+    position: absolute;
+    left: 60%;
+    transform: rotateZ(45deg);
+    width: 60px;
+    height: 60px;
+}
+.layout .card3{
+    position: absolute;
+    left: 78%;
+    transform: rotateZ(160deg);
+    width: 40px;
+    height: 40px;
+}
+.card1 { animation-timing-function: ease-in; }
+.card2 { animation-timing-function: ease-in-out; }
+.card3 { animation-timing-function: ease-in; }
+.card4 { animation-timing-function: ease-in-out; }
+.card5 { animation-timing-function: ease-in; }
+.card6 { animation-timing-function: ease-in-out; }
+
+@keyframes mymove {
+    from { bottom: 20px; }
+    to { bottom: 100vh; }
+}
+@keyframes cardcircle {
+    from { bottom: 100vh; }
+    to { bottom: 20px; }
+}
+.layout .layoutcontainer {
+    width: 95%;
+    height: 90%;
+    z-index: 1;
+    display: flex;
+    gap: 10px;
+}
+.layoutcontent,
+.layoutsidebar {
+    border-radius: 10px;
+    z-index: 1;
+}
+.layout .layoutcontainer .layoutsidebar{
+    width: 25%;
+    background: #ffffffa3;
+}
+.layout .layoutcontainer .layoutTopbarContent{
+    width: 85%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    position: relative;
+}
+.layoutTopbarContent .layoutcontent{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    visibility: hidden;
+}
+.layout .layoutcontainer .layoutTopbarContent .layouttopbar {
+    width:calc(100% - 30px);
+    display: flex;
+    flex-direction: row;
+    font-size: 15px;
+    color: black;
+    gap: 5px;
+    border-radius: 10px;
+    padding-inline: 15px;
+    justify-content: space-between; 
+    align-items: center;
+    height: 80px;
+    background: #ffffffa3;
+}
+
+
+@media only screen and (max-width: 780px) {
+  /* For tablets: */
+  .layoutsidebar{
+    display: none;
+  }
+  .layout .layoutcontainer .layoutcontent {
+    width: 100%;
+  }
+  .card1, .card2, .card3,
+  .card4, .card5, .card6 {
+    display: none;
+  }
+}
+@media only screen and (min-width: 768px) {
+  /* For desktop: */
+  
+}
+
+
+.layoutcontent-inner,
+.layoutcontent:hover {
+    visibility: visible;
+}
+
+.layoutcontent .layoutcontent-inner {
+    height: 100%;
+}
+
+.contentlayoutinner .btnfloat{
+    visibility: hidden;
+    box-shadow: 0 6px 8px #00000080;
+}
+
+.contentlayoutinner:hover .btnfloat{
+    visibility: visible;
+}

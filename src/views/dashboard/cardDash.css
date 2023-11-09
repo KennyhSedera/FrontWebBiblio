@@ -1,0 +1,172 @@
+.containercard {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-wrap: wrap;
+    padding-inline: 10px;
+    padding-top: 0;
+    margin-block: 0;
+}
+
+.tBox-wrap {
+    margin-top: 20px;
+    width: 200px;
+    min-height: 200px;
+    position: relative;
+    transition: all 0.6s ease-out;
+    perspective: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    /* background: blue; */
+}
+
+.tBox-wrap:hover {
+    transition: all 0.3s linear;
+    transform: scale(1.05);
+}
+
+.tBox-wrap .header {
+    position: absolute;
+    top: -14%;
+    background: transparent;
+    left: 52%;
+    border-radius: 50%;
+    transform-style: preserve-3d;
+    box-shadow: 2px 2px 10px #009da0, 2px 2px 15px #2377a9, 2px 2px 5px #00a1feaa;
+}
+
+.tBox {
+    width: 98%;
+    height: 98%;
+    position: relative;
+    background: #ffffff33;
+    transition: all 0.6s ease-out;
+    transform: rotateX(0deg) rotateY(0deg);
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px #009da0, 2px 2px 2px #2377a9, 2px 2px 5px #00a1feaa;
+    padding: 10px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color:black;
+}
+
+.tHover {
+    width: 33.333%;
+    height: 33.333%;
+    position: absolute;
+    z-index: 1;
+}
+
+.tHover:nth-child(1) {
+    left: 0;
+    top: 0;
+    display: flex;
+    gap: 8px;
+    padding-left: 5px;
+}
+
+.tHover:nth-child(2) {
+    left: 33.333%;
+    top: 0;
+    z-index: 2;
+}
+
+.tHover:nth-child(3) {
+    left: 66.666%;
+    top: 0;
+}
+
+.tHover:nth-child(4) {
+    left: 0;
+    top: 33.333%;
+}
+
+.tHover:nth-child(5) {
+    left: 33.333%;
+    top: 33.333%;
+}
+
+.tHover:nth-child(6) {
+    left: 66.666%;
+    top: 33.333%;
+}
+
+.tHover:nth-child(7) {
+    left: 0;
+    top: 66.666%;
+}
+
+.tHover:nth-child(8) {
+    left: 33.333%;
+    top: 66.666%;
+}
+
+.tHover:nth-child(9) {
+    left: 66.666%;
+    top: 66.666%;
+}
+
+.tHover:nth-child(1):hover~.tBox {
+    transform: rotateX(-15deg) rotateY(15deg);
+}
+
+.tHover:nth-child(2):hover~.tBox {
+    transform: rotateX(-15deg) rotateY(0deg);
+}
+
+.tHover:nth-child(3):hover~.tBox {
+    transform: rotateX(-15deg) rotateY(-15deg);
+}
+
+.tHover:nth-child(4):hover~.tBox {
+    transform: rotateX(0deg) rotateY(15deg);
+}
+
+.tHover:nth-child(5):hover~.tBox {
+    transform: rotateX(0deg) rotateY(0deg);
+}
+
+.tHover:nth-child(6):hover~.tBox {
+    transform: rotateX(0deg) rotateY(-15deg);
+}
+
+.tHover:nth-child(7):hover~.tBox {
+    transform: rotateX(15deg) rotateY(15deg);
+}
+
+.tHover:nth-child(8):hover~.tBox {
+    transform: rotateX(15deg) rotateY(0deg);
+}
+
+.tHover:nth-child(9):hover~.tBox {
+    transform: rotateX(15deg) rotateY(-15deg);
+}
+
+.tBox img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+    position: relative;
+    /* top: 0px; */
+    transform-style: preserve-3d;
+    /* left: calc(50% - 50px); */
+    box-shadow: 2px 2px 10px #009da0, 2px 2px 2px #2377a9, 2px 2px 5px #00a1feaa;
+}
+
+.tBox .nombre {
+    font-size: 30px;
+    border-radius: 15px;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.tBox .title {
+    font-size: 20px;
+}

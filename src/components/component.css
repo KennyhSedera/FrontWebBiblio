@@ -1,0 +1,118 @@
+.layout {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20;
+}
+
+.container {
+    height: calc(100vh - 50px);
+    width: 92%;
+    border-radius: 20px;
+    /* margin-inline: 15px; */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+}
+
+.sidebarscroll {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100% - 250px);
+    visibility: hidden;
+}
+
+.sidebarscroll-inner,
+.sidebarscroll:hover {
+    visibility: visible;
+    /* overflow-x: hidden; */
+}
+
+
+.topbar {
+    height: 65px;
+    background: transparent;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-inline: 20px;
+}
+
+.content {
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: calc(100vh - 125px);
+    visibility: hidden;
+}
+
+.content-inner,
+.content:hover {
+    visibility: visible;
+}
+
+.content-inner {
+    padding: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: grey;
+    border-radius: 50px;
+}
+::-webkit-scrollbar-track {
+    background: white;
+    border-radius: 50px;
+}
+
+.list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 40px;
+    padding: 3px 10px;
+    text-decoration: none;
+    font-size:15px;
+    margin: 5px 10px;
+    color:black;
+}
+.sublist {
+    display: flex;
+    gap:10px;
+    align-items: center;
+    height: 40px;
+    padding: 3px 10px;
+    text-decoration: none;
+    font-size:15px;
+    margin: 5px 30px;
+    color:black;
+}
+
+.list:hover, .sublist:hover {
+    background: #ffffff6e;
+    border-radius: 5px;
+    transform: scale(1.1);
+    font-size: 14px;
+    margin-inline: 10px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.sublist:hover, .sublist .active{
+    margin: 10px 30px;
+}
+
+.iconNotification{
+    border-radius: 50; margin-right: 8;
+    width: 36; height: 36; flex-direction: row-reverse;
+    display: flex; align-items: center; justify-content: center;
+}
+.iconNotification, .badge{
+    position: absolute; width: 20; height: 20;
+    border-radius: 50; background: red; top: 28; color: white;
+    display: flex; align-items: center; justify-content: center;
+}

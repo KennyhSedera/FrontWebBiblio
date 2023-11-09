@@ -1,0 +1,24 @@
+.dashboard {
+    height: 100%;
+    /* background-image: url('../../../public/3.jpg'); */
+    /* color:#ff0000bb; */
+}
+
+.dashboardcontent {
+    padding: 10px;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.carddashboard {
+    transition: all 300ms ease-in;
+}
+
+.carddashboard:hover {
+    transform: scale(1.01);
+}

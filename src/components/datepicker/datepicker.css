@@ -1,0 +1,251 @@
+/* Styles for the date picker input container */
+.datepicker-input {
+    position: relative;
+    display: inline-block;
+    font-family: Arial, sans-serif;
+    color: #333;
+    width: 100%;
+    height: 48px;
+}
+
+.datepicker-input .inputdate{
+    width: calc(100% - 20px);
+    height: 48px;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding-inline: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    box-shadow: 0 2px 2px #00000080;
+}
+.datepicker-input .placeholder {
+    height:100%;
+    display: flex;
+    align-items: center;
+    position: absolute;
+    left: 84px;
+}
+
+/* Styles for the input field */
+.datepicker-input .inputdate input {
+    height:90%;
+    width: calc(100% - 20px);
+    border:none;
+    outline:none;
+    background: transparent;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Styles for the calendar dropdown */
+.datepicker-input .calendar {
+    position: absolute;
+    top: -100%;
+    left: 0;
+    background: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    display: none;
+    z-index: 1000;
+    border-radius: 10px;
+}
+
+/* Styles for the calendar header */
+.datepicker-input .calendar .calendar-header {
+    background: #3498db;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.datepicker-input .calendar .calendar-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.datepicker-input .calendar .calendar-header button:hover {
+    color: #3498db;
+    background:#ffffffd1;
+}
+
+/* Styles for the month and year in the calendar header */
+.datepicker-input .calendar .calendar-header .month-selector {
+    background: #fff;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 60px) !important;
+    overflow-y: auto;
+    border-radius: 0 0 10px 10px ;
+    color: black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 10px;
+}
+.datepicker-input .calendar .calendar-header .year-selector {
+    background: #fff;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 60px) !important;
+    overflow-y: auto;
+    border-radius: 0 0 10px 10px ;
+    color: black;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    padding-top: 10px;
+}
+.month-option{
+    width: calc(33% - 8px);
+    height: 40px !important;
+    margin: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 14px;
+}
+.month-option:hover{
+    cursor: pointer;
+    background: #f0f0f0;
+}
+.year-option{
+    width: calc(33% - 8px);
+    height: 40px !important;
+    margin: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    font-weight: 500;
+    font-size: 14px;
+}
+.year-option:hover{
+    cursor: pointer;
+    background: #f0f0f0;
+}
+.datepicker-input .calendar .calendar-header h2 {
+    margin-top: 5px;
+    font-size: 18px;
+}
+
+/* Styles for the weekdays */
+.datepicker-input .calendar .weekdays {
+    display: flex;
+    padding-inline: 12px;
+    border-bottom: 1px solid #ccc;
+    /* background: #f2f2f2; */
+}
+
+.datepicker-input .calendar .weekday {
+    flex: 1;
+    text-align: center;
+    padding: 4px;
+    font-weight: 700;
+    font-size: 16px;
+}
+
+/* Styles for the days in the calendar */
+.datepicker-input .calendar .days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 0px 10px 11px 10px;
+}
+
+.datepicker-input .calendar .calendar-day {
+    text-align: center;
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    margin: 1px;
+}
+
+.datepicker-input .calendar .calendar-day:hover {
+    background: #f0f0f0;
+}
+
+/* Styles for the empty days in the calendar */
+.datepicker-input .calendar .empty-day {
+    border: none;
+    visibility: hidden;
+}
+
+/* Style for the current day */
+.datepicker-input .calendar .calendar-day.today {
+    background: #a5a5a5;
+    color: #fff;
+    font-weight: bold;
+}
+
+/* Style for the selected day */
+.datepicker-input .calendar .calendar-day.selected {
+    background: #3498db;
+    color: #fff;
+    font-weight: bold;
+}
+
+.datepicker-input .calendar-header .btnmois{
+    padding-inline-start: 4px;
+    padding-block: 2px;
+    font-size: 18px;
+}
+.datepicker-input .calendar-header .btnmois:hover {
+    background: #ededed40;
+}
+
+.datepicker-input .calendar-header .btnyear{
+    padding-inline-start: 4px;
+    padding-block: 2px;
+    font-size: 18px;
+}
+.datepicker-input .calendar-header .btnyear:hover {
+    background: #ededed40;
+}
+.datepicker-input .calendar-header .btnmois:hover .arrowmois,
+.datepicker-input .calendar-header .btnyear:hover .arrowmois{
+    visibility: visible;
+}
+.datepicker-input .calendar-header .arrowmois{
+    visibility: hidden;
+    margin-left: 4px;
+}
+.active-month {
+    background: #3498db !important;
+    color: #fff !important;
+}
+.active-year {
+    background: #3498db !important;
+    color: #fff !important;
+}
+.current-month {
+    background: #a5a5a5;
+    color: #000;
+}
+.current-year {
+    background: #a5a5a5;
+    color: #000;
+}

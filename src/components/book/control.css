@@ -1,0 +1,35 @@
+.flipcard {
+    width: 600px;
+    height: 320px;
+    perspective: 1000px;
+    margin: 20px;
+}
+
+.flipcard .flipcardinner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    border-radius: 10px;
+    background: #ffffffa6;
+    transition: transform 1s;
+    transform-style: preserve-3d;
+}
+.flipfront,
+.flipback{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.flipback {
+    transform: rotateY(180deg);
+}
+.flipcard.flipped .flipcardinner{
+    transform: rotateY(180deg);
+}

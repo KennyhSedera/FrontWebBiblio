@@ -1,0 +1,19 @@
+.alertcomponent {
+    min-width: 250px;
+    max-width: 320px;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-inline: 20px;
+    border-radius: 10px;
+    font-size: 16px;
+    color: white;
+    z-index: 100;
+}
+.alertcomponent .alertmsg {
+    width: calc(100% - 40px);
+    display: flex;
+    flex-wrap: wrap;
+    text-wrap: wrap;
+}

@@ -1,0 +1,102 @@
+.datatable table {
+    width: 100%;
+}
+
+.datatable td img {
+    width: 36px;
+    height: 36px;
+    margin-right: .5rem;
+    border-radius: 50%;
+
+    vertical-align: middle;
+}
+
+.datatable table,
+.datatable th,
+.datatable td {
+    border-collapse: collapse;
+    padding: 1rem;
+    text-align: left;
+}
+
+.datatable thead th:nth-child(1) {
+    border-top-left-radius: 10px;
+}
+
+.datatable thead th:last-child{
+    border-top-right-radius: 10px;
+}
+
+.datatable thead{
+    background: #ffffff98;
+    border-bottom: 1px solid #00000020;
+    height:55px;
+    /* background-image: linear-gradient(to left,
+    #0059ff69, #00fbff5b); */
+}
+  
+.datatable thead th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    /* background-color: #00aaff85; */
+    cursor: pointer;
+    text-transform: capitalize;
+}
+
+/* tbody tr:nth-child(even) { */
+    /* background-color: #0059ffaf; */
+    /* background-image: linear-gradient(to left,
+    #0059ff69, #00fbff5b); */
+/* } */
+
+.datatable tbody tr {
+    --delay: .1s;
+    transition: .5s ease-in-out var(--delay), background-color 0s;
+    background: #ffffff98;
+}
+
+.datatable tbody tr.hide {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+.datatable tbody tr:last-child td:nth-child(1){
+    border-bottom-left-radius: 10px;
+}
+
+.datatable tbody tr:last-child td:last-child{
+    border-bottom-right-radius: 10px;
+}
+
+.datatable tbody tr:hover {
+    /* background-color: rgba(255, 255, 255, 0.591); */
+    background-image: linear-gradient(to left,
+                #0059ff69, #00fbff5b) !important;
+}
+
+tbody tr td,
+tbody tr td p,
+.datatable tbody tr td img {
+    transition: .2s ease-in-out;
+}
+
+.datatable tbody tr.hide td,
+.datatable tbody tr.hide td p {
+    padding: 0;
+    font: 0 / 0 sans-serif;
+    transition: .2s ease-in-out .5s;
+}
+
+.datatable tbody tr.hide td img {
+    width: 0;
+    height: 0;
+    transition: .2s ease-in-out .5s;
+}
+
+
+@media (max-width: 1000px) {
+    .datatable td:not(:first-of-type) {
+        min-width: 12.1rem;
+    }
+}

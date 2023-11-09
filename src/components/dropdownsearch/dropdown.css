@@ -1,0 +1,46 @@
+/* Style de base pour le conteneur Autocomplete */
+.autocomplete {
+    position: relative;
+    width: 100%;
+    box-shadow: 0 2px 2px #00000080;
+    border-radius: 10px;
+}
+
+/* Style de la zone de recherche */
+.autocomplete input[type="text"] {
+    width: calc(100%);
+    height: 48px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border: none;
+    outline: none;
+    padding-inline: 10px;
+    border-radius: 10px;
+}
+
+/* Style de la liste des résultats */
+.results {
+    position: absolute;
+    top: 110%;
+    left: 0;
+    width: 100%;
+    font-size: 16px;
+    max-height: 200px;
+    overflow-y: auto;
+    border-top: none;
+    border-radius: 10px;
+    background-color: #fff;
+    z-index: 1;
+    box-shadow: 0 2px 2px #00000080;
+}
+
+/* Style des éléments de la liste des résultats */
+.results li {
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.results li:hover {
+    background-color: #f0f0f0;
+}

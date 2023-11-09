@@ -1,0 +1,77 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.button {
+  background: #00b2fee1;
+  transition: all 300ms ease-in;
+  color: white;
+  font-weight: bold;
+  padding-inline: 8px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: capitalize;
+  outline: none;
+  border: none;
+}
+
+.button:hover {
+  /* transform: scale(1.05); */
+  cursor: pointer;
+}
+
+.toptitle {
+  transition: all 300ms ease-out;
+}
+
+.toptitle:hover {
+  transform: scale(1.05);
+  cursor: default;
+  margin-left: 5px;
+}
+
+/* .input {
+  transition: all 300ms ease-in;
+}
+
+.input:hover {
+  transform: scale(1.03);
+} */
+
+.login {
+  background-image: url('../public/1.jpg');
+}
+.modalcard {
+  position:relative;
+}
+.modalcard .modalheadear .btnclosemodal {
+  cursor: 'pointer';
+  position:absolute; 
+  right:-18px; 
+  top:-18px;
+  width: 35px;
+  height: 35px;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background: #fff;
+  color: #fd4040;
+  cursor: pointer;
+}
+.btnclosemodal:hover {
+  background: #fd4040 !important;
+  color: #ffffff !important;
+}
