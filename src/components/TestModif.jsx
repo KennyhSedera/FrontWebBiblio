@@ -13,12 +13,18 @@ function TestModif({value, onClose=()=>{}, title}) {
     const [adressadh, setAdressAdh] = useState('')
     const [quartieradh, setQuartierAdh] = useState('')
     const [nationaliteadh, setNationaliteAdh] = useState('')
+    const [lieunaissadh, setLieuNaiss] = useState('')
     const [genre, setGenre] = useState('Homme')
     useEffect(() => {
         if (value) {
             setNomAdh(value.nom_Adh)
             setNumAdh(value.id_Adh)
             setPrenomAdh(value.prenom_Adh)
+            setTelAdh(value.tel_Adh)
+            setAdressAdh(value.adresse_Adh)
+            setQuartierAdh(value.quartier_Adh)
+            setNationaliteAdh(value.nationalite_Adh)
+            setLieuNaiss(value.lieunaiss_Adh)
         }
     }, [value])
     
@@ -83,7 +89,7 @@ function TestModif({value, onClose=()=>{}, title}) {
                 onChange={e=>setTelAdh(e.target.value)}
                 name="teladh"
                 type='number'
-                placeholder='Entrer num telephone ...'
+                placeholder='Entrer num telephone Adhérent ...'
                 pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                 value={teladh}
               />
@@ -92,7 +98,7 @@ function TestModif({value, onClose=()=>{}, title}) {
               <Input
                 onChange={e=>setAdressAdh(e.target.value)}
                 name="addressadh"
-                placeholder='Entrer adresse ...'
+                placeholder='Entrer adresse Adhérent ...'
                 value={adressadh}
               />
             </div>
@@ -100,7 +106,7 @@ function TestModif({value, onClose=()=>{}, title}) {
               <Input
                 onChange={e=>setQuartierAdh(e.target.value)}
                 name="quartieradh"
-                placeholder='Entrer quartier ...'
+                placeholder='Entrer quartier Adhérent ...'
                 value={quartieradh}
               />
             </div>
@@ -108,8 +114,15 @@ function TestModif({value, onClose=()=>{}, title}) {
               <Input
                 onChange={e=>setNationaliteAdh(e.target.value)}
                 name="nationaliteadh"
-                placeholder='Entrer nationalite ...'
+                placeholder='Entrer nationalite Adhérent ...'
                 value={nationaliteadh}
+              />
+            </div>
+            <div style={{ width: '32%', }}>
+              <Input
+                onChange={e=>setLieuNaiss(e.target.value)}
+                placeholder='Entrer lieu de naissance adhérent ...'
+                value={lieunaissadh}
               />
             </div>
         </div>
