@@ -19,12 +19,12 @@ function CardEmprunt({data}) {
           <div style={{
               position: 'relative',
               top: 8, left: 10,
-              fontWeight: 'bold',
-              fontSize: 20,
+              fontWeight: '800',
+              fontSize: 12,
               marginBottom: 20,
           }}>{data.inscriptionadherent.adherent.id_Adh}</div>
           <div style={{width:'calc(100% - 115px)', fontSize:18, paddingInline:5, overflowWrap:'break-word'}}>
-            <div style={{fontWeight:'700'}}>{pseudo[pseudo.length - 1]}</div>
+            <div style={{fontWeight:'600'}}>{pseudo[pseudo.length - 1]}</div>
           </div>
           <div className='bookemp'>
             <div><strong>Titre: </strong>{data.livre.titre_livre}</div>
