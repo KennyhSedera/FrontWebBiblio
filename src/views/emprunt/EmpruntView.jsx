@@ -61,7 +61,7 @@ function EmpruntView() {
         borderRadius: 10,
         display: 'flex',
         flexWrap: 'wrap',
-        gap: 10,
+        gap: 20,
       }}>
         { data.length > 0 ?
           data
