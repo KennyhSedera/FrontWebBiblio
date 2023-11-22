@@ -93,11 +93,10 @@ function BtnTop({theme=false}) {
                         key={item.id_Notification}
                         // onClick={item.onClick}
                         style={{
-                            background: item.readAt !== null ? 'red':'grey'
+                            background: item.readAt === null ? 'red':'grey'
                         }}
                     >
                         <div style={{
-                            background:'red',
                         }}>     
                             <img
                                 src={getImg(item.reservationLivre.adherent.photo_Adh)}
@@ -105,8 +104,6 @@ function BtnTop({theme=false}) {
                                     width: 50,
                                     height: 50,
                                     borderRadius: 50,
-                                    // objectFit: 'cover',
-                                    //resize:''
                                 }}
                             />
                         </div>
