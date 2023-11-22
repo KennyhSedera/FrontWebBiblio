@@ -43,7 +43,7 @@ export default function LivreRow() {
         setInput(prevState => ({ ...prevState, [name]: value }));
 
         const filteredLivres = initialLivres.filter((item) => {
-            return input.toLowerCase() === ''
+            return value.toLowerCase() === ''
                 ? item
                 : item.titre_livre.toLowerCase().includes(value.toLowerCase()) ||
                   item.auteur_livre.toLowerCase().includes(value.toLowerCase()) ||

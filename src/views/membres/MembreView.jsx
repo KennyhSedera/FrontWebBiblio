@@ -67,7 +67,6 @@ export default function MembreView() {
                   item.tel_Adh.toLowerCase().includes(value.toLowerCase()) ||
                   item.naissance_Adh.toLowerCase().includes(value.toLowerCase());
         });
-
         setMembres(filteredMembres);
     };
 
