@@ -51,12 +51,9 @@ function StatistiqueView() {
 //         </MainLayout >
     //     )
      const data = [
-    ['Task', 'Hours per Day'],
-    ['Work', 11],
-    ['Eat', 2],
-    ['Commute', 2],
-    ['Watch TV', 2],
-    ['Sleep', 7],
+    ['Emplacement', 'Total emprunt'],
+    ['Adulte', 11],
+    ['Jeune', 2],
   ];
 
   return (
@@ -69,7 +66,8 @@ function StatistiqueView() {
         data={data}
         options={{
           title: 'My Daily Activities',
-          is3D: true,
+            is3D: true,
+          backgroundColor: 'transparent',
         }}
       />
     </MainLayout>
