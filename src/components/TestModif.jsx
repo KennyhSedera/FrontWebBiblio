@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../index.css'
 import Input from './Input'
+import { MdClose } from 'react-icons/md'
 // import Button from './Button'
 
 function TestModif({value, onClose=()=>{}, title}) {
