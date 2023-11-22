@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useState } from 'react'
 import Button from './Button'
 import { MdClose } from 'react-icons/md'
 import '../index.css'
@@ -6,151 +6,89 @@ import Input from './Input'
 import DatePickerInput from './datepicker/DatePikers'
 import Autocomplete from './drowpDown/Autocomplete'
 import InputImg from './inputImg/InputImg'
-import { createAdh, getAllAdh, updatedAdh } from '../services/adherentService'
+import { createAdh, updatedAdh } from '../services/adherentService'
 import Alert from './alert/Alert'
-import Testdropdown from './dropdownsearch/Testdropdown'
-import { getAllType } from '../services/typeAdhService'
-import { inscription } from '../services/membreService'
 
 function AddAdh({ title, onClose = () => { }, value, }) {
-  const [typeAdh, setTypeAdh] = useState([]);
-  const [searchValue, setSearchValue] = useState(null);
-  React.useEffect(() => {
-    getTypeAdhAll();
-    getAdhAll();
-  }, []);
-  const getAdhAll = async () => {
-    try {
-      let adherent = [];
-      const result = await getAllAdh();
-      adherent = result.data.adherents;
-      if (adherent.length<= 0){
-        setInput(prevState => ({ ...prevState, [name.numadh]: 'AFF00001' }))
-      }else {
-          var max  = adherent[adherent.length - 1].id_Adh
-          var reference = ''
-          var number = ''
-          for(var i=0;i<max.length;i++){
-              if(isNaN(max[i])){
-                  reference+=max[i]
-              }else{
-                  number+=max[i]
-              }
-          }
-          const num = parseInt(number)+1
-        const id = (num < 10000) ? (num < 1000) ? (num < 100) ? (num < 10) ? reference + '0000' + num: reference + '000' + num: reference + '00' + num : reference + '0' + num : reference + num
-        setInput(prevState => ({ ...prevState, [name.numadh]: id }))
-      }
-    } catch (err) {
-      console.log(err);
+     const inputs = {
+        numadh: '',
+        nomadh: '',
+        prenomadh: '',
+        teladh: '',
+        addressadh: '',
+        quartieradh: '',
+        nationaliteadh: '',
+        lieunaissadh: '',
     }
-  };
-  const getTypeAdhAll = async () => {
-    try {
-      const result = await getAllType();
-      const types = result.data.types.map((type) => ({id:type.id_TypeAdh, title:type.nom_TypeAdh}));
-      setTypeAdh(types);
-    } catch (err) {
-      console.log(err);
+    const name = {
+        numadh: 'numadh', nomadh: 'nomadh',
+        prenomadh: 'prenomadh', genreadh: 'genreadh',
+        teladh: 'teladh', addressadh: 'addressadh',
+        quartieradh: 'quartieradh', nationaliteadh: 'nationaliteadh',
+        lieunaissadh: 'lieunaissadh',
     }
-  };
-  const handleSearchValueChange = (newValue) => {
-    setSearchValue(newValue);
-    setTypeError('')
-  };
-  const handelResetValueType = () => {
-    setSearchValue(null);
-  };
-  const [numadh, setNumadh] = useState('');
-  const [nomadh, setNomadh] = useState('');
-  const [prenomadh, setPrenomadh] = useState('');
-  const [teladh, setTeladh] = useState('');
-  const [addressadh, setAddressadh] = useState('');
-  const [quartieradh, setQuartieradh] = useState('');
-  const [nationaliteadh, setNationaliteadh] = useState('');
-  const [lieunaissadh, setLieunaissadh] = useState('');
   
-  const [numadherr, setNumadherr] = useState('');
-  const [nomadherr, setNomadherr] = useState('');
-  const [prenomadherr, setPrenomadherr] = useState('');
-  const [teladherr, setTeladherr] = useState('');
-  const [addressadherr, setAddressadherr] = useState('');
-  const [quartieradherr, setQuartieradherr] = useState('');
-  const [nationaliteadherr, setNationaliteadherr] = useState('');
-  const [lieunaissadherr, setLieunaissadherr] = useState('');
-
-  const clearForm = [
-    setNationaliteadh(''),
-    setNumadh(''),
-    setNomadh(''),
-    setAddressadh(''),
-    setDateNaiss(new Date),
-    setPrenomadh(''),
-    setTeladh(''),
-    setQuartieradh(''),
-    setNationaliteadh(''),
-    setLieunaissadh(''),
-    setFile(''),
-    setGenre(''),
-    setSearchValue(null)
-  ]
-
-  useEffect(() => {
-    if (value) {
-      setNumadh(value.id_Adh);
-      setNomadh(value.nom_Adh);
-      setPrenomadh(value.prenom_Adh);
-      setTeladh(value.tel_Adh);
-      setAddressadh(value.adresse_Adh);
-      setQuartieradh(value.quartier_Adh);
-      setNationaliteadh(value.nationalite_Adh);
-      setLieunaissadh(value.lieunaiss_Adh)
-      setGenre(value.genre_Adh || 'Homme');
-      setDateNaiss(value.naissance_Adh);
-      setBtnTitle('Modifier');
-    }
-  }, [value]);
+     React.useEffect(() => {
+        if (value) {
+          setInput(prevState => ({ ...prevState, [name.numadh]: value.id_Adh }))
+          setInput(prevState => ({ ...prevState, [name.nomadh]: value.nom_Adh }))
+          setInput(prevState => ({ ...prevState, [name.prenomadh]: value.prenom_Adh }))
+          setInput(prevState => ({ ...prevState, [name.teladh]: value.tel_Adh }))
+          setInput(prevState => ({ ...prevState, [name.addressadh]: value.adresse_Adh }))
+          setInput(prevState => ({ ...prevState, [name.quartieradh]: value.quartier_Adh }))
+          setInput(prevState => ({ ...prevState, [name.nationaliteadh]: value.nationalite_Adh }))
+          setInput(prevState => ({ ...prevState, [name.lieunaissadh]: value.lieunaiss_Adh }))
+          setDateNaiss(value.naissance_Adh)
+          setBtnTitle('Modifier')
+        }
+     }, [value, name])
   
-  // const [input, setInput] = React.useState(inputs);
+  const [input, setInput] = React.useState(inputs);
+  const [error, setError] = React.useState(inputs);
   const [btnTitle, setBtnTitle] = React.useState('Enregistrer');
   const [file, setFile] = React.useState(null);
   const [datenaiss, setDateNaiss] = useState(new Date());
   const [genre, setGenre] = useState('Homme');
+  
+  const handleOnChange = (e) => {
+    const { name, value } = e.target;
+    setInput(prevState => ({ ...prevState, [name]: value }));
+    setError(prevState => ({ ...prevState, [name]: '' }));
+  }
+  const handleUpload = () => {
+    setFileError('')
+  }
   const [fileError, setFileError] = React.useState('');
-  const [typeError, setTypeError] = React.useState('');
   
   const validate = () => {
-    if (numadh ==='') {
-      setNumadherr( 'Cet champ ne doit pas être vide!' )
-    } else if (nomadh ==='') {
-      setNomadherr( 'Cet champ ne doit pas être vide!' )
-    }else if (prenomadh ==='') {
-      setPrenomadherr( 'Cet champ ne doit pas être vide!' )
-    }else if (teladh ==='') {
-      setTeladherr( 'Cet champ ne doit pas être vide!' )
-    }else if (addressadh ==='') {
-      setAddressadherr( 'Cet champ ne doit pas être vide!' )
-    }else if (quartieradh ==='') {
-      setQuartieradherr( 'Cet champ ne doit pas être vide!' )
-    }else if (nationaliteadh ==='') {
-      setNationaliteadherr( 'Cet champ ne doit pas être vide!' )
-    }else if (file === null && btnTitle === 'Enregistrer') {
+    if (input.numadh ==='') {
+      setError(prevState => ({ ...prevState, [name.numadh]: 'Cette champ ne doit pas être vide!' }))
+    } else if (input.nomadh ==='') {
+      setError(prevState => ({ ...prevState, [name.nomadh]: 'Cette champ ne doit pas être vide!' }))
+    }else if (input.prenomadh ==='') {
+      setError(prevState => ({ ...prevState, [name.prenomadh]: 'Cette champ ne doit pas être vide!' }))
+    }else if (input.teladh ==='') {
+      setError(prevState => ({ ...prevState, [name.teladh]: 'Cette champ ne doit pas être vide!' }))
+    }else if (input.addressadh ==='') {
+      setError(prevState => ({ ...prevState, [name.addressadh]: 'Cette champ ne doit pas être vide!' }))
+    }else if (input.quartieradh ==='') {
+      setError(prevState => ({ ...prevState, [name.quartieradh]: 'Cette champ ne doit pas être vide!' }))
+    }else if (input.nationaliteadh ==='') {
+      setError(prevState => ({ ...prevState, [name.nationaliteadh]: 'Cette champ ne doit pas être vide!' }))
+    }else if (input.lieunaissadh ==='') {
+      setError(prevState => ({ ...prevState, [name.lieunaissadh]: 'Cette champ ne doit pas être vide!' }))
+    } else if (file === null) {
       setFileError('Choisissez une image!')
-    }else if (lieunaissadh ==='') {
-      setLieunaissadherr( 'Cet champ ne doit pas être vide!' )
-    }else if (searchValue === null && btnTitle === 'Enregistrer') {
-      setTypeError('Choisissez le type d\'adherent!')
-    }else {
+    } else {
       const formData = new FormData();
       formData.append("photo_adh", file);
-      formData.append("id_Adh", numadh);
-      formData.append("nom_Adh", nomadh);
-      formData.append("prenom_Adh", prenomadh);
-      formData.append("adresse_Adh", addressadh);
-      formData.append("quartier_Adh", quartieradh);
-      formData.append("tel_Adh", teladh);
-      formData.append("nationalite_Adh", nationaliteadh);
-      formData.append("lieunaiss_Adh", lieunaissadh);
+      formData.append("nom_Adh", input.nomadh);
+      formData.append("prenom_Adh", input.prenomadh);
+      formData.append("adresse_Adh", input.addressadh);
+      formData.append("quartier_Adh", input.quartieradh);
+      formData.append("tel_Adh", input.teladh);
+      formData.append("nationalite_Adh", input.nationaliteadh);
+      formData.append("lieunaiss_Adh", input.lieunaissadh);
       formData.append("naissance_Adh", datenaiss);
       formData.append("genre_Adh", genre);
       if (!loading) {
@@ -162,11 +100,9 @@ function AddAdh({ title, onClose = () => { }, value, }) {
           setAlertOpen(true);
           setAlertMsg(res.data.succee);
           setAlertType('success')
+          setInput(inputs);
+          setError(inputs);
           setLoading(false);
-          setTimeout(() => {
-            inscription({ id_Adh: numadh, id_TypeAdh: searchValue })
-            .then(()=>clearForm())
-          }, 1000);
           setTimeout(() => {
             onClose();
             setAlertOpen(false);
@@ -180,7 +116,8 @@ function AddAdh({ title, onClose = () => { }, value, }) {
           setAlertOpen(true);
           setAlertMsg(res.data.succee);
           setAlertType('success')
-          clearForm()
+          setInput(inputs);
+          setError(inputs);
           setLoading(false);
           setTimeout(() => {
             onClose();
@@ -222,30 +159,38 @@ function AddAdh({ title, onClose = () => { }, value, }) {
         }}>
             <div style={{ width: '32%', }}>
               <Input
-                placeholder='Numéro ...'
-                onChange={e=>(setNumadh(e.target.value), setNumadherr(''))}
+                onChange={handleOnChange}
                 name="numadh"
-                value={numadh}
-                error={numadherr}
-                readOnly
+                placeholder='Id ...'
+                value={input.numadh}
+                error={error.numadh}
               />
             </div>
             <div style={{ width: '32%', }}>
               <Input
-                onChange={e=>(setNomadh(e.target.value), setNomadherr(''))}
+                onChange={handleOnChange}
+                name="numadh"
+                placeholder='Num inscription ...'
+                value={input.numadh}
+                error={error.numadh}
+              />
+            </div>
+            <div style={{ width: '32%', }}>
+              <Input
+                onChange={handleOnChange}
                 name="nomadh"
                 placeholder='Entrer nom ...'
-                value={nomadh}
-                error={nomadherr}
+                value={input.nomadh}
+                error={error.nomadh}
               />
             </div>
             <div style={{ width: '32%', }}>
               <Input
-                onChange={e=>(setPrenomadh(e.target.value), setPrenomadherr(''))}
+                onChange={handleOnChange}
                 name="prenomadh"
-                placeholder='Entrer prénom ...'
-                value={prenomadh}
-                error={prenomadherr}
+                placeholder='Entrer prenom ...'
+                value={input.prenomadh}
+                error={error.prenomadh}
               />
             </div>
             <div style={{ width: '32%', }}>
@@ -258,73 +203,64 @@ function AddAdh({ title, onClose = () => { }, value, }) {
             </div>
             <div style={{ width: '32%', }}>
               <Input
-                onChange={e=>(setTeladh(e.target.value), setTeladherr(''))}
+                onChange={handleOnChange}
                 name="teladh"
                 type='number'
                 placeholder='Entrer num telephone ...'
                 pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-                value={teladh}
-                error={teladherr}
+                value={input.teladh}
+                error={error.teladh}
               />
             </div>
             <div style={{ width: '32%', }}>
               <Input
-                onChange={e=>(setAddressadh(e.target.value), setAddressadherr(''))}
+                onChange={handleOnChange}
                 name="addressadh"
                 placeholder='Entrer adresse ...'
-                value={addressadh}
-                error={addressadherr}
+                value={input.addressadh}
+                error={error.addressadh}
               />
             </div>
             <div style={{ width: '32%', }}>
               <Input
-                onChange={e=>(setQuartieradh(e.target.value), setQuartieradherr(''))}
+                onChange={handleOnChange}
                 name="quartieradh"
                 placeholder='Entrer quartier ...'
-                value={quartieradh}
-                error={quartieradherr}
+                value={input.quartieradh}
+                error={error.quartieradh}
               />
             </div>
             <div style={{ width: '32%', }}>
               <Input
-                onChange={e=>(setNationaliteadh(e.target.value), setNationaliteadherr(''))}
+                onChange={handleOnChange}
                 name="nationaliteadh"
-                placeholder='Entrer nationalité ...'
-                value={nationaliteadh}
-                error={nationaliteadherr}
+                placeholder='Entrer nationalite ...'
+                value={input.nationaliteadh}
+                error={error.nationaliteadh}
               />
             </div>
-            <div style={{ width: '32%', marginBottom: 6, }}>
+            <div style={{ width: '32%', }}>
+          <DatePickerInput
+            onDateChange={setDateNaiss}
+            placeholder="Date de naissance"
+            date={datenaiss}
+          />
+            </div>
+            <div style={{ width: '32%', }}>
+              <Input
+                onChange={handleOnChange}
+                name="lieunaissadh"
+                placeholder='Entrer liue naissance ...'
+                value={input.lieunaissadh}
+                error={error.lieunaissadh}
+              />
+            </div>
+            <div style={{ width: '32%', marginBottom: 20, }}>
                 <InputImg
                   setFile={setFile}
                   error={fileError}
                   handelChange={handleUpload}
                 />
-            </div>
-            <div style={{ width: '32%', }}>
-              <DatePickerInput
-                onDateChange={setDateNaiss}
-                placeholder="Date de naissance"
-                date={datenaiss}
-              />
-            </div>
-            <div style={{ width: '32%', }}>
-              <Input
-                onChange={e=>(setLieunaissadh(e.target.value), setLieunaissadherr(''))}
-                name="lieunaissadh"
-                placeholder='Entrer lieu de naissance ...'
-                value={lieunaissadh}
-                error={lieunaissadherr}
-              />
-            </div>
-            <div style={{ width: '32%' }}>
-              <Testdropdown
-            placeholder='Types adhérent ...'
-            data={typeAdh}
-            onSelectId={handleSearchValueChange}
-            onResetId={handelResetValueType}
-            error={typeError}
-              />
             </div>
         </div>
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
