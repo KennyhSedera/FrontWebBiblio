@@ -30,15 +30,13 @@
     left:5px;
     top: 5px;
 }
-.cardemprunt .bookemp,
-.cardemprunt .adhemp {
-    position: absolute;
+.cardemprunt .bookemp {
+    position: relative;
     display: flex;
     flex-direction: column;
     gap: 4px;
     width:calc(100% - 10px);
     left: 5px;
-    top:45%;
     overflow-wrap: break-word;
     font-size: 14px;
 }
