@@ -11,6 +11,8 @@ function TestModif({value, onClose=()=>{}, title}) {
     const [prenomadh, setPrenomAdh] = useState('')
     const [teladh, setTelAdh] = useState('')
     const [adressadh, setAdressAdh] = useState('')
+    const [quartieradh, setQuartierAdh] = useState('')
+    const [nationaliteadh, setNationaliteAdh] = useState('')
     const [genre, setGenre] = useState('Homme')
     useEffect(() => {
         if (value) {
@@ -92,6 +94,22 @@ function TestModif({value, onClose=()=>{}, title}) {
                 name="addressadh"
                 placeholder='Entrer adresse ...'
                 value={adressadh}
+              />
+            </div>
+            <div style={{ width: '32%', }}>
+              <Input
+                onChange={e=>setQuartierAdh(e.target.value)}
+                name="quartieradh"
+                placeholder='Entrer quartier ...'
+                value={quartieradh}
+              />
+            </div>
+            <div style={{ width: '32%', }}>
+              <Input
+                onChange={e=>setNationaliteAdh(e.target.value)}
+                name="nationaliteadh"
+                placeholder='Entrer nationalite ...'
+                value={nationaliteadh}
               />
             </div>
         </div>
