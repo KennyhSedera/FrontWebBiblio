@@ -2,12 +2,16 @@ import React, { useEffect, useState } from 'react'
 import '../index.css'
 import Input from './Input'
 import { MdClose } from 'react-icons/md'
+import Autocomplete from './drowpDown/Autocomplete'
 // import Button from './Button'
 
 function TestModif({value, onClose=()=>{}, title}) {
     const [numadh, setNumAdh] = useState('')
     const [nomadh, setNomAdh] = useState('')
     const [prenomadh, setPrenomAdh] = useState('')
+    const [teladh, setTelAdh] = useState('')
+    const [adressadh, setAdressAdh] = useState('')
+    const [genre, setGenre] = useState('Homme')
     useEffect(() => {
         if (value) {
             setNomAdh(value.nom_Adh)
@@ -44,6 +48,7 @@ function TestModif({value, onClose=()=>{}, title}) {
                 onChange={e=>setNumAdh(e.target.value)}
                 placeholder='Numéro ...'
                 value={numadh}
+                readOnly
                 // error={error.numadh}
               />
             </div>
@@ -61,6 +66,32 @@ function TestModif({value, onClose=()=>{}, title}) {
                 placeholder='Entrer prénom adhérent ...'
                 value={prenomadh}
                 // error={error.nomadh}
+              />
+            </div>
+            <div style={{ width: '32%', }}>
+              <Autocomplete
+                items={['Homme', 'Femme']}
+                placeholder='Genre adhérent ...'
+                selected={genre}
+                setSelected={setGenre}
+              />
+              </div>
+              <div style={{ width: '32%', }}>
+              <Input
+                onChange={e=>setTelAdh(e.target.value)}
+                name="teladh"
+                type='number'
+                placeholder='Entrer num telephone ...'
+                pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
+                value={teladh}
+              />
+            </div>
+            <div style={{ width: '32%', }}>
+              <Input
+                onChange={e=>setAdressAdh(e.target.value)}
+                name="addressadh"
+                placeholder='Entrer adresse ...'
+                value={adressadh}
               />
             </div>
         </div>
