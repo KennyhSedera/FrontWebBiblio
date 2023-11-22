@@ -76,7 +76,7 @@ function EmpruntView() {
                 )
             })
             .map((item) => (
-              <div key={item.id_Emprunt} style={{width:'calc(25% - 20px)', minHeight:'45%', maxHeight:'49%'}}>
+              <div key={item.id_Emprunt} style={{width:'calc(25% - 20px)', Height:'48%'}}>
                 <CardEmprunt data={item} />
               </div>
             )) : (
