@@ -7,6 +7,7 @@ import Modal from '../../components/modal/Modal';
 import AddAdh from '../../components/AddAdh';
 import DialogDelete from '../../components/DialogDelete';
 import Alert from '../../components/alert/Alert'
+import TestModif from '../../components/TestModif';
 
 export default function MembreView() {
     const [membres, setMembres] = React.useState([]);
@@ -157,8 +158,11 @@ export default function MembreView() {
                     )}
             </div>
 
-            <Modal open={open}>
+            {/* <Modal open={open}>
                 <AddAdh onClose={handleClose} title={title} value={value} />
+            </Modal> */}
+            <Modal open={open}>
+                <TestModif onClose={handleClose} title={title} value={value} />
             </Modal>
             <DialogDelete active={delOpen} message={delMsg} onClose={() => setDelOpen(false)} onAccept={handleAccept} />
             <Alert open={alertOpen} Message={alertMsg} type={alertType} />
