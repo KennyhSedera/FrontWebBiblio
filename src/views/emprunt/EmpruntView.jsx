@@ -69,13 +69,13 @@ function EmpruntView() {
               return input.search.toLowerCase() === '' ?
                 item : (
                   item.livre.titre_livre.toLowerCase().includes(input.search.toLowerCase()) ||
-                  item.inscriptionadherent.id_InscritAdh.toLowerCase().includes(input.search.toLowerCase()) ||
+                  item.inscriptionadherent.adherent.id_Adh.toLowerCase().includes(input.search.toLowerCase()) ||
                   item.inscriptionadherent.adherent.nom_Adh.toLowerCase().includes(input.search.toLowerCase()) ||
                   item.inscriptionadherent.adherent.prenom_Adh.toLowerCase().includes(input.search.toLowerCase())
                 )
             })
             .map((item) => (
-              <div key={item.id_Emprunt} style={{width:'calc(25% - 10px)', height:'47%'}}>
+              <div key={item.id_Emprunt} style={{width:'calc(25% - 20px)', height:'45%'}}>
                 <CardEmprunt data={item} />
               </div>
             )) : (

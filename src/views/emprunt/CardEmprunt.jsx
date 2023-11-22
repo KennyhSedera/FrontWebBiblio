@@ -20,7 +20,7 @@ function CardEmprunt({data}) {
               position: 'relative',
               top: 8, left: 10,
               fontWeight: '800',
-              fontSize: 12,
+              fontSize: 18,
               marginBottom: 20,
           }}>{data.inscriptionadherent.adherent.id_Adh}</div>
           <div style={{width:'calc(100% - 115px)', fontSize:18, paddingInline:5, overflowWrap:'break-word'}}>
