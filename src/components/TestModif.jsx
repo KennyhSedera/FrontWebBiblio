@@ -25,6 +25,8 @@ function TestModif({value, onClose=()=>{}, title}) {
     const [file, setFile] = React.useState(null);
     const [genre, setGenre] = useState('Homme');
     const [datenaiss, setDateNaiss] = useState(new Date());
+    const [typeAdh, setTypeAdh] = useState([]);
+    const [searchValue, setSearchValue] = useState(null);
     
     const [numadherr, setNumadherr] = useState('');
     const [nomadherr, setNomadherr] = useState('');
@@ -58,12 +60,13 @@ function TestModif({value, onClose=()=>{}, title}) {
         setSearchValue(null)
     ]
 
-    const [typeAdh, setTypeAdh] = useState([]);
-    const [searchValue, setSearchValue] = useState(null);
+
     React.useEffect(() => {
         getTypeAdhAll();
-        getAdhAll();
-    }, []);
+        if(!value){
+            getAdhAll();
+        }
+    }, [value]);
     const getAdhAll = async () => {
         try {
         let adherent = [];
