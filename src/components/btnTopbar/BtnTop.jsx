@@ -97,23 +97,20 @@ function BtnTop({theme=false}) {
                         }}
                     >
                         <div style={{
-                            width: 50,
-                            height: 50,
-                            borderRadius: 50,
                             background:'red',
-                        }}>
-
+                        }}>     
+                            <img
+                                src={getImg(item.reservationLivre.adherent.photo_Adh)}
+                                style={{
+                                    width: 50,
+                                    height: 50,
+                                    borderRadius: 50,
+                                    // objectFit: 'cover',
+                                    //resize:''
+                                }}
+                            />
                         </div>
-                        {/* <img
-                            src={getImg(item.reservationLivre.adherent.photo_Adh)}
-                            style={{
-                                width: 50,
-                                height: 50,
-                                borderRadius: 50,
-                                // objectFit: 'cover',
-                                //resize:''
-                            }}
-                        /> */}
+                        
                         <div style={{
                             display: 'flex',
                             flexDirection: 'column',fontSize:12
@@ -123,7 +120,7 @@ function BtnTop({theme=false}) {
                                 {item.content_Notification}
                                 {item.reservationLivre.livre.titre_Livre}
                             </span>
-                            <span>{moment(item.date_Notification).format('DD MMM YYYY')}</span>
+                            <span style={{fontSize:10, fontWeight:300}}>{moment(item.date_Notification).format('DD MMM YYYY')}</span>
                         </div>
                         
                     </div>  
