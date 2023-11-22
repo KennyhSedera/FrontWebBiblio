@@ -8,6 +8,7 @@ import { createEmprunt } from '../services/empruntService'
 import AlertMessage from './AlertMessage'
 import { getAllAdhInscrit } from '../services/membreService'
 import Alert from './alert/Alert'
+import { getAllAdhNoEmp } from '../services/adherentService'
 
 function EmpruntBook({ title, onClose = () => { }, value, }) {
   
@@ -32,8 +33,8 @@ function EmpruntBook({ title, onClose = () => { }, value, }) {
 
   const getAdhAll = async () => {
     try {
-      const result = await getAllAdhInscrit();
-      const adherent = result.data.inscriptions.map((Adh) => ({id:Adh.id_InscritAdh, title:Adh.adherent.nom_Adh + ' ' + Adh.adherent.prenom_Adh}));
+      const result = await getAllAdhNoEmp();
+      const adherent = result.data.adherents.map((Adh) => ({id:Adh.id_InscritAdh, title:Adh.adherent.nom_Adh + ' ' + Adh.adherent.prenom_Adh}));
       setAdh(adherent);
     } catch (err) {
       console.log(err);

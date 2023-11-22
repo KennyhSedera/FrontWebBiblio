@@ -11,9 +11,7 @@ import DashboardView from './views/dashboard/DashboardView';
 import LivreView from './views/livres/LivreView';
 import StatistiqueView from './views/StatistiqueView';
 import ProfilView from './views/profile/ProfilView';
-import DemandeView from './views/DemandeView';
 import LoginView from './views/LoginView';
-import StatusView from './views/StatusView';
 import EmpruntView from './views/emprunt/EmpruntView';
 import UserView from './views/user/UserView';
 import InscriptionView from './views/inscrit/InscriptionView';
@@ -21,6 +19,7 @@ import CircularIntegration from './components/ProgressCirculaire';
 import LivreDispo from './views/livres/LivreDispo';
 import EmpruntEnCours from './views/emprunt/EmpruntEnCours';
 import App from './App';
+import NotificationView from './views/NotificationView';
 
 const router = createBrowserRouter([
   {
@@ -52,20 +51,12 @@ const router = createBrowserRouter([
     element: <ProfilView />
   },
   {
-    path: "/demande",
-    element: <DemandeView />
-  },
-  {
     path: "/emprunt",
     element: <EmpruntView />
   },
   {
     path: "/empruntencours",
     element: <EmpruntEnCours />
-  },
-  {
-    path: "/status",
-    element: <StatusView />
   },
   {
     path: "/utilisateur",
@@ -86,6 +77,10 @@ const router = createBrowserRouter([
   {
     path: "/test",
     element: <App />
+  },
+  {
+    path: "/notification",
+    element: <NotificationView />
   },
 ])
 

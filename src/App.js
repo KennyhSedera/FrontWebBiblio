@@ -1,35 +1,34 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React from "react";
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
-import axios from "axios";
+import React, { useState, useEffect } from 'react';
 
-const queryClient = new QueryClient();
+const App = ({ valeurInitiale='gfsvsdcs' }) => {
+  // Utilisez useState pour créer un état local avec la valeur initiale
+  const [valeur, setValeur] = useState(valeurInitiale);
 
-export default function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <Example />
-    </QueryClientProvider>
-  );
-}
+  // Utilisez un effet uniquement lors du montage pour définir la valeur initiale
+  useEffect(() => {
+    if (valeurInitiale !== null) {
+      setValeur(valeurInitiale);
+    }
+  }, [valeurInitiale]);
 
-function Example() {
-  const { isLoading, error, data, isFetching } = useQuery("repoData", () =>
-    axios.get(
-      "http://localhost:1142/livre"
-    ).then((res) => res.data.livres)
-  );
-
-  if (isLoading) return "Loading...";
-
-  if (error) return "An error has occurred: " + error.message;
+  // Fonction de gestion de changement pour mettre à jour la valeur
+  const handleChangement = (e) => {
+    setValeur(e.target.value);
+  };
 
   return (
     <div>
-      <strong>👀 {data.map(item => (
-        <div key={item.id_livre}>{item.titre_livre}</div>
-      ))}</strong>
-      <div>{isFetching ? "Updating..." : ""}</div>
+      {/* Champ de saisie contrôlé avec la valeur de l'état local */}
+      <input
+        type="text"
+        value={valeur === null ? '' : valeur}
+        onChange={handleChangement}
+      />
+
+      {/* Affichage de la valeur actuelle */}
+      <p>La valeur est : {valeur}</p>
     </div>
   );
-}
+};
+
+export default App;

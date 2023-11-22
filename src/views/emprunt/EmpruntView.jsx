@@ -8,7 +8,25 @@ import CardEmprunt from './CardEmprunt';
 function EmpruntView() {
   const [isOpen, setIsOpen] = useState(false);
   const [emprunt, setEmprunt] = useState([])
-
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const dataPerPage = 8;
+  const lastIndex = currentPage * dataPerPage;
+  const firstIndex = lastIndex - dataPerPage;
+  const data = emprunt.slice(firstIndex, lastIndex);
+  const nbPage = Math.ceil(emprunt.length / dataPerPage);
+  const [input, setInput] = React.useState({
+    search: '',
+  })
+  const prevPage = () => {
+    if (currentPage !== firstIndex && currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+  const nextPage = () => {
+    if (currentPage !== lastIndex && currentPage < nbPage) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
   const getAll = () => {
     getAllEmprunt()
     .then((res) => {
@@ -17,39 +35,12 @@ function EmpruntView() {
       console.log(err);
     });
   }
-
   useEffect(() => {
     getAll()
   }, [])
-    
   const handleClickListItem = () => {
     setIsOpen(true)
   }
-  
-  // const [idSelected, setIdSelected] = React.useState(null);
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const dataPerPage = 8;
-  const lastIndex = currentPage * dataPerPage;
-  const firstIndex = lastIndex - dataPerPage;
-  const data = emprunt.slice(firstIndex, lastIndex);
-  const nbPage = Math.ceil(emprunt.length / dataPerPage);
-
-  const prevPage = () => {
-    if (currentPage !== firstIndex && currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-    }
-  }
-
-  const nextPage = () => {
-    if (currentPage !== lastIndex && currentPage < nbPage) {
-      setCurrentPage(currentPage + 1);
-    }
-  }
-
-  const [input, setInput] = React.useState({
-    search: '',
-  })
-
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setInput(prevState => ({ ...prevState, [name]: value }));
@@ -96,7 +87,6 @@ function EmpruntView() {
                 marginTop:50
             }}>Aucun livre emprunter .</div>
         )}
-        
       </div>
       <Modal open={isOpen} >
         <EmpruntBook onClose={()=>{setIsOpen(false); getAll()}} title='Emprunter' />

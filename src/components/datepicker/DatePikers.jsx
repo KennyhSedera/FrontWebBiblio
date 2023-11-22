@@ -22,7 +22,12 @@ class DatePickerInput extends Component {
 
   componentDidMount() {
     document.addEventListener('click', this.handleDocumentClick);
-    this.updateCalendarDays(this.state.selectedYear, this.state.currentDate.getMonth());
+    const today = this.props.date || new Date();
+
+    // Assurez-vous que this.props.date n'est pas undefined avant d'accéder à getMonth()
+    const initialMonth = this.props.date ? this.props.date.getMonth() : today.getMonth();
+
+    this.updateCalendarDays(today.getFullYear(), initialMonth);
   }
 
   componentWillUnmount() {
@@ -64,6 +69,7 @@ class DatePickerInput extends Component {
 
   handleInputFocus = () => {
     this.setState({ isDatePickerOpen: true, monthSelectionMade: false });
+    this.updateCalendarDays(this.state.selectedYear, this.props.date.getMonth());
   }
 
   toggleMonthSelector = () => {
@@ -228,10 +234,10 @@ class DatePickerInput extends Component {
             onFocus={this.handleInputFocus}
             readOnly
           />
-          <div className='placeholder' style={{
+          <div onClick={this.handleInputFocus} className='placeholder' style={{
             maxWidth: 'calc(100% - 120px)',
             overflow: 'hidden',
-            color: '#000',
+            color: 'grey',
             whiteSpace: 'nowrap',
             textOverflow:'ellipsis',
           }}>{this.props.placeholder}</div>

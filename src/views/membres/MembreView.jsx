@@ -57,7 +57,7 @@ export default function MembreView() {
         setInput((prevState) => ({ ...prevState, [name]: value }));
 
         const filteredMembres = initialMembres.filter((item) => {
-            return value.toLowerCase() === ''
+            return input.toLowerCase() === ''
                 ? item
                 : item.nom_Adh.toLowerCase().includes(value.toLowerCase()) ||
                   item.prenom_Adh.toLowerCase().includes(value.toLowerCase()) ||
@@ -120,11 +120,8 @@ export default function MembreView() {
     return (
         <MainLayout
             handleOnChange={handleOnChange}
-            title="Liste Adhérents"
-            search
-            btn
-            handleClickListItem={handleClickListItem}
-            btnAdd
+            title="Liste Adhérents" search btn
+            handleClickListItem={handleClickListItem} btnAdd
             nextPage={nextPage}
             prevPage={prevPage}
             lastIndex={lastIndex}
@@ -140,13 +137,13 @@ export default function MembreView() {
                     display: 'flex',
                     flexWrap: 'wrap',
                     gap: 10,
-                    paddingBlock:10,
+                    paddingBlock:2,
                 }}
             >
                 {membres.length > 0 ? membres
                     .slice(firstIndex, lastIndex)
                     .map((item) => (
-                        <div key={item.id_Adh} style={{ width: 'calc(25% - 14px)', height: '47%'}}>
+                        <div key={item.id_Adh} style={{ width: 'calc(25% - 14px)', height: '40%'}}>
                             <CardMembre data={item} deleteItem={()=>deleteItem(item)} edit={()=>editItem(item)} />
                         </div>
                     )) : (

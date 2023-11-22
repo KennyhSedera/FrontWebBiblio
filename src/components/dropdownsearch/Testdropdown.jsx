@@ -3,7 +3,7 @@ import './dropdown.css';
 import { MdCheck, MdKeyboardArrowDown, MdKeyboardArrowUp } from 'react-icons/md';
 
 function Testdropdown(props) {
-  const { placeholder, data } = props;
+  const { placeholder, data, error='' } = props;
 
   const [results, setResults] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
@@ -72,58 +72,67 @@ function Testdropdown(props) {
   };
 
   return (
-    <div ref={autocompleteRef} className="autocomplete" style={{ marginBottom: 20 }}>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-around',
-          background: 'white',
-          borderRadius: 10,
-          alignItems: 'center',
-          paddingRight: 5,
-        }}
-      >
-        <input
-          type="text"
-          placeholder={placeholder ? placeholder : 'Search...'}
-          value={searchValue}
-          onChange={(e) => handleSearchValueChange(e.target.value)}
-          onFocus={() => {
-            if (!searchValue) {
-              // Si l'input est en focus et vide, afficher toutes les valeurs de data
-              setResults(data);
-            }
-            setIsOpen(true);
+    <div style={{backgound:'red', position:'relative' }}>
+      <div ref={autocompleteRef} className="autocomplete" style={{ marginBottom: 20 }}>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-around',
+            background: 'white',
+            borderRadius: 5,
+            alignItems: 'center',
+            paddingRight: 5,
+            border: error ? '1px solid red' : '',     
           }}
-          onBlur={() => {
-            setTimeout(() => {
-              setIsOpen(false);
-            }, 200);
-          }}
-          id="autocomplete-input"
-        />
-        {isOpen ? <MdKeyboardArrowUp size={22} /> : <MdKeyboardArrowDown size={22} />}
+        >
+          <input
+            type="text"
+            placeholder={placeholder ? placeholder : 'Search...'}
+            value={searchValue}
+            onChange={(e) => handleSearchValueChange(e.target.value)}
+            onFocus={() => {
+              if (!searchValue) {
+                // Si l'input est en focus et vide, afficher toutes les valeurs de data
+                setResults(data);
+              }
+              setIsOpen(true);
+            }}
+            onBlur={() => {
+              setTimeout(() => {
+                setIsOpen(false);
+              }, 200);
+            }}
+            id="autocomplete-input"
+          />
+          {isOpen ? <MdKeyboardArrowUp size={22} /> : <MdKeyboardArrowDown size={22} />}
+        </div>
+        {isOpen && results.length > 0 && (
+          <ul className="results">
+            {results.map((result, index) => (
+              <li
+                key={index}
+                onClick={() => handleItemClick(result)}
+                style={{
+                  color: result.id === selectedId ? 'blue' : '',
+                  display: 'flex',
+                  justifyContent: result.id === selectedId ? 'space-between' : '',
+                }}
+              >
+                {result.title}
+                {result.id === selectedId && <MdCheck />}
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
-
-      {isOpen && results.length > 0 && (
-        <ul className="results">
-          {results.map((result, index) => (
-            <li
-              key={index}
-              onClick={() => handleItemClick(result)}
-              style={{
-                color: result.id === selectedId ? 'blue' : '',
-                display: 'flex',
-                justifyContent: result.id === selectedId ? 'space-between' : '',
-              }}
-            >
-              {result.title}
-              {result.id === selectedId && <MdCheck />}
-            </li>
-          ))}
-        </ul>
-      )}
+      <span style={{
+        position:'absolute',
+        top:'110%',
+        left: 5,
+        color:'red',
+      }}>{error}</span>
     </div>
+    
   );
 }
 

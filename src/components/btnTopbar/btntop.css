@@ -33,3 +33,10 @@
 .menuprofile {
     transition: max-height 2s;
 }
+.listnotification {
+    display: flex;
+    flex-direction: row;
+    /* align-items: flex-start; */
+    gap: 8px;
+    padding-inline: 5px;
+}

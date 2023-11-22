@@ -1,8 +1,9 @@
 .containercard {
     display: flex;
-    width:'100%';
+    width:100%;
     flex-wrap: wrap;
     padding-inline: 5px;
+    height:50%;
 }
 
 .header{

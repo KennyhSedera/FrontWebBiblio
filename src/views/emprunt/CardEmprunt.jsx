@@ -22,7 +22,7 @@ function CardEmprunt({data}) {
               fontWeight: 'bold',
               fontSize: 14,
               marginBottom: 20,
-          }}>{data.id_AdhInsc}</div>
+          }}>{data.inscriptionadherent.adherent.id_Adh}</div>
           <div style={{width:'calc(100% - 115px)', fontSize:19, paddingInline:5, overflowWrap:'break-word'}}>
             <div style={{fontWeight:'700'}}>{pseudo[pseudo.length - 1]}</div>
           </div>

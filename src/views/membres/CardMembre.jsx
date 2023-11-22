@@ -37,14 +37,14 @@ function CardMembre({
           <div style={{
             display:'flex',
             gap:10,
-            alignItems:"center"
+            alignItems:'center'
           }}>
-            <FaTrashAlt
+            {data.status === false && <FaTrashAlt
               size={17}
               color='red'
               onClick={deleteItem} 
               style={{ transformStyle: 'preserve-3d', cursor: 'pointer' }}
-            />
+            />}
             <FaEdit
               size={18}
               color='blue'
@@ -57,7 +57,7 @@ function CardMembre({
             position: 'absolute',
             top: 6,
             right: 15,
-            fontSize: 22,
+            fontSize: 18,
           }}>
             <strong>{data.id_Adh}</strong>
           </div>

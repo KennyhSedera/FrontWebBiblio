@@ -42,19 +42,12 @@ code {
   margin-left: 5px;
 }
 
-/* .input {
-  transition: all 300ms ease-in;
-}
-
-.input:hover {
-  transform: scale(1.03);
-} */
-
 .login {
   background-image: url('../public/1.jpg');
 }
 .modalcard {
   position:relative;
+  box-shadow: 4px 4px 4px 4px #0000003d;
 }
 .modalcard .modalheadear .btnclosemodal {
   cursor: 'pointer';
@@ -70,6 +63,7 @@ code {
   background: #fff;
   color: #fd4040;
   cursor: pointer;
+  box-shadow: 1px 1px 2px #0000003d;
 }
 .btnclosemodal:hover {
   background: #fd4040 !important;

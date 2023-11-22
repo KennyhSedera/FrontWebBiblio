@@ -85,8 +85,8 @@ function AdherentOne() {
                         fontWeight:600,
                       }}>
                         <strong style={{fontSize:20}}> {type} </strong>
-                        <div><strong>Année: </strong> {moment(new Date()).format('YYYY')}</div>
-                        <div><strong>N°:</strong> {data.id_InscritAdh}</div>
+                        <div><strong>Année: </strong> {moment(data.date_InscritAdh).format('YYYY')}</div>
+                        <div><strong>N°:</strong> {adh.id_Adh}</div>
                       </div>
                     </div>
                     <img className='img' src={getImg(adh.photo_Adh)} alt="photoAdh" />

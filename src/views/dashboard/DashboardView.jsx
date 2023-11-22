@@ -36,8 +36,8 @@ export default function DashboardView() {
     }, [])
 
     const cards = [
-        { title: 'Livres', route: '/livre', total: livre, color: '#ff0000bb', icon: 'dictionary.gif' },
         { title: 'Membres', route: '/membre', total: membre, color: 'green', icon: 'graduate.gif' },
+        { title: 'Livres', route: '/livre', total: livre, color: '#ff0000bb', icon: 'dictionary.gif' },
         { title: 'Emprunts', route: '/emprunt', total: emprunt, color: 'blue', icon: 'science-fiction.gif' },
         { title: 'Utilisateurs', route: '/user', total: 500, color: 'orange', icon: 'pie-chart.gif' },
         { title: 'Statistiques', route: '/statistique', color: 'blue', icon: 'pie-chart (1).gif' },
@@ -53,7 +53,7 @@ export default function DashboardView() {
                 }}>
                     {cards.map((item, i) => (
                         <Link className='carddashboard' style={{
-                            width: 225, color: 'white',
+                            width: '24%', color: 'white',
                             height: 225, fontSize: 24,
                             borderRadius: 10,
                             marginBlock: 5, fontWeight: 600,

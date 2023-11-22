@@ -75,7 +75,7 @@ function InscriptionView() {
     const handleClose = () => {
         setOpen(false);
         setValue('')
-        setTitle('Inscription');
+        setTitle('Reinscription');
     };
 
     return (
@@ -103,7 +103,7 @@ function InscriptionView() {
             }}>
                 {   data.length > 0 ?
                     data.map((item) => (
-                        <div key={item.id_InscritAdh} style={{ width: 'calc(25% - 10px)', height: '47%' }}>
+                        <div key={item.id_InscritAdh} style={{ width: 'calc(25% - 10px)', height: '45%' }}>
                             <CardInscrit data={item} />
                         </div>
                     )) : (

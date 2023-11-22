@@ -1,22 +1,37 @@
 import React, { useEffect, useState } from 'react'
 import Modal from '../modal/Modal'
 import Button from '../Button'
-import { FaMoon } from 'react-icons/fa'
-import { MdSunny } from 'react-icons/md'
+// import { FaMoon } from 'react-icons/fa'
+// import { MdSunny } from 'react-icons/md'
 import { TbLogout } from 'react-icons/tb'
 import { FiBell } from 'react-icons/fi'
 import { ImUser } from 'react-icons/im'
 import { useNavigate } from 'react-router-dom'
 import './btntop.css'
+import { notification } from '../../services/notificationService'
+import moment from 'moment/moment'
+import { getImg } from '../../services/getImg'
 
 function BtnTop({theme=false}) {
     const [dark, setDark] = useState(false)
     const [openLogout, setOpenLogout] = useState(false)
     const [showMenu, setShowMenu] = useState(false)
+    const [showNotification, setShowNotification] = useState(false)
+    const [data, setData] = useState([])
 
     useEffect(() => {
         setDark(theme)
+        getNotification()
     }, [theme])
+
+    const getNotification = async () => {
+        await notification()
+        .then((result) => {
+            setData(result.data.notification);
+        }).catch((err) => {
+            console.log(err);
+        });
+    }
 
     const navigate = useNavigate();
     const handleLogout = () => {
@@ -29,26 +44,97 @@ function BtnTop({theme=false}) {
     ]
   return (
     <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginRight:5 }}>
-        <div style={{ display: 'flex', flexDirection: 'row-reverse', gap: 15, cursor: 'pointer', }}>
-            <div style={{
-                position: 'absolute', width: 20, height: 20,
-                borderRadius: 50, background: 'red', top: 35, color: 'white',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>2</div>
-            <div style={{
-                background: dark ? '#ffffff67' : '#00000067',
-                borderRadius: 50, marginRight: 8,
-                width: 36, height: 36, flexDirection: 'row-reverse',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}>
-                <FiBell color='white' size={22} />
+        <div style={{
+            position:'relative',
+            width: 50,
+            height: 50,
+            borderRadius: 50,
+            top: 5,
+        }}>
+            <div style={{ display: 'flex', flexDirection: 'row-reverse', gap: 15, cursor: 'pointer', }}>
+                <div style={{
+                    position: 'absolute', width: 20, height: 20,
+                    borderRadius: 50, background: 'red', top: -5, color: 'white',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}><span style={{ fontSize: 10 }}>{
+                        data.length > 15 ? '15+':data.length
+                      }</span></div>
+                <div style={{
+                        background: dark ? '#ffffff67' : '#00000067',
+                        borderRadius: 50, marginRight: 8,
+                        width: 40, height: 40, flexDirection: 'row-reverse',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}
+                    onClick={() =>( 
+                        setShowNotification(!showNotification),
+                        setShowMenu(false)
+                    )}
+                >
+                    <FiBell color='white' size={22} />
+                </div>
             </div>
+            {showNotification ? <div
+                className='menuprofile'
+                style={{
+                    width: 250,
+                    minHeight: showNotification?100:0,
+                    background:'#fffffff0',
+                    position: 'absolute',
+                    right: 20,
+                    zIndex: 99,
+                    paddingBlock: 10,
+                    borderRadius: 5,
+                    top: 41,
+                }}
+            >
+                {data.map((item) => (
+                    <div
+                        className='listnotification'
+                        key={item.id_Notification}
+                        // onClick={item.onClick}
+                        style={{
+                            background: item.readAt !== null ? 'red':'grey'
+                        }}
+                    >
+                        <div style={{
+                            width: 50,
+                            height: 50,
+                            borderRadius: 50,
+                            background:'red',
+                        }}>
+
+                        </div>
+                        {/* <img
+                            src={getImg(item.reservationLivre.adherent.photo_Adh)}
+                            style={{
+                                width: 50,
+                                height: 50,
+                                borderRadius: 50,
+                                // objectFit: 'cover',
+                                //resize:''
+                            }}
+                        /> */}
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'column',fontSize:12
+                        }}>
+                            <span style={{}}>
+                                {item.reservationLivre.adherent.prenom_Adh}
+                                {item.content_Notification}
+                                {item.reservationLivre.livre.titre_Livre}
+                            </span>
+                            <span>{moment(item.date_Notification).format('DD MMM YYYY')}</span>
+                        </div>
+                        
+                    </div>  
+                ))}
+            </div>:null}
         </div>
-        <div onClick={() => { setDark(!dark) }} style={{
+        {/* <div onClick={() => { setDark(!dark) }} style={{
             width: 36, height: 36, cursor: 'pointer',
             background: dark ? '#ffffff67' : '#00000067',
-            borderRadius: 50, display: 'flex', alignItems: 'center', justifyContent: 'center',
-        }}>{dark ? <FaMoon color='white' size={22} /> : <MdSunny color='yellow' size={25} />}</div>
+            borderRadius: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', 
+        }}>{dark ? <FaMoon color='white' size={22} /> : <MdSunny color='yellow' size={25} />}</div> */}
         <div style={{
             position:'relative',
             width: 45,
@@ -56,8 +142,11 @@ function BtnTop({theme=false}) {
             borderRadius: 50,
         }}>
             <img
-                onClick={() => setShowMenu(!showMenu)}
-                src='me.jpg' alt=""
+                onClick={() => (
+                    setShowNotification(false),
+                    setShowMenu(!showMenu)
+                )}
+                src='me.jpg' alt="pdp"
                 style={{
                     width: '100%',
                     height: '100%',
@@ -65,10 +154,11 @@ function BtnTop({theme=false}) {
                     objectFit: 'cover',
                     borderRadius: 50,
                     border: '1px solid #2377a9',
-                    boxShadow: '2px 2px 10px #009da0, 2px 2px 2px #2377a9, 2px 2px 5px #00a1feaa'
+                    boxShadow: '2px 2px 10px #009da0, 2px 2px 2px #2377a9, 2px 2px 5px #00a1feaa',
+                    resize:'inherit'
                 }}
             />
-              {showMenu ? <div
+            {showMenu ? <div
                 className='menuprofile'
                 style={{
                     width: 250,

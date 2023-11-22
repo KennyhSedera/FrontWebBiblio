@@ -10,6 +10,7 @@ import {
 } from 'react-icons/fa'
 import { BiMap } from "react-icons/bi";
 import { useNavigate } from 'react-router-dom';
+import { getImg } from '../../services/getImg';
 
 // import moment from 'moment';
 
@@ -79,7 +80,7 @@ function CardInscrit({ data }) {
             right: 15,
             fontSize: 18,
           }}>
-            <strong>{data.id_InscritAdh}</strong>
+            <strong>{data.id_Adh}</strong>
           </div>
           <div style={{fontWeight:'bold', marginTop:15, textTransform:'capitalize'}}>{data.adherent.nom_Adh} </div>
           <div style={{textTransform:'capitalize'}}> {data.adherent.prenom_Adh}</div>
@@ -88,6 +89,17 @@ function CardInscrit({ data }) {
           <div>{ data.genre_Adh==='Homme' ? <FaMale /> : <FaFemale />} : { data.adherent.genre_Adh }</div>
           <div><FaMobile /> : { data.adherent.tel_Adh }</div>
           <div><FaGraduationCap /> : { data.typeadherent.nom_TypeAdh }</div>
+           <img src={getImg(data.adherent.photo_Adh)} alt="adhPhoto" style={{
+            width: 75,
+            height: 75,
+            position: 'absolute',
+            right: 5,
+            bottom: 5,
+            borderRadius: 50,
+            objectFit: 'cover',
+            transformStyle: 'preserve-3d',
+            backdropFilter: 'blur(5px)'
+          }} />
         </div>
       </div>
     </div>

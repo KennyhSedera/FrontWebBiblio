@@ -12,7 +12,7 @@ export const SidebarData = [
     link:false,
     subNav: [
       {
-        title: 'Tous les Adhérents',
+        title: 'Adhérents',
         path: '/membre',
         icon: <FaIcons.FaUsers />
       },
@@ -56,5 +56,4 @@ export const SidebarData = [
     ] },
     { id: 5, title: 'Statistique', path: '/statistique', icon: <FaIcons.FaChartPie />, link:true },
     { id: 7, title: 'Utilisateur', path: '/utilisateur', icon: <FaIcons.FaUserAlt />, link:true },
-    // { id: 6, title: 'Profile', path: '/profile', icon: <FaIcons.FaUserCog />, link:true },
 ];

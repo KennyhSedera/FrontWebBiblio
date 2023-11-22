@@ -9,6 +9,9 @@ exports.getAllAdh = () => {
 exports.getAllAdhNoInsc = () => {
     return Api.Api().get('adherentNoInsc');
 }
+exports.getAllAdhNoEmp = () => {
+    return Api.Api().get('adherentNoEmp');
+}
 exports.getOneAdh = (id) => {
     return Api.Api().get(`adherent/${id}`);
 }
