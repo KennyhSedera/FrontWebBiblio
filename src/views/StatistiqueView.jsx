@@ -57,8 +57,25 @@ function StatistiqueView() {
   ];
 
   return (
-    <MainLayout>
-      <Chart
+      <MainLayout>
+          <Chart
+        width={'500px'}
+        height={'300px'}
+        chartType="LineChart"
+        loader={<div>Loading Chart</div>}
+        data={data}
+        options={{
+          title: 'Données depuis la base de données',
+          backgroundColor: '#f7f7f7', // Changer la couleur de fond du graphique
+          hAxis: {
+            title: 'X-axis Title',
+          },
+          vAxis: {
+            title: 'Y-axis Title',
+          },
+        }}
+      />
+      {/* <Chart
         width={'500px'}
         height={'300px'}
         chartType="BarChart"
@@ -74,7 +91,7 @@ function StatistiqueView() {
             title: 'Y-axis Title',
           },
         }}
-      />
+      /> */}
     </MainLayout>
   );
 }
