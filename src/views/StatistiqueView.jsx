@@ -52,7 +52,7 @@ function StatistiqueView() {
     //     )
      const data = [
     ['Emplacement', 'Total emprunt'],
-    ['Adulte', 11],
+    ['Adulte', 3],
     ['Jeune', 2],
   ];
 
