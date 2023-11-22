@@ -157,12 +157,12 @@ export default function MembreView() {
                     )}
             </div>
 
-            {/* <Modal open={open}>
-                <AddAdh onClose={handleClose} title={title} value={value} />
-            </Modal> */}
             <Modal open={open}>
-                <TestModif onClose={handleClose} title={title} value={value} />
+                <AddAdh onClose={handleClose} title={title} value={value} />
             </Modal>
+            {/* // <Modal open={open}>
+            //     <TestModif onClose={handleClose} title={title} value={value} />
+            // </Modal> */}
             <DialogDelete active={delOpen} message={delMsg} onClose={() => setDelOpen(false)} onAccept={handleAccept} />
             <Alert open={alertOpen} Message={alertMsg} type={alertType} />
         </MainLayout>
