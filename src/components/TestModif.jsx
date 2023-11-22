@@ -25,6 +25,7 @@ function TestModif({value, onClose=()=>{}, title}) {
             setQuartierAdh(value.quartier_Adh)
             setNationaliteAdh(value.nationalite_Adh)
             setLieuNaiss(value.lieunaiss_Adh)
+            setGenre(value.genre_Adh || 'Homme')
         }
     }, [value])
     

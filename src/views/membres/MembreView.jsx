@@ -58,7 +58,7 @@ export default function MembreView() {
         setInput((prevState) => ({ ...prevState, [name]: value }));
 
         const filteredMembres = initialMembres.filter((item) => {
-            return input.toLowerCase() === ''
+            return value.toLowerCase() === ''
                 ? item
                 : item.nom_Adh.toLowerCase().includes(value.toLowerCase()) ||
                   item.prenom_Adh.toLowerCase().includes(value.toLowerCase()) ||

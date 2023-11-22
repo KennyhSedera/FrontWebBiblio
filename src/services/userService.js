@@ -6,7 +6,7 @@ const { default: Api } = require("./Api")
     exports.login=(data)=> {
        return Api.Api().post('signin', data) 
     }
-    exports.getAll=()=> {
+    exports.getAllUsers=()=> {
         return Api.Api().get('user')
     }
     exports.getOne=(id)=> {
