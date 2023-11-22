@@ -57,13 +57,13 @@ function StatistiqueView() {
   ];
 
   return (
-      <MainLayout>
+      <MainLayout title={'Statistique'} overflow>
         <Chart
             width={'500px'}
             height={'300px'}
             chartType="PieChart"
             loader={<div>Loading Chart</div>}
-            data={chartData}
+            data={data}
             options={{
             title: '',
             is3D: true,
