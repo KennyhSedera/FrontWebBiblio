@@ -56,7 +56,7 @@ export default function MembreView() {
     const handleOnChange = (e) => {
         const { name, value } = e.target;
         setInput((prevState) => ({ ...prevState, [name]: value }));
-
+        console.log(input);
         const filteredMembres = initialMembres.filter((item) => {
             return value.toLowerCase() === ''
                 ? item

@@ -79,7 +79,7 @@ function UserView() {
           paddingBlock:2,
         }}
       >
-        
+        {console.log(users)}
       </div>
     </MainLayout>
   )
