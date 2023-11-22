@@ -21,7 +21,7 @@ function TestModif({value, onClose=()=>{}, title}) {
           {title}
           <Input
               value={nom}
-              onChange={(text)=>(setNom(text))}
+              onChange={(text)=>(setNom(text.target.value))}
           />
           <Button title='Close' onClick={onClose} />
     </div>
