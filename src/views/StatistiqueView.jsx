@@ -65,9 +65,9 @@ function StatistiqueView() {
             loader={<div>Loading Chart</div>}
             data={data}
             options={{
-            title: '',
-            is3D: true,
-            backgroundColor: 'transparent', // Changer la couleur de fond du graphique
+                title: 'Comparaison total emprunt par emplacement livre',
+                is3D: true,
+                backgroundColor: 'transparent', // Changer la couleur de fond du graphique
             }}
         />
           {/* <Chart
