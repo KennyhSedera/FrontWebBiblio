@@ -256,7 +256,7 @@ function TestModif({value, onClose=()=>{}, title}) {
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
             <div style={{ width: '50%', position:'relative' }}>
               <Button
-                onClick={validate}
+                // onClick={validate}
                 large
                 color='#00b2fee1'
                 title={btnTitle}
