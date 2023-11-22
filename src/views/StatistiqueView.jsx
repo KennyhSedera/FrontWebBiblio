@@ -52,14 +52,25 @@ function StatistiqueView() {
     //     )
      const data = [
     ['Emplacement', 'Total emprunt'],
-    ['11-11-23', 11],
-    ['12-11-23', 2],
-    ['13-11-23', 8],
+    ['Adulte', 11],
+    ['Jeune', 2],
   ];
 
   return (
       <MainLayout>
-          <Chart
+        <Chart
+            width={'500px'}
+            height={'300px'}
+            chartType="PieChart"
+            loader={<div>Loading Chart</div>}
+            data={chartData}
+            options={{
+            title: '',
+            is3D: true,
+            backgroundColor: 'transparent', // Changer la couleur de fond du graphique
+            }}
+        />
+          {/* <Chart
         width={'500px'}
         height={'300px'}
         chartType="LineChart"
@@ -75,7 +86,7 @@ function StatistiqueView() {
             title: 'Y-axis Title',
           },
         }}
-      />
+      /> */}
       {/* <Chart
         width={'500px'}
         height={'300px'}
