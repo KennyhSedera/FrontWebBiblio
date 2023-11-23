@@ -13,6 +13,7 @@ import { notification } from '../../services/notificationService'
 import moment from 'moment/moment'
 import { getImg } from '../../services/getImg'
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import { Link } from 'react-router-dom';
 
 const queryClient = new QueryClient();
 
@@ -21,26 +22,14 @@ const fetchData = async () => {
   return response.data.notification;
 };
 
-const MyComponent = ({ setShowMenu, showNotification, setShowNotification, history }) => {
-    const { data, isLoading, error } = useQuery('myData', fetchData);
-    
-  const navigateToNotification = (data) => {
-    history.push({
-      pathname: '/notification',
-      state: { data: data }
-    });
-  };
-
-  if (isLoading) {
-    return console.log('loading ...');
-  }
+const MyComponent = ({ setShowMenu, showNotification, setShowNotification }) => {
+    const { data, error } = useQuery('myData', fetchData);
 
   if (error) {
     return <div>Error: {error.message}</div>;
   }
 
   return (
-    
         <div style={{
             position:'relative',
             width: 50,
@@ -101,10 +90,12 @@ const MyComponent = ({ setShowMenu, showNotification, setShowNotification, histo
                   />
               </div>
                 {data.map((item) => (
-                    <div
+                    <Link
                         className='listnotification'
-                        key={item.id_Notification}
-                        onClick={()=>navigateToNotification(item)}
+                        key={item.id_Notification} to={{
+      pathname: '/bookOne',
+      state: { data: dataToSend }
+    }}
                         style={{position:'relative',}}
                     >
                         <div style={{
@@ -134,7 +125,7 @@ const MyComponent = ({ setShowMenu, showNotification, setShowNotification, histo
                             }}>{moment(item.date_Notification).format('DD MMM YYYY')}</span>
                         </div>
                         {!item.readAt && <MdCircle size={8} color='#1e88e5' style={{position:'absolute', right:2, top:25}} />}
-                    </div>  
+                    </Link>  
                 ))}
             </div>:null}
         </div>

@@ -42,4 +42,5 @@
 }
 .listnotification:hover {
     background: #1e88e562;
+    cursor: pointer;
 }
