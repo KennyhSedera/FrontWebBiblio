@@ -24,8 +24,7 @@ const MyComponent = () => {
   return (
     <div>
       <h1>Données de l'API :</h1>
-      <pre>{JSON.stringify(data, null, 2)}</pre>
-      {console.log(data)}
+      {data.length}
     </div>
   );
 };
