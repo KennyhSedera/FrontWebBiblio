@@ -33,7 +33,7 @@ const MyComponent = () => {
 
 const NotificationView = () => {
   const location = useLocation();
-  const { data } = location.state;
+  const { data } = location.state || {};
   console.log(data);
   return (
     <Background>
