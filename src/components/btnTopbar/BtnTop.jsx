@@ -21,8 +21,15 @@ const fetchData = async () => {
   return response.data.notification;
 };
 
-const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification}) => {
-  const { data, isLoading, error } = useQuery('myData', fetchData);
+const MyComponent = ({ setShowMenu, showNotification, setShowNotification, history }) => {
+    const { data, isLoading, error } = useQuery('myData', fetchData);
+    
+  const navigateToNotification = (data) => {
+    history.push({
+      pathname: '/notification',
+      state: { data: data }
+    });
+  };
 
   if (isLoading) {
     return console.log('loading ...');
@@ -80,7 +87,6 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
           >
               <div style={{
                   display: 'flex',
-                  alignItems: 'center',
                   justifyContent:'space-between',
                   padding: 5,
                   fontSize: 20,
@@ -88,13 +94,17 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                   marginBottom: 2,
               }}>
                   <span>Notifications</span>
-                  <MdClose size={15} onClick={()=>setShowNotification(!showNotification)} />
+                  <MdClose
+                      size={17}
+                      onClick={() => setShowNotification(!showNotification)}
+                      style={{cursor:'pointer'}}
+                  />
               </div>
                 {data.map((item) => (
                     <div
                         className='listnotification'
                         key={item.id_Notification}
-                        // onClick={item.onClick}
+                        onClick={()=>navigateToNotification(item)}
                         style={{position:'relative',}}
                     >
                         <div style={{
@@ -115,9 +125,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                             flexDirection: 'column',fontSize:12
                         }}>
                             <span style={{marginRight:10}}>
-                                {item.reservationLivre.adherent.prenom_Adh}
-                                {item.content_Notification}
-                                {item.reservationLivre.livre.titre_Livre}
+                                {item.reservationLivre.adherent.prenom_Adh+' '+item.content_Notification+' '+item.reservationLivre.livre.titre_Livre}
                             </span>
                             <span style={{
                                 fontSize: 10,

@@ -11,6 +11,7 @@ const fetchData = async () => {
 };
 
 const MyComponent = () => {
+
   const { data, isLoading, error } = useQuery('myData', fetchData);
 
   if (isLoading) {
@@ -29,7 +30,9 @@ const MyComponent = () => {
   );
 };
 
-const NotificationView = () => {
+const NotificationView = ({location}) => {
+  const { data } = location.state;
+  console.log(data);
   return (
     <Background>
       <QueryClientProvider client={queryClient}>
