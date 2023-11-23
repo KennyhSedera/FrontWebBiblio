@@ -83,12 +83,12 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                   alignItems: 'center',
                   justifyContent:'space-between',
                   padding: 5,
-                  fontSize: 18,
-                  fontWeight: 600,
+                  fontSize: 20,
+                  fontWeight: 700,
                   marginBottom: 2,
               }}>
                   <span>Notifications</span>
-                  <MdClose size={25} onClick={()=>setShowNotification(!showNotification)} />
+                  <MdClose size={15} onClick={()=>setShowNotification(!showNotification)} />
               </div>
                 {data.map((item) => (
                     <div
