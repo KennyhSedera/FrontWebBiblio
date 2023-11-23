@@ -1,12 +1,13 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import axios from 'axios';
+import Background from '../components/layout/Background';
 
 const queryClient = new QueryClient();
 
 const fetchData = async () => {
-  const response = await axios.get('http://localhost:1142/livre');
-  return response.data.livres;
+  const response = await axios.get('http://localhost:1142/notificationNot');
+  return response.data.notification;
 };
 
 const MyComponent = () => {
@@ -31,9 +32,12 @@ const MyComponent = () => {
 
 const NotificationView = () => {
   return (
-    <QueryClientProvider client={queryClient}>
-      <MyComponent />
-    </QueryClientProvider>
+    <Background>
+      <QueryClientProvider client={queryClient}>
+        <MyComponent />
+      </QueryClientProvider>
+    </Background>
+    
   );
 };
 
