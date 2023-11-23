@@ -20,8 +20,7 @@ const fetchData = async () => {
   return response.data.notification;
 };
 
-const MyComponent = () => {
-    const [showNotification, setShowNotification] = useState(false)
+const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification}) => {
   const { data, isLoading, error } = useQuery('myData', fetchData);
 
   if (isLoading) {
@@ -219,7 +218,12 @@ function BtnTop({theme=false}) {
             </div>:null}
         </div> */}
         <QueryClientProvider client={queryClient}>
-            <MyComponent />
+              <MyComponent
+                  dark={dark}
+                  setShowMenu={setShowMenu}
+                  showNotification={showNotification}
+                  setShowNotification={setShowNotification}
+              />
         </QueryClientProvider>
         {/* <div onClick={() => { setDark(!dark) }} style={{
             width: 36, height: 36, cursor: 'pointer',
