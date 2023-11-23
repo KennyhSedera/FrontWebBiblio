@@ -76,7 +76,8 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                     top: 41,
                     overflowY:'auto',
                 }}
-            >
+          >
+              <div style={{textAlign:'center', padding:10,}}>Notifications</div>
                 {data.map((item) => (
                     <div
                         className='listnotification'
