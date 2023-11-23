@@ -4,7 +4,7 @@ import Button from '../Button'
 // import { FaMoon } from 'react-icons/fa'
 // import { MdSunny } from 'react-icons/md'
 import { TbLogout } from 'react-icons/tb'
-import { FiBell } from 'react-icons/fi'
+import { FiBell, FiCircle } from 'react-icons/fi'
 import { ImUser } from 'react-icons/im'
 import { useNavigate } from 'react-router-dom'
 import './btntop.css'
@@ -89,9 +89,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                         className='listnotification'
                         key={item.id_Notification}
                         // onClick={item.onClick}
-                        style={{
-                            background: item.readAt === null ? '#0000005f':''
-                        }}
+                        style={{position:'relative'}}
                     >
                         <div style={{
                         }}>     
@@ -116,9 +114,13 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                                 {item.content_Notification}
                                 {item.reservationLivre.livre.titre_Livre}
                             </span>
-                            <span style={{fontSize:10, fontWeight:300}}>{moment(item.date_Notification).format('DD MMM YYYY')}</span>
+                            <span style={{
+                                fontSize: 10,
+                                fontWeight: 300,
+                                color: item.readAt ? 'black' : '#1e88e5',
+                            }}>{moment(item.date_Notification).format('DD MMM YYYY')}</span>
                         </div>
-                        
+                        {!item.readAt && <FiCircle size={20} color='#1e88e5' style={{position:'absolute', right:8,}} />}
                     </div>  
                 ))}
             </div>:null}
