@@ -2,6 +2,7 @@ import React from 'react';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
 import Background from '../components/layout/Background';
 import { notification } from '../services/notificationService';
+import { useLocation } from 'react-router-dom';
 
 const queryClient = new QueryClient();
 
@@ -30,7 +31,8 @@ const MyComponent = () => {
   );
 };
 
-const NotificationView = ({location}) => {
+const NotificationView = () => {
+  const location = useLocation();
   const { data } = location.state;
   console.log(data);
   return (
