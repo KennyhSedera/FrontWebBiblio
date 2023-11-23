@@ -95,7 +95,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                         className='listnotification'
                         key={item.id_Notification}
                         // onClick={item.onClick}
-                        style={{position:'relative', marginRight:5}}
+                        style={{position:'relative', marginRight:10, background:'red'}}
                     >
                         <div style={{
                         }}>     
@@ -126,7 +126,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                                 color: item.readAt ? 'black' : '#1e88e5',
                             }}>{moment(item.date_Notification).format('DD MMM YYYY')}</span>
                         </div>
-                        {!item.readAt && <MdCircle size={14} color='#1e88e5' style={{position:'absolute', right:2,}} />}
+                        {!item.readAt && <MdCircle size={10} color='#1e88e5' style={{position:'absolute', right:2, top:25}} />}
                     </div>  
                 ))}
             </div>:null}
