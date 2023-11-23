@@ -92,10 +92,11 @@ const MyComponent = ({ setShowMenu, showNotification, setShowNotification }) => 
                 {data.map((item) => (
                     <Link
                         className='listnotification'
-                        key={item.id_Notification} to={{
-      pathname: '/bookOne',
-      state: { data: dataToSend }
-    }}
+                        key={item.id_Notification}
+                        to={{
+                        pathname: '/notification',
+                        state: { data: item }
+                        }}
                         style={{position:'relative',}}
                     >
                         <div style={{
