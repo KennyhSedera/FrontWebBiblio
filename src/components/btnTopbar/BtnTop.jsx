@@ -49,7 +49,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                         data.length > 15 ? '15+':data.length
                       }</span></div>
                 <div style={{
-                        background: dark ? '#ffffff67' : '#00000067',
+                        background: '#00000067',
                         borderRadius: 50, marginRight: 8,
                         width: 40, height: 40, flexDirection: 'row-reverse',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
