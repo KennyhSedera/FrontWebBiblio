@@ -66,7 +66,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                 className='menuprofile'
                 style={{
                     width: 250,
-                    minHeight: showNotification?100:0,
+                    maxHeight: showNotification?100:0,
                     background:'#fffffff0',
                     position: 'absolute',
                     right: 20,
@@ -74,6 +74,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                     paddingBlock: 10,
                     borderRadius: 5,
                     top: 41,
+                    overflowY:'auto',
                 }}
             >
                 {data.map((item) => (
