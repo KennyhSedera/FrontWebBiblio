@@ -1,33 +1,39 @@
-import { useQuery } from 'react-query';
-import Background from '../components/layout/Background';
+import React from 'react';
+import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import axios from 'axios';
 
-function NotificationView() {
-  const { isLoading, error, data } = useQuery('tasks', async () => {
-    const response = await fetch('http://localhost:1142/adherent');
-    if (!response.ok) {
-      throw new Error('Something went wrong while fetching data');
-    }
-    return response.json();
-  });
+const queryClient = new QueryClient();
+
+const fetchData = async () => {
+  const response = await axios.get('http://localhost:1142/livre');
+  return response.data.livres;
+};
+
+const MyComponent = () => {
+  const { data, isLoading, error } = useQuery('myData', fetchData);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <div>Loading...</div>;
   }
 
   if (error) {
-    return <p>Error: {error.message}</p>;
+    return <div>Error: {error.message}</div>;
   }
 
   return (
-    <Background>
-      <h1>Task List</h1>
-      <ul>
-        {data.map(task => (
-          <li key={task.id_Adh}>{task.nom_Adh}</li>
-        ))}
-      </ul>
-    </Background>
+    <div>
+      <h1>Données de l'API :</h1>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+    </div>
   );
-}
+};
+
+const NotificationView = () => {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <MyComponent />
+    </QueryClientProvider>
+  );
+};
 
 export default NotificationView;
