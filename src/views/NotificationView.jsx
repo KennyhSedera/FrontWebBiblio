@@ -34,7 +34,7 @@ const MyComponent = () => {
 const NotificationView = () => {
   const location = useLocation();
   const { data } = location.state || {};
-  console.log(data);
+  console.log({data:data});
   return (
     <Background>
       <QueryClientProvider client={queryClient}>

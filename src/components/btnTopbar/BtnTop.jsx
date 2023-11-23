@@ -7,7 +7,7 @@ import { MdCircle, MdClose } from 'react-icons/md'
 import { TbLogout } from 'react-icons/tb'
 import { FiBell } from 'react-icons/fi'
 import { ImUser } from 'react-icons/im'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import './btntop.css'
 import { notification } from '../../services/notificationService'
 import moment from 'moment/moment'
@@ -22,6 +22,7 @@ const fetchData = async () => {
 };
 
 const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification}) => {
+  const navigate = useNavigate();
   const { data, isLoading, error } = useQuery('myData', fetchData);
 
   if (isLoading) {
@@ -94,14 +95,13 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                   />
               </div>
                 {data.map((item) => (
-                    <Link
+                    <div
                         className='listnotification'
                         key={item.id_Notification}
-                        to={{
-                            pathname: '/notification',
-                            state: { data: item }
-                        }}      
-                        style={{position:'relative', textDecoration:'none', color:'black'}}
+                        onClick={() => {
+                            navigate('/notification', { state: { data: item } })
+                        }}
+                        style={{position:'relative',}}
                     >
                         <div style={{
                         }}>     
@@ -118,21 +118,19 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                         
                         <div style={{
                             display: 'flex',
-                            flexDirection: 'column',
-                            fontSize: 14,
-                            fontWeight: 600,
+                            flexDirection: 'column',fontSize:12
                         }}>
                             <span style={{marginRight:10}}>
                                 {item.reservationLivre.adherent.prenom_Adh+' '+item.content_Notification+' '+item.reservationLivre.livre.titre_Livre}
                             </span>
                             <span style={{
-                                fontSize: 12,
-                                fontWeight: 400,
-                                color: item.readAt ? 'black' : '#1e88e5 ',
+                                fontSize: 10,
+                                fontWeight: 300,
+                                color: item.readAt ? 'black' : '#1e88e5',
                             }}>{moment(item.date_Notification).format('DD MMM YYYY')}</span>
                         </div>
                         {!item.readAt && <MdCircle size={8} color='#1e88e5' style={{position:'absolute', right:2, top:25}} />}
-                    </Link>  
+                    </div>  
                 ))}
             </div>:null}
         </div>
