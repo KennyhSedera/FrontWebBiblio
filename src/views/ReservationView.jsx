@@ -19,8 +19,8 @@ function ReservationView() {
           }}>
                 <div style={{textAlign:'center', position:'relative', paddingTop:15,}}>
                     <MdKeyboardArrowLeft 
-                        size={25}
-                        style={{ position: 'absolute', left: 10, }}
+                        size={30}
+                        style={{ position: 'absolute', left: 10, cursor:'pointer' }}
                         onClick={()=>navigate('/accueil')}
                     />
                     <span style={{ fontSize: 25, fontWeight: 700 }}>Réservation</span>
