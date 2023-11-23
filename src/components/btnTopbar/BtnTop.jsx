@@ -44,7 +44,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                     borderRadius: 50, background: 'red', top: -5, color: 'white',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}><span style={{ fontSize: 10 }}>{
-                        // data.length > 15 ? '15+':data.length
+                        data.length > 15 ? '15+':data.length
                       }</span></div>
                 <div style={{
                         background: '#00000067',
