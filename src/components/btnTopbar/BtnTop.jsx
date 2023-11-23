@@ -99,7 +99,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                         className='listnotification'
                         key={item.id_Notification}
                         onClick={() => {
-                            navigate('/notification', { state: { data: item } })
+                            navigate('/reservation', { state: { data: item } })
                         }}
                         style={{position:'relative',}}
                     >

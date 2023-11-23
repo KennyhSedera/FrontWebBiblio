@@ -20,6 +20,7 @@ import LivreDispo from './views/livres/LivreDispo';
 import EmpruntEnCours from './views/emprunt/EmpruntEnCours';
 import App from './App';
 import NotificationView from './views/NotificationView';
+import ReservationView from './views/ReservationView';
 
 const router = createBrowserRouter([
   {
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
   {
     path: "/notification",
     element: <NotificationView />
+  },
+  {
+    path: "/reservation",
+    element: <ReservationView />
   },
 ])
 
