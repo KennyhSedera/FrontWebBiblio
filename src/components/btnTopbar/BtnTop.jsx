@@ -44,7 +44,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                     borderRadius: 50, background: 'red', top: -5, color: 'white',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                   }}><span style={{ fontSize: 10 }}>{
-                        data.length > 15 ? '15+':data.length
+                        // data.length > 15 ? '15+':data.length
                       }</span></div>
                 <div style={{
                         background: '#00000067',
@@ -154,86 +154,6 @@ function BtnTop({theme=false}) {
     ]
   return (
     <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginRight:5 }}>
-        {/* <div style={{
-            position:'relative',
-            width: 50,
-            height: 50,
-            borderRadius: 50,
-            top: 5,
-        }}>
-            <div style={{ display: 'flex', flexDirection: 'row-reverse', gap: 15, cursor: 'pointer', }}>
-                <div style={{
-                    position: 'absolute', width: 20, height: 20,
-                    borderRadius: 50, background: 'red', top: -5, color: 'white',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  }}><span style={{ fontSize: 10 }}>{
-                        data.length > 15 ? '15+':data.length
-                      }</span></div>
-                <div style={{
-                        background: dark ? '#ffffff67' : '#00000067',
-                        borderRadius: 50, marginRight: 8,
-                        width: 40, height: 40, flexDirection: 'row-reverse',
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    }}
-                    onClick={() =>( 
-                        setShowNotification(!showNotification),
-                        setShowMenu(false)
-                    )}
-                >
-                    <FiBell color='white' size={22} />
-                </div>
-            </div>
-            {showNotification ? <div
-                className='menuprofile'
-                style={{
-                    width: 250,
-                    minHeight: showNotification?100:0,
-                    background:'#fffffff0',
-                    position: 'absolute',
-                    right: 20,
-                    zIndex: 99,
-                    paddingBlock: 10,
-                    borderRadius: 5,
-                    top: 41,
-                }}
-            >
-                {data.map((item) => (
-                    <div
-                        className='listnotification'
-                        key={item.id_Notification}
-                        // onClick={item.onClick}
-                        style={{
-                            background: item.readAt === null ? 'red':'grey'
-                        }}
-                    >
-                        <div style={{
-                        }}>     
-                            <img
-                                src={getImg(item.reservationLivre.adherent.photo_Adh)}
-                                style={{
-                                    width: 50,
-                                    height: 50,
-                                    borderRadius: 50,
-                                }}
-                            />
-                        </div>
-                        
-                        <div style={{
-                            display: 'flex',
-                            flexDirection: 'column',fontSize:12
-                        }}>
-                            <span style={{}}>
-                                {item.reservationLivre.adherent.prenom_Adh}
-                                {item.content_Notification}
-                                {item.reservationLivre.livre.titre_Livre}
-                            </span>
-                            <span style={{fontSize:10, fontWeight:300}}>{moment(item.date_Notification).format('DD MMM YYYY')}</span>
-                        </div>
-                        
-                    </div>  
-                ))}
-            </div>:null}
-        </div> */}
         <QueryClientProvider client={queryClient}>
               <MyComponent
                   dark={dark}
@@ -242,11 +162,6 @@ function BtnTop({theme=false}) {
                   setShowNotification={setShowNotification}
               />
         </QueryClientProvider>
-        {/* <div onClick={() => { setDark(!dark) }} style={{
-            width: 36, height: 36, cursor: 'pointer',
-            background: dark ? '#ffffff67' : '#00000067',
-            borderRadius: 50, display: 'flex', alignItems: 'center', justifyContent: 'center', 
-        }}>{dark ? <FaMoon color='white' size={22} /> : <MdSunny color='yellow' size={25} />}</div> */}
         <div style={{
             position:'relative',
             width: 45,
