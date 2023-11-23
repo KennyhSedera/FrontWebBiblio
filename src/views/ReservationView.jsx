@@ -12,7 +12,7 @@ function ReservationView() {
           <div style={{
               width: 700,
               height: 400,
-              background: '#ffffffdf',
+              background: '#ffffffa2',
               borderRadius:15,
               ZIndex: 99,
           }}>
