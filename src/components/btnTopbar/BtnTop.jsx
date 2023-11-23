@@ -7,7 +7,7 @@ import { MdCircle, MdClose } from 'react-icons/md'
 import { TbLogout } from 'react-icons/tb'
 import { FiBell } from 'react-icons/fi'
 import { ImUser } from 'react-icons/im'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './btntop.css'
 import { notification } from '../../services/notificationService'
 import moment from 'moment/moment'
@@ -94,7 +94,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                   />
               </div>
                 {data.map((item) => (
-                    <div
+                    <Link
                         className='listnotification'
                         key={item.id_Notification}
                         // onClick={item.onClick}
@@ -127,7 +127,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                             }}>{moment(item.date_Notification).format('DD MMM YYYY')}</span>
                         </div>
                         {!item.readAt && <MdCircle size={8} color='#1e88e5' style={{position:'absolute', right:2, top:25}} />}
-                    </div>  
+                    </Link>  
                 ))}
             </div>:null}
         </div>
