@@ -77,14 +77,20 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                     overflowY:'auto',
                 }}
           >
-              <div style={{textAlign:'center', padding:10,}}>Notifications</div>
+              <div style={{
+                  textAlign: 'center',
+                  padding: 5,
+                  fontSize: 18,
+                  fontWeight: 600,
+                  marginBottom: 2,
+              }}>Notifications</div>
                 {data.map((item) => (
                     <div
                         className='listnotification'
                         key={item.id_Notification}
                         // onClick={item.onClick}
                         style={{
-                            background: item.readAt === null ? 'red':'grey'
+                            background: item.readAt === null ? '#0000005f':''
                         }}
                     >
                         <div style={{
