@@ -14,7 +14,7 @@ function ReservationView() {
               height: 400,
               background: '#ffffffdf',
               borderRadius:15,
-              ZIndex: 5,
+              ZIndex: 99,
           }}>
               <div style={{textAlign:'center', position:'relative', paddingTop:15,}}>
                   <MdKeyboardArrowLeft size={25} style={{position:'absolute', left:10,}} />
@@ -22,7 +22,7 @@ function ReservationView() {
               </div>
               <div style={{
                   display: 'flex',
-                  flexDirection: 'column',
+                  flexDirection: 'row',
                   alignItems: 'flex-start',
                   justifyContent: 'space-between',
               }}>
@@ -33,7 +33,7 @@ function ReservationView() {
                   }}></div>
                   <div style={{
                     width:'50%', 
-                    background:'red', 
+                    background:'blue', 
                     minHeight:200,
                   }}></div>
               </div>
