@@ -12,38 +12,27 @@ import { notification } from '../../services/notificationService'
 import moment from 'moment/moment'
 import { getImg } from '../../services/getImg'
 
-function BtnTop({theme=false}) {
-    const [dark, setDark] = useState(false)
-    const [openLogout, setOpenLogout] = useState(false)
-    const [showMenu, setShowMenu] = useState(false)
+const queryClient = new QueryClient();
+
+const fetchData = async () => {
+  const response = await notification();
+  return response.data.notification;
+};
+
+const MyComponent = () => {
     const [showNotification, setShowNotification] = useState(false)
-    const [data, setData] = useState([])
+  const { data, isLoading, error } = useQuery('myData', fetchData);
 
-    useEffect(() => {
-        setDark(theme)
-        getNotification()
-    }, [theme])
+  if (isLoading) {
+    return console.log('loading ...');
+  }
 
-    const getNotification = async () => {
-        await notification()
-        .then((result) => {
-            setData(result.data.notification);
-        }).catch((err) => {
-            console.log(err);
-        });
-    }
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
-    const navigate = useNavigate();
-    const handleLogout = () => {
-        navigate('/')
-    }
-    const list = [
-        {title:'Voir votre profil', icon: ImUser, onClick:()=>{navigate('/profile')}},
-        {title:'Notification', icon: FiBell, onClick:()=>{navigate('/notification')}},
-        {title:'Se deconnecter', icon: TbLogout, onClick:()=>{setOpenLogout(true)}}
-    ]
   return (
-    <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginRight:5 }}>
+    
         <div style={{
             position:'relative',
             width: 50,
@@ -124,6 +113,113 @@ function BtnTop({theme=false}) {
                 ))}
             </div>:null}
         </div>
+  );
+};
+
+function BtnTop({theme=false}) {
+    const [dark, setDark] = useState(false)
+    const [openLogout, setOpenLogout] = useState(false)
+    const [showMenu, setShowMenu] = useState(false)
+    const [showNotification, setShowNotification] = useState(false)
+
+    useEffect(() => {
+        setDark(theme)
+    }, [theme])
+
+    const navigate = useNavigate();
+    const handleLogout = () => {
+        navigate('/')
+    }
+    const list = [
+        {title:'Voir votre profil', icon: ImUser, onClick:()=>{navigate('/profile')}},
+        {title:'Notification', icon: FiBell, onClick:()=>{navigate('/notification')}},
+        {title:'Se deconnecter', icon: TbLogout, onClick:()=>{setOpenLogout(true)}}
+    ]
+  return (
+    <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginRight:5 }}>
+        {/* <div style={{
+            position:'relative',
+            width: 50,
+            height: 50,
+            borderRadius: 50,
+            top: 5,
+        }}>
+            <div style={{ display: 'flex', flexDirection: 'row-reverse', gap: 15, cursor: 'pointer', }}>
+                <div style={{
+                    position: 'absolute', width: 20, height: 20,
+                    borderRadius: 50, background: 'red', top: -5, color: 'white',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                  }}><span style={{ fontSize: 10 }}>{
+                        data.length > 15 ? '15+':data.length
+                      }</span></div>
+                <div style={{
+                        background: dark ? '#ffffff67' : '#00000067',
+                        borderRadius: 50, marginRight: 8,
+                        width: 40, height: 40, flexDirection: 'row-reverse',
+                        display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    }}
+                    onClick={() =>( 
+                        setShowNotification(!showNotification),
+                        setShowMenu(false)
+                    )}
+                >
+                    <FiBell color='white' size={22} />
+                </div>
+            </div>
+            {showNotification ? <div
+                className='menuprofile'
+                style={{
+                    width: 250,
+                    minHeight: showNotification?100:0,
+                    background:'#fffffff0',
+                    position: 'absolute',
+                    right: 20,
+                    zIndex: 99,
+                    paddingBlock: 10,
+                    borderRadius: 5,
+                    top: 41,
+                }}
+            >
+                {data.map((item) => (
+                    <div
+                        className='listnotification'
+                        key={item.id_Notification}
+                        // onClick={item.onClick}
+                        style={{
+                            background: item.readAt === null ? 'red':'grey'
+                        }}
+                    >
+                        <div style={{
+                        }}>     
+                            <img
+                                src={getImg(item.reservationLivre.adherent.photo_Adh)}
+                                style={{
+                                    width: 50,
+                                    height: 50,
+                                    borderRadius: 50,
+                                }}
+                            />
+                        </div>
+                        
+                        <div style={{
+                            display: 'flex',
+                            flexDirection: 'column',fontSize:12
+                        }}>
+                            <span style={{}}>
+                                {item.reservationLivre.adherent.prenom_Adh}
+                                {item.content_Notification}
+                                {item.reservationLivre.livre.titre_Livre}
+                            </span>
+                            <span style={{fontSize:10, fontWeight:300}}>{moment(item.date_Notification).format('DD MMM YYYY')}</span>
+                        </div>
+                        
+                    </div>  
+                ))}
+            </div>:null}
+        </div> */}
+        <QueryClientProvider client={queryClient}>
+            <MyComponent />
+        </QueryClientProvider>
         {/* <div onClick={() => { setDark(!dark) }} style={{
             width: 36, height: 36, cursor: 'pointer',
             background: dark ? '#ffffff67' : '#00000067',
