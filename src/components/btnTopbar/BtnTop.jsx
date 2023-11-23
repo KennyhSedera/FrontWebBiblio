@@ -3,6 +3,7 @@ import Modal from '../modal/Modal'
 import Button from '../Button'
 // import { FaMoon } from 'react-icons/fa'
 // import { MdSunny } from 'react-icons/md'
+import { MdClose } from 'react-icons/md'
 import { TbLogout } from 'react-icons/tb'
 import { FiBell, FiCircle } from 'react-icons/fi'
 import { ImUser } from 'react-icons/im'
@@ -78,12 +79,17 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                 }}
           >
               <div style={{
-                  textAlign: 'center',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent:'space-between',
                   padding: 5,
                   fontSize: 18,
                   fontWeight: 600,
                   marginBottom: 2,
-              }}>Notifications</div>
+              }}>
+                  <span>Notifications</span>
+                  <MdClose size={25} onClick={()=>setShowNotification(!showNotification)} />
+              </div>
                 {data.map((item) => (
                     <div
                         className='listnotification'
