@@ -23,11 +23,7 @@ const fetchData = async () => {
 
 const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification}) => {
   const navigate = useNavigate();
-  const { data, isLoading, error } = useQuery('myData', fetchData);
-
-  if (isLoading) {
-    return console.log('loading ...');
-  }
+  const { data, error } = useQuery('myData', fetchData);
 
   if (error) {
     return <div>Error: {error.message}</div>;
