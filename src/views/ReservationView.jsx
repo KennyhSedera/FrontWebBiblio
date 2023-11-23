@@ -16,8 +16,8 @@ function ReservationView() {
               borderRadius:15,
               ZIndex: 5,
           }}>
-              <div style={{textAlign:'center', position:'relative'}}>
-                  <MdKeyboardArrowLeft size={25} style={{position:'absolute', left:4,}} />
+              <div style={{textAlign:'center', position:'relative', paddingTop:15,}}>
+                  <MdKeyboardArrowLeft size={25} style={{position:'absolute', left:10,}} />
                   <span style={{ fontSize: 20, fontWeight: 700 }}>Réservation</span>
               </div>
               
