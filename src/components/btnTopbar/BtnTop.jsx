@@ -98,7 +98,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                         className='listnotification'
                         key={item.id_Notification}
                         // onClick={item.onClick}
-                        style={{position:'relative',}}
+                        style={{position:'relative', textDecoration:'none', color:'black'}}
                     >
                         <div style={{
                         }}>     
@@ -115,14 +115,16 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                         
                         <div style={{
                             display: 'flex',
-                            flexDirection: 'column',fontSize:12
+                            flexDirection: 'column',
+                            fontSize: 14,
+                            fontWeight: 600,
                         }}>
                             <span style={{marginRight:10}}>
                                 {item.reservationLivre.adherent.prenom_Adh+' '+item.content_Notification+' '+item.reservationLivre.livre.titre_Livre}
                             </span>
                             <span style={{
-                                fontSize: 10,
-                                fontWeight: 300,
+                                fontSize: 12,
+                                fontWeight: 400,
                                 color: item.readAt ? 'black' : '#1e88e5',
                             }}>{moment(item.date_Notification).format('DD MMM YYYY')}</span>
                         </div>
