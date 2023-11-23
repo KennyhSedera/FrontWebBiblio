@@ -14,11 +14,11 @@ function ReservationView() {
               height: 400,
               background: '#ffffffdf',
               borderRadius:15,
-              ZIndex: 1,
+              ZIndex: 5,
           }}>
-              <div>
-                  <MdKeyboardArrowLeft size={25} />
-                  <span style={{fontSize:20, fontWeight:700}}>Réservation</span>
+              <div style={{textAlign:'center', position:'relative'}}>
+                  <MdKeyboardArrowLeft size={25} style={{position:'absolute', left:4,}} />
+                  <span style={{ fontSize: 20, fontWeight: 700 }}>Réservation</span>
               </div>
               
       </div>
