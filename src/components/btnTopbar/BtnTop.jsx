@@ -95,7 +95,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                         className='listnotification'
                         key={item.id_Notification}
                         // onClick={item.onClick}
-                        style={{position:'relative', marginRight:10, background:'red'}}
+                        style={{position:'relative',}}
                     >
                         <div style={{
                         }}>     
@@ -106,7 +106,6 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                                     height: 50,
                                     borderRadius: 50,
                                     objectFit: 'cover',
-                                    resize:''
                                 }}
                             />
                         </div>
@@ -115,7 +114,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                             display: 'flex',
                             flexDirection: 'column',fontSize:12
                         }}>
-                            <span style={{}}>
+                            <span style={{marginRight:10, background:'red'}}>
                                 {item.reservationLivre.adherent.prenom_Adh}
                                 {item.content_Notification}
                                 {item.reservationLivre.livre.titre_Livre}
@@ -126,7 +125,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                                 color: item.readAt ? 'black' : '#1e88e5',
                             }}>{moment(item.date_Notification).format('DD MMM YYYY')}</span>
                         </div>
-                        {!item.readAt && <MdCircle size={10} color='#1e88e5' style={{position:'absolute', right:2, top:25}} />}
+                        {!item.readAt && <MdCircle size={15} color='#1e88e5' style={{position:'absolute', right:2, top:25}} />}
                     </div>  
                 ))}
             </div>:null}
