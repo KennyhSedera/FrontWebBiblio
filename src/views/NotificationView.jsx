@@ -1,12 +1,12 @@
 import React from 'react';
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
-import axios from 'axios';
 import Background from '../components/layout/Background';
+import { notification } from '../services/notificationService';
 
 const queryClient = new QueryClient();
 
 const fetchData = async () => {
-  const response = await axios.get('http://localhost:1142/notificationNot');
+  const response = await notification();
   return response.data.notification;
 };
 
