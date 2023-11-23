@@ -13,7 +13,6 @@ import { notification } from '../../services/notificationService'
 import moment from 'moment/moment'
 import { getImg } from '../../services/getImg'
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
-import { Link } from 'react-router-dom';
 
 const queryClient = new QueryClient();
 
@@ -22,14 +21,19 @@ const fetchData = async () => {
   return response.data.notification;
 };
 
-const MyComponent = ({ setShowMenu, showNotification, setShowNotification }) => {
-    const { data, error } = useQuery('myData', fetchData);
+const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification}) => {
+  const { data, isLoading, error } = useQuery('myData', fetchData);
+
+  if (isLoading) {
+    return console.log('loading ...');
+  }
 
   if (error) {
     return <div>Error: {error.message}</div>;
   }
 
   return (
+    
         <div style={{
             position:'relative',
             width: 50,
@@ -90,13 +94,10 @@ const MyComponent = ({ setShowMenu, showNotification, setShowNotification }) => 
                   />
               </div>
                 {data.map((item) => (
-                    <Link
+                    <div
                         className='listnotification'
                         key={item.id_Notification}
-                        to={{
-                        pathname: '/notification',
-                        state: { data: item }
-                        }}
+                        // onClick={item.onClick}
                         style={{position:'relative',}}
                     >
                         <div style={{
@@ -126,7 +127,7 @@ const MyComponent = ({ setShowMenu, showNotification, setShowNotification }) => 
                             }}>{moment(item.date_Notification).format('DD MMM YYYY')}</span>
                         </div>
                         {!item.readAt && <MdCircle size={8} color='#1e88e5' style={{position:'absolute', right:2, top:25}} />}
-                    </Link>  
+                    </div>  
                 ))}
             </div>:null}
         </div>
