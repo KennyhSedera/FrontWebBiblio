@@ -3,9 +3,9 @@ import Modal from '../modal/Modal'
 import Button from '../Button'
 // import { FaMoon } from 'react-icons/fa'
 // import { MdSunny } from 'react-icons/md'
-import { MdClose } from 'react-icons/md'
+import { MdCircle, MdClose } from 'react-icons/md'
 import { TbLogout } from 'react-icons/tb'
-import { FiBell, FiCircle } from 'react-icons/fi'
+import { FiBell } from 'react-icons/fi'
 import { ImUser } from 'react-icons/im'
 import { useNavigate } from 'react-router-dom'
 import './btntop.css'
@@ -95,7 +95,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                         className='listnotification'
                         key={item.id_Notification}
                         // onClick={item.onClick}
-                        style={{position:'relative'}}
+                        style={{position:'relative', marginRight:5}}
                     >
                         <div style={{
                         }}>     
@@ -126,7 +126,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                                 color: item.readAt ? 'black' : '#1e88e5',
                             }}>{moment(item.date_Notification).format('DD MMM YYYY')}</span>
                         </div>
-                        {!item.readAt && <FiCircle size={20} color='#1e88e5' style={{position:'absolute', right:8,}} />}
+                        {!item.readAt && <MdCircle size={14} color='#1e88e5' style={{position:'absolute', right:2,}} />}
                     </div>  
                 ))}
             </div>:null}
