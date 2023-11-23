@@ -65,8 +65,8 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
             {showNotification ? <div
                 className='menuprofile'
                 style={{
-                    width: 250,
-                    maxHeight: showNotification?100:0,
+                    width: 300,
+                    maxHeight: showNotification?350:0,
                     background:'#fffffff0',
                     position: 'absolute',
                     right: 20,
@@ -94,6 +94,8 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                                     width: 50,
                                     height: 50,
                                     borderRadius: 50,
+                                    objectFit: 'cover',
+                                    resize:''
                                 }}
                             />
                         </div>
