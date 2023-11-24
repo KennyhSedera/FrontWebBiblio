@@ -7,7 +7,9 @@ import { getAllAdhNoInsc } from '../services/adherentService'
 import { getAllType } from '../services/typeAdhService'
 import Testdropdown from './dropdownsearch/Testdropdown'
 import InputImg from './inputImg/InputImg'
-// import Button from './Button'
+import DatePickerInput from './datepicker/DatePikers'
+import Button from './Button'
+import Alert from './alert/Alert'
 
 function TestModif({value, onClose=()=>{}, title}) {
   const [numadh, setNumAdh] = useState('')
@@ -22,10 +24,24 @@ function TestModif({value, onClose=()=>{}, title}) {
   const [file, setFile] = React.useState(null);
   const [typeAdh, setTypeAdh] = useState([]);
   const [searchValue, setSearchValue] = useState(null);
+  const [datenaiss, setDateNaiss] = useState(new Date());
+  const [btnTitle, setBtnTitle] = React.useState('Enregistrer');
+  const [loading, setLoading] = React.useState(false);
+  const [alertOpen, setAlertOpen] = useState(false)
+  const [alertMsg, setAlertMsg] = useState('')
+  const [alertType, setAlertType] = useState('success')
   
   
   const [fileError, setFileError] = React.useState('');
   const [typeError, setTypeError] = useState('');
+  const [numadhErr, setNumAdhErr] = useState('')
+  const [nomadhErr, setNomAdhErr] = useState('')
+  const [prenomadhErr, setPrenomAdhErr] = useState('')
+  const [teladhErr, setTelAdhErr] = useState('')
+  const [adressadhErr, setAdressAdhErr] = useState('')
+  const [quartieradhErr, setQuartierAdhErr] = useState('')
+  const [nationaliteadhErr, setNationaliteAdhErr] = useState('')
+  const [lieunaissadhErr, setLieuNaissErr] = useState('')
     useEffect(() => {
         if (value) {
             setNomAdh(value.nom_Adh)
@@ -90,7 +106,77 @@ function TestModif({value, onClose=()=>{}, title}) {
   const handelResetValueType = () => {
     setSearchValue(null);
   };
-
+ const validate = () => {
+  setLoading(true)
+    // if (input.numadh ==='') {
+    //   setError(prevState => ({ ...prevState, [numadh]: 'Cette champ ne doit pas être vide!' }))
+    // } else if (input.nomadh ==='') {
+    //   setError(prevState => ({ ...prevState, [name.nomadh]: 'Cette champ ne doit pas être vide!' }))
+    // }else if (input.prenomadh ==='') {
+    //   setError(prevState => ({ ...prevState, [name.prenomadh]: 'Cette champ ne doit pas être vide!' }))
+    // }else if (input.teladh ==='') {
+    //   setError(prevState => ({ ...prevState, [name.teladh]: 'Cette champ ne doit pas être vide!' }))
+    // }else if (input.addressadh ==='') {
+    //   setError(prevState => ({ ...prevState, [name.addressadh]: 'Cette champ ne doit pas être vide!' }))
+    // }else if (input.quartieradh ==='') {
+    //   setError(prevState => ({ ...prevState, [name.quartieradh]: 'Cette champ ne doit pas être vide!' }))
+    // }else if (input.nationaliteadh ==='') {
+    //   setError(prevState => ({ ...prevState, [name.nationaliteadh]: 'Cette champ ne doit pas être vide!' }))
+    // }else if (input.lieunaissadh ==='') {
+    //   setError(prevState => ({ ...prevState, [name.lieunaissadh]: 'Cette champ ne doit pas être vide!' }))
+    // } else if (file === null) {
+    //   setFileError('Choisissez une image!')
+    // } else {
+    //   const formData = new FormData();
+    //   formData.append("photo_adh", file);
+    //   formData.append("nom_Adh", input.nomadh);
+    //   formData.append("prenom_Adh", input.prenomadh);
+    //   formData.append("adresse_Adh", input.addressadh);
+    //   formData.append("quartier_Adh", input.quartieradh);
+    //   formData.append("tel_Adh", input.teladh);
+    //   formData.append("nationalite_Adh", input.nationaliteadh);
+    //   formData.append("lieunaiss_Adh", input.lieunaissadh);
+    //   formData.append("naissance_Adh", datenaiss);
+    //   formData.append("genre_Adh", genre);
+    //   if (!loading) {
+    //     setLoading(true);
+    //   }
+    //   if (btnTitle === 'Enregistrer') {
+    //     createAdh(formData)
+    //     .then((res) => {
+    //       setAlertOpen(true);
+    //       setAlertMsg(res.data.succee);
+    //       setAlertType('success')
+    //       setInput(inputs);
+    //       setError(inputs);
+    //       setLoading(false);
+    //       setTimeout(() => {
+    //         onClose();
+    //         setAlertOpen(false);
+    //       }, 3000);
+    //     }).catch((err) => {
+    //       console.log(err);
+    //     });
+    //   } else {
+    //     updatedAdh(formData, value.id_Adh)
+    //     .then((res) => {
+    //       setAlertOpen(true);
+    //       setAlertMsg(res.data.succee);
+    //       setAlertType('success')
+    //       setInput(inputs);
+    //       setError(inputs);
+    //       setLoading(false);
+    //       setTimeout(() => {
+    //         onClose();
+    //         setAlertOpen(false);
+    //       }, 3000);
+    //     }).catch((err) => {
+    //       console.log(err);
+    //     });
+    //   }
+      
+    // }
+  }
   return (
       <div className="modalcard"
           style={{
@@ -120,7 +206,7 @@ function TestModif({value, onClose=()=>{}, title}) {
                 placeholder='Numéro ...'
                 value={numadh}
                 readOnly
-                // error={numadhErr}
+                error={numadhErr}
               />
             </div>
             <div style={{ width: '32%', }}>
@@ -128,7 +214,7 @@ function TestModif({value, onClose=()=>{}, title}) {
                 onChange={e=>setNomAdh(e.target.value)}
                 placeholder='Entrer nom adhérent ...'
                 value={nomadh}
-                // error={nomadhErr}
+                error={nomadhErr}
               />
             </div>
             <div style={{ width: '32%', }}>
@@ -136,7 +222,7 @@ function TestModif({value, onClose=()=>{}, title}) {
                 onChange={e=>setPrenomAdh(e.target.value)}
                 placeholder='Entrer prénom adhérent ...'
                 value={prenomadh}
-                // error={prenomadhErr}
+                error={prenomadhErr}
               />
             </div>
             <div style={{ width: '32%', }}>
@@ -155,7 +241,7 @@ function TestModif({value, onClose=()=>{}, title}) {
                 placeholder='Entrer num telephone Adhérent ...'
                 pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                 value={teladh}
-                // error={teladhErr}
+                error={teladhErr}
               />
             </div>
             <div style={{ width: '32%', }}>
@@ -164,6 +250,7 @@ function TestModif({value, onClose=()=>{}, title}) {
                 name="addressadh"
                 placeholder='Entrer adresse Adhérent ...'
                 value={adressadh}
+                error={adressadhErr}
               />
             </div>
             <div style={{ width: '32%', }}>
@@ -172,6 +259,7 @@ function TestModif({value, onClose=()=>{}, title}) {
                 name="quartieradh"
                 placeholder='Entrer quartier Adhérent ...'
                 value={quartieradh}
+                error={quartieradhErr}
               />
             </div>
             <div style={{ width: '32%', }}>
@@ -180,13 +268,7 @@ function TestModif({value, onClose=()=>{}, title}) {
                 name="nationaliteadh"
                 placeholder='Entrer nationalite Adhérent ...'
                 value={nationaliteadh}
-              />
-            </div>
-            <div style={{ width: '32%', }}>
-              <Input
-                onChange={e=>setLieuNaiss(e.target.value)}
-                placeholder='Entrer lieu de naissance adhérent ...'
-                value={lieunaissadh}
+                error={nationaliteadhErr}
               />
             </div>
             <div style={{ width: '32%', marginBottom: 20, }}>
@@ -195,6 +277,21 @@ function TestModif({value, onClose=()=>{}, title}) {
                   error={fileError}
                   handelChange={()=>setFileError('')}
                 />
+            </div>
+            <div style={{ width: '32%', }}>
+              <DatePickerInput
+                onDateChange={setDateNaiss}
+                placeholder="Date de naissance"
+                date={datenaiss}
+              />
+            </div>
+            <div style={{ width: '32%', }}>
+              <Input
+                onChange={e=>setLieuNaiss(e.target.value)}
+                placeholder='Entrer lieu de naissance adhérent ...'
+                value={lieunaissadh}
+                error={lieunaissadhErr}
+              />
             </div>
             <div style={{ width: '32%' }}>
               <Testdropdown
@@ -205,7 +302,20 @@ function TestModif({value, onClose=()=>{}, title}) {
                 error={typeError}
               />
             </div>
+      </div>
+      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <div style={{ width: '50%', position:'relative' }}>
+              <Button
+                onClick={validate}
+                large
+                color='#00b2fee1'
+                title={btnTitle}
+                textsize={15}
+                loanding={loading}
+              />
+            </div>
         </div>
+        <Alert open={alertOpen} Message={alertMsg} type={alertType} />
     </div>
   )
 }
