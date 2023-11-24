@@ -1,159 +1,164 @@
-import React from "react"
+import React, { useEffect, useState } from 'react'
 import '../index.css'
-import { MdClose } from "react-icons/md";
-import Input from "./Input";
-import Button from "./Button";
-// import moment from "moment";
-import DatePickerInput from "./datepicker/DatePikers";
-import InputImg from "./inputImg/InputImg";
-import Alert from "./alert/Alert";
-import { createLivre, updateLivre } from "../services/livreService";
+import Input from './Input'
+import { MdClose } from 'react-icons/md'
+import Autocomplete from './drowpDown/Autocomplete'
+import InputImg from './inputImg/InputImg'
+import DatePickerInput from './datepicker/DatePikers'
+import Button from './Button'
+import Alert from './alert/Alert'
+import { createLivre, updateLivre } from '../services/livreService'
 
-export default function AddLivre({ title, onClose = () => { }, value, }) {
-    const inputs = {
-        numlivre: '', titrelivre: '', auteurlivre: '', collectionlivre: '',
-        editionlivre: '', notationlivre: '', formatlivre: '',
-        nbpagelivre: '', emplacementlivre: '', fileerror:'',
-    }
-    const inputName = {
-        numlivre: 'numlivre', titrelivre: 'titrelivre',
-        auteurlivre: 'auteurlivre', collectionlivre: 'collectionlivre',
-        editionlivre: 'editionlivre', fileerror:'fileerror',
-        notationlivre: 'notationlivre', formatlivre: 'formatlivre',
-        nbpagelivre: 'nbpagelivre', emplacementlivre: 'emplacementlivre',
-        
-    }
-    
-    // const setDate = ({ date }) => {
-    //     return moment(date).format('DD MM YYYY ');
-    // }
-    React.useEffect(() => {
+function AddLivre({value, onClose=()=>{}, title}) {
+  const [titrelivre, setTitreLivre] = useState('')
+  const [auteurlivre, setAuteurLivre] = useState('')
+  const [collectionlivre, setCollectionLivre] = useState('')
+  const [editionlivre, setEditionLivre] = useState('')
+  const [notationlivre, setNotationLivre] = useState('')
+  const [nbpagelivre, setNbPageLivre] = useState('')
+  const [formatlivre, setFormatLivre] = useState('')
+  const [emplacementlivre, setEmplacementLivre] = useState('Jeune')
+  const [file, setFile] = React.useState(null);
+  const [dateeditionlivre, setDateEdition] = React.useState(new Date());
+  const [btnTitle, setBtnTitle] = React.useState('Enregistrer');
+  const [loading, setLoading] = React.useState(false);
+  const [alertOpen, setAlertOpen] = useState(false)
+  const [alertMsg, setAlertMsg] = useState('')
+  const [alertType, setAlertType] = useState('success')
+  const [idUser, setIdUser] = useState(null)
+  
+  const [fileError, setFileError] = useState('');
+  const [titrelivreErr, settitrelivreErr] = useState('')
+  const [auteurlivreErr, setauteurlivreErr] = useState('')
+  const [collectionlivreErr, setcollectionlivreErr] = useState('')
+  const [editionlivreErr, seteditionlivreErr] = useState('')
+  const [notationlivreErr, setnotationlivreErr] = useState('')
+  const [nbpagelivreErr, setnbpagelivreErr] = useState('')
+  const [formatlivreErr, setformatlivreErr] = useState('')
+    useEffect(() => {
         if (value) {
-            setInput(prevState => ({ ...prevState, [inputName.numlivre]: value.id_livre }));
-            setInput(prevState => ({ ...prevState, [inputName.titrelivre]: value.titre_livre }));
-            setInput(prevState => ({ ...prevState, [inputName.auteurlivre]: value.auteur_livre }));
-            setInput(prevState => ({ ...prevState, [inputName.collectionlivre]: value.collection_livre }));
-            setInput(prevState => ({ ...prevState, [inputName.editionlivre]: value.edition_livre }));
-            setInput(prevState => ({ ...prevState, [inputName.notationlivre]: value.notation_livre }));
-            setInput(prevState => ({ ...prevState, [inputName.formatlivre]: value.format_livre }));
-            setInput(prevState => ({ ...prevState, [inputName.nbpagelivre]: value.nb_page_livre }));
-            setInput(prevState => ({ ...prevState, [inputName.emplacementlivre]: value.emplacement_livre }));
-            setDateEdition(value.date_edition_livre);
-            setDateEnrg(value.date_enregistrement_livre)
+            setTitreLivre(value.titre_livre)
+            setAuteurLivre(value.auteur_livre)
+            setCollectionLivre(value.collection_livre)
+            setEditionLivre(value.edition_livre)
+            setNotationLivre(value.notation_livre)
+            setFormatLivre(value.format_livre)
+            setNbPageLivre(value.nb_page_livre)
+            setEmplacementLivre(value.emplacement_livre || 'Jeune')
+            setDateEdition(value.date_edition_livre)
             setBtnTitle('Modifier')
         }
-    }, [value, inputName])
+    }, [value])
 
-    const [btnTitle, setBtnTitle] = React.useState('Enregistrer')
-    const [input, setInput] = React.useState(inputs);
-    const [error, setErrors] = React.useState(inputs);
-    const [file, setFile] = React.useState(null);
-    const [dateeditionlivre, setDateEdition] = React.useState(new Date());
-    const [dateenrglivre, setDateEnrg] = React.useState(new Date());
-    const [loading, setLoading] = React.useState(false);
-    const handleOnChange = (e) => {
-        const { name, value } = e.target;
-        setInput(prevState => ({ ...prevState, [name]: value }));
-        setErrors(prevState => ({ ...prevState, [name]: '' }));
-    }
-    const onChangeFile = () => {
-        setErrors(prevState=>({...prevState, [inputName.fileerror]:''}))
-    }
-    const validate = () => {
-        if (input.numlivre==='') {
-            setErrors(prevState=>({...prevState, [inputName.numlivre]:'Cette champ ne doit pas être vide!'}))
-        } else if(input.titrelivre==='') {
-            setErrors(prevState=>({...prevState, [inputName.titrelivre]:'Cette champ ne doit pas être vide!'}))
-        } else if(input.auteurlivre==='') {
-            setErrors(prevState=>({...prevState, [inputName.auteurlivre]:'Cette champ ne doit pas être vide!'}))
-        } else if(input.collectionlivre==='') {
-            setErrors(prevState=>({...prevState, [inputName.collectionlivre]:'Cette champ ne doit pas être vide!'}))
-        } else if(input.editionlivre==='') {
-            setErrors(prevState=>({...prevState, [inputName.editionlivre]:'Cette champ ne doit pas être vide!'}))
-        } else if(input.notationlivre==='') {
-            setErrors(prevState=>({...prevState, [inputName.notationlivre]:'Cette champ ne doit pas être vide!'}))
-        } else if(input.formatlivre==='') {
-            setErrors(prevState=>({...prevState, [inputName.formatlivre]:'Cette champ ne doit pas être vide!'}))
-        } else if(input.nbpagelivre==='') {
-            setErrors(prevState=>({...prevState, [inputName.nbpagelivre]:'Cette champ ne doit pas être vide!'}))
-        } else if(input.emplacementlivre==='') {
-            setErrors(prevState=>({...prevState, [inputName.emplacementlivre]:'Cette champ ne doit pas être vide!'}))
-        } else if(file===null) {
-            setErrors(prevState=>({...prevState, [inputName.fileerror]:'Choisissez une image!'}))
-        } else {
-            const formData = new FormData();
-            formData.append("photo_livre", file);
-            formData.append("id_livre", input.numlivre);
-            formData.append("titre_livre", input.titrelivre);
-            formData.append("auteur_livre", input.auteurlivre);
-            formData.append("collection_livre", input.collectionlivre);
-            formData.append("edition_livre", input.editionlivre);
-            formData.append("notation_livre", input.notationlivre);
-            formData.append("format_livre", input.formatlivre);
-            formData.append("nb_page_livre", input.nbpagelivre);
-            formData.append("emplacement_livre", input.emplacementlivre);
-            formData.append("date_edition_livre", dateeditionlivre);
-            formData.append("date_enregistrement_livre", dateenrglivre);
-            if (!loading) {
-                setLoading(true);
-            }
-            if (btnTitle === 'Enregistrer') {
-                createLivre(formData)
-                .then((res) => {
-                    setAlertOpen(true);
-                    setAlertMsg(res.data.succee);
-                    setAlertType('success')
-                    setInput(inputs);
-                    setErrors(inputs);
-                    setLoading(false);
-                    setTimeout(() => {
-                    onClose();
-                    setAlertOpen(false);
-                    }, 3000);
-                }).catch((err) => {
-                    console.log(err);
-                }); 
-            } else {
-                updateLivre(formData)
-                .then((res) => {
-                    setAlertOpen(true);
-                    setAlertMsg(res.data.succee);
-                    setAlertType('success')
-                    setInput(inputs);
-                    setErrors(inputs);
-                    setLoading(false);
-                    setTimeout(() => {
-                    onClose();
-                    setAlertOpen(false);
-                    }, 3000);
-                }).catch((err) => {
-                    console.log(err);
-                }); 
-            }
-            
-        }
-    }
+  useEffect(() => {
+    getUserLocal();
+  }, []);
     
-    const [alertOpen, setAlertOpen] = React.useState(false)
-    const [alertMsg, setAlertMsg] = React.useState('')
-    const [alertType, setAlertType] = React.useState('success')
-    return (
-        <div className="modalcard" style={{
-            width: 700, minHeight: 200, color: 'black',
-            padding: 12, borderRadius: 10, background: '#fffffff0',
-        }}>
+  const getUserLocal = () => {
+    const storedUser = localStorage.getItem('User');
+      if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setIdUser(parsedUser.id_user); // Ici, vous obtiendrez de nouveau l'objet user
+    } else {
+      console.log('Aucun utilisateur trouvé dans le localStorage.');
+    }
+  }
 
-            <div className="modalheadear" style={{
-                textAlign: 'center', fontWeight: 'bold', fontSize: 30, display: 'flex',
-                alignItems: 'center', justifyContent: 'center', paddingInlineStart: 15,
-            }}>
-                <span>{title} Livre</span>
-                <span 
-                    className="btnclosemodal" 
-                    style={{ background: '#ffffffee' }} 
-                    onClick={onClose}><MdClose size={20} 
-                /></span>
-            </div>
+ const validate = () => {
+    if (titrelivre ==='') {
+      settitrelivreErr( 'Cette champ ne doit pas être vide!' )
+    }else if (auteurlivre ==='') {
+      setauteurlivreErr( 'Cette champ ne doit pas être vide!' )
+    }else if (collectionlivre ==='') {
+      setcollectionlivreErr( 'Cette champ ne doit pas être vide!' )
+    }else if (editionlivre ==='') {
+      seteditionlivreErr( 'Cette champ ne doit pas être vide!' )
+    }else if (notationlivre ==='') {
+      setnotationlivreErr( 'Cette champ ne doit pas être vide!' )
+    }else if (formatlivre ==='') {
+      setformatlivreErr( 'Cette champ ne doit pas être vide!' )
+    }else if (nbpagelivre ==='') {
+      setnbpagelivreErr( 'Cette champ ne doit pas être vide!' )
+    } else if (file === null && btnTitle === 'Enregistrer') {
+      setFileError('Choisissez une image!')
+    } else {
+      const formData = new FormData();
+      formData.append("photo_livre", file);
+      formData.append("titre_livre", titrelivre);
+      formData.append("auteur_livre", auteurlivre);
+      formData.append("collection_livre", collectionlivre);
+      formData.append("edition_livre", editionlivre);
+      formData.append("notation_livre",notationlivre);
+      formData.append("format_livre", formatlivre);
+      formData.append("nb_page_livre", nbpagelivre);
+      formData.append("emplacement_livre", emplacementlivre);
+      formData.append("date_edition_livre", dateeditionlivre);
+      formData.append("date_enregistrement_livre", new Date);
+      formData.append("userId", idUser);
+      if (!loading) {
+        setLoading(true);
+      }
+      if (btnTitle === 'Enregistrer') {
+        createLivre(formData)
+        .then((res) => {
+          setAlertOpen(true);
+          setAlertMsg(res.data.succee);
+          setAlertType('success')
+          setLoading(false);
+          setTimeout(() => {
+            onClose();
+            setAlertOpen(false);
+          }, 3000);
+        }).catch((err) => {
+          console.log(err);
+        }); 
+      } else {
+      const formData = {
+        titre_livre: titrelivre,
+        auteur_livre: auteurlivre,
+        collection_livr: collectionlivre,
+        edition_livre: editionlivre,
+        notation_livre: notationlivre,
+        format_livre: formatlivre,
+        nb_page_livre: nbpagelivre,
+        emplacement_livre: emplacementlivre,
+        userId:idUser,
+      }
+        updateLivre(formData, value.id_livre)
+        .then((res) => {
+          setAlertOpen(true);
+          setAlertMsg(res.data.succee);
+          setAlertType('success')
+          setLoading(false);
+          setTimeout(() => {
+          onClose();
+          setAlertOpen(false);
+          }, 3000);
+        }).catch((err) => {
+          console.log(err);
+        }); 
+      }
+      
+    }
+  }
+  return (
+      <div className="modalcard"
+          style={{
+             width: 700, minHeight: 200, color: 'black',
+        padding: 12, borderRadius: 10, background: '#fffffff0',
+        }}
+      >
+        <div className="modalheadear" style={{
+            textAlign: 'center', fontWeight: 'bold', fontSize: 30, display: 'flex',
+            alignItems: 'center', justifyContent: 'center', paddingInlineStart: 15,
+        }}>
+            <span>{title} Adhérent</span>
+            <span 
+                className="btnclosemodal" 
+                style={{ background: '#fff' }} 
+                onClick={onClose}><MdClose size={20} 
+            /></span>
+        </div>
             <div style={{
                 minHeight: 200, display: 'flex',
                 justifyContent: 'space-around', flexWrap: 'wrap',
@@ -161,138 +166,126 @@ export default function AddLivre({ title, onClose = () => { }, value, }) {
             }}>
                 <div style={{ width: '32%', }}>
                     <Input
-                        onChange={handleOnChange}
-                        name="numlivre"
-                        error={error.numlivre}
-                        value={input.numlivre}
-                        // Icon={MdNoteAlt}
-                        placeholder='Numero du livre'
-                        iconColor='black'
-                        bgcolor='white'
-                    />
-                </div>
-                <div style={{ width: '32%', }}>
-                    <Input
-                        onChange={handleOnChange}
-                        name="titrelivre"
-                        error={error.titrelivre}
-                        value={input.titrelivre}
-                        // Icon={FaBook}
+                        onChange={e=>{
+                          setTitreLivre(e.target.value)
+                          settitrelivreErr('')
+                        }}
+                        error={titrelivreErr}
+                        value={titrelivre}
                         placeholder='Entrez la titre du livre'
-                        iconColor='black'
                         bgcolor='white'
                     />
                 </div>
                 <div style={{ width: '32%', }}>
                     <Input
-                        onChange={handleOnChange}
-                        name="auteurlivre"
-                        error={error.auteurlivre}
-                        value={input.auteurlivre}
-                        // Icon={FaUser}
+                        onChange={e=>{
+                          setAuteurLivre(e.target.value)
+                          setauteurlivreErr('')
+                        }}
+                        error={auteurlivreErr}
+                        value={auteurlivre}
                         placeholder="Entrez l'auteur du livre"
-                        iconColor='black'
                         bgcolor='white'
                     />
                 </div>
                 <div style={{ width: '32%', }}>
                     <Input
-                        onChange={handleOnChange}
-                        name="collectionlivre"
-                        error={error.collectionlivre}
-                        value={input.collectionlivre}
-                        // Icon={FaUser}
+                        onChange={e=>{
+                          setCollectionLivre(e.target.value)
+                          setcollectionlivreErr('')
+                        }}
+                        error={collectionlivreErr}
+                        value={collectionlivre}
                         placeholder='Entrez collection du livre'
-                        iconColor='black'
                         bgcolor='white'
                     />
                 </div>
                 <div style={{ width: '32%', }}>
                     <Input
-                        onChange={handleOnChange}
-                        name="editionlivre"
-                        error={error.editionlivre}
-                        value={input.editionlivre}
-                        // Icon={FaUser}
+                        onChange={e=>{
+                          setEditionLivre(e.target.value)
+                          seteditionlivreErr('')
+                        }}
+                        error={editionlivreErr}
+                        value={editionlivre}
                         placeholder='Entrez edition du livre'
-                        iconColor='black'
                         bgcolor='white'
                     />
                 </div>
                 <div style={{ width: '32%', }}>
-                    <DatePickerInput  onDateChange={setDateEdition} value={input.dateeditionlivre} />
+                  <DatePickerInput
+                    onDateChange={setDateEdition}
+                    value={dateeditionlivre}
+                    placeholder='Date édition livre ...'
+                  />
                 </div>
                 <div style={{ width: '32%', }}>
                     <Input
-                        onChange={handleOnChange}
-                        name="notationlivre"
-                        value={input.notationlivre}
-                        error={error.notationlivre}
+                        onChange={e=>{
+                          setNotationLivre(e.target.value)
+                          setnotationlivreErr('')
+                        }}
+                        value={notationlivre}
+                        error={notationlivreErr}
                         placeholder='Entrez notation du livre'
-                        iconColor='black'
                         bgcolor='white'
                     />
                 </div>
                 <div style={{ width: '32%', }}>
                     <Input
-                        onChange={handleOnChange}
-                        name="formatlivre"
-                        error={error.formatlivre}
-                        value={input.formatlivre}
+                        onChange={e=>{
+                          setFormatLivre(e.target.value)
+                          setformatlivreErr('')
+                        }}
+                        error={formatlivreErr}
+                        value={formatlivre}
                         placeholder='Entrez format du livre'
-                        iconColor='black'
-                        bgcolor='white'
                     />
                 </div>
                 <div style={{ width: '32%', }}>
                     <Input
-                        onChange={handleOnChange}
-                        name="nbpagelivre"
+                        onChange={e=>{
+                          setNbPageLivre(e.target.value)
+                          setnbpagelivreErr('')
+                        }}
                         type='number'
-                        error={error.nbpagelivre}
-                        value={input.nbpagelivre}
+                        error={nbpagelivreErr}
+                        value={nbpagelivre}
                         placeholder='Entrez le nombre de page'
-                        iconColor='black'
                         bgcolor='white'
                     />
                 </div>
                 <div style={{ width: '32%', }}>
-                    <Input
-                        onChange={handleOnChange}
-                        name="emplacementlivre"
-                        error={error.emplacementlivre}
-                        value={input.emplacementlivre}
-                        placeholder="Entrez l'emplacement du livre"
-                        iconColor='black'
-                        bgcolor='white'
+                    <Autocomplete
+                      items={['Jeune', 'Adulte']}
+                      placeholder='Emplacement livre ...'
+                      selected={emplacementlivre}
+                      setSelected={setEmplacementLivre}
                     />
                 </div>
-                <div style={{ width: '32%', }}>
-                    <DatePickerInput
-                        onDateChange={setDateEnrg}
-                    />
-                </div>
-                <div style={{ width: '32%', marginBottom: 20, }}>
+                {!value && <div style={{ width: '32%', marginBottom: 20, }}>
                     <InputImg
                         setFile={setFile}
-                        handelChange={onChangeFile}
-                        error={error.fileerror}
+                        handelChange={()=>setFileError('')}
+                        error={fileError}
                     />
-                </div>
+                </div>}
             </div>
-            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
-                <div style={{ width: '50%', position: 'relative' }}>
-                    <Button
-                        onClick={validate}
-                        large
-                        color='#00b2fee1'
-                        title={btnTitle}
-                        textsize={15}
-                        loanding={loading}
-                    />
-                </div>
+      <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+            <div style={{ width: '50%', position:'relative' }}>
+              <Button
+                onClick={validate}
+                large
+                color='#00b2fee1'
+                title={btnTitle}
+                textsize={15}
+                loanding={loading}
+              />
             </div>
-        <Alert open={alertOpen} Message={alertMsg} type={alertType} />
         </div>
-    )
+        <Alert open={alertOpen} Message={alertMsg} type={alertType} />
+    </div>
+  )
 }
+
+export default AddLivre;

@@ -12,6 +12,7 @@ function InscritAdh({ title, onClose = () => { } }) {
   const [typeAdh, setTypeAdh] = useState([]);
   const [adherent, setAdh] = useState([]);
   const btnTitle = useState('Enregistrer');
+  const [idUser, setIdUser] = useState(null)
 
   const [searchValue, setSearchValue] = useState(null);
   const [searchValueAdh, setSearchValueAdh] = useState(null);
@@ -21,7 +22,18 @@ function InscritAdh({ title, onClose = () => { } }) {
   useEffect(() => {
     getTypeAdhAll();
     getAdhAll();
+    getUserLocal();
   }, []);
+    
+  const getUserLocal = () => {
+    const storedUser = localStorage.getItem('User');
+      if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setIdUser(parsedUser.id_user); // Ici, vous obtiendrez de nouveau l'objet user
+    } else {
+      console.log('Aucun utilisateur trouvé dans le localStorage.');
+    }
+  }
 
   const getTypeAdhAll = async () => {
     try {
@@ -61,7 +73,8 @@ function InscritAdh({ title, onClose = () => { } }) {
   
   const datas = {
     id_TypeAdh: searchValue,
-    id_Adh: searchValueAdh
+    id_Adh: searchValueAdh,
+    userId: idUser,
   }
  
   const validate = () => {
@@ -136,7 +149,15 @@ function InscritAdh({ title, onClose = () => { } }) {
             error={typeError}
           />
         </div>
-        <Button onClick={validate} small width={'88%'} color='#00b2fee1' title={btnTitle} textsize={15} />
+        <Button
+          onClick={validate}
+          small
+          width={'88%'}
+          color='#00b2fee1'
+          title={btnTitle}
+          textsize={15}
+          loanding={loading}
+        />
       </div>
         <Alert open={alertOpen} Message={alertMsg} type={alertType} />
     </div>

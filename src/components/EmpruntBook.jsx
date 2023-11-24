@@ -18,6 +18,7 @@ function EmpruntBook({ title, onClose = () => { }, value, }) {
   const [selectedAdhId, setSelectedAdhId] = useState(null);
   const [selectedLivreId, setSelectedLivreId] = useState(null);
   const [duree, setDuree] = useState(null)
+  const [idUser, setIdUser] = useState(null)
 
   const handleResetAdhId = () => {
     setSelectedAdhId(null);
@@ -29,7 +30,18 @@ function EmpruntBook({ title, onClose = () => { }, value, }) {
   useEffect(() => {
     getAdhAll();
     getLivreAll();
+    getUserLocal();
   }, []);
+    
+  const getUserLocal = () => {
+    const storedUser = localStorage.getItem('User');
+      if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setIdUser(parsedUser.id_user); // Ici, vous obtiendrez de nouveau l'objet user
+    } else {
+      console.log('Aucun utilisateur trouvé dans le localStorage.');
+    }
+  }
 
   const getAdhAll = async () => {
     try {
@@ -64,11 +76,12 @@ function EmpruntBook({ title, onClose = () => { }, value, }) {
   const Values = {
     id_Livre: selectedLivreId,
     id_AdhInsc: selectedAdhId,
-    duree_Emprunt: duree
+    duree_Emprunt: duree,
+    userId: idUser,
   }
 
   const validate = () => {
-    
+    setLoading(true)
     createEmprunt(Values)
     .then((res) => {
       if (res.data.error) {
@@ -77,6 +90,7 @@ function EmpruntBook({ title, onClose = () => { }, value, }) {
         setAlertType('error')
         setTimeout(() => {
           setOpenAlert(false)
+          setLoading(false)
         }, 3000);
       } else {
         setOpenAlert(true)
@@ -84,6 +98,7 @@ function EmpruntBook({ title, onClose = () => { }, value, }) {
         setAlertType('success')
         setTimeout(() => {
           setOpenAlert(false)
+          setLoading(false)
           onClose()
         }, 3000);
       }
@@ -96,6 +111,7 @@ function EmpruntBook({ title, onClose = () => { }, value, }) {
   const [openAlert, setOpenAlert] = useState(false);
   const [alertMsg, setAlertMsg] = useState('');
   const [alertType, setAlertType] = useState('success')
+  const [loading, setLoading] = React.useState(false);
 
   return (
   <>
@@ -141,7 +157,14 @@ function EmpruntBook({ title, onClose = () => { }, value, }) {
       </div>
         <div style={{ display: 'flex', justifyContent: 'space-around' }}>
           <div style={{ width: '80%' }}>
-              <Button onClick={validate} large color='#00b2fee1' title={'Enregistrer'} textsize={15} />
+            <Button
+              onClick={validate}
+              large
+              color='#00b2fee1'
+              title={'Enregistrer'}
+              textsize={15}
+              loanding={loading}
+            />
           </div>
         </div>
       </div>

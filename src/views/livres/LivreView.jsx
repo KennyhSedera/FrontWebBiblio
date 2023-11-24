@@ -168,11 +168,8 @@ export default function LivreRow() {
                 </div>
             </div>
             <Modal open={open} >
-                <TestModif title={title} onClose={handleClose} value={value} />
-            </Modal>
-            {/* <Modal open={open} >
                 <AddLivre title={title} onClose={handleClose} value={value} />
-            </Modal> */}
+            </Modal>
         </MainLayout>
     );
 }
