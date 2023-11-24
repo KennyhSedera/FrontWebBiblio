@@ -183,20 +183,19 @@ function TestModif({value, onClose=()=>{}, title}) {
         lieunaiss_Adh: lieunaissadh,
         genre_Adh: genre,
       }
-        console.log({DATA:formData, id:value.id_Adh});
-        // updatedAdh(formData, value.id_Adh)
-        // .then((res) => {
-        //   setAlertOpen(true);
-        //   setAlertMsg(res.data.succee);
-        //   setAlertType('success')
-        //   setLoading(false);
-        //   setTimeout(() => {
-        //     onClose();
-        //     setAlertOpen(false);
-        //   }, 3000);
-        // }).catch((err) => {
-        //   console.log(err);
-        // });
+        updatedAdh(formData, value.id_Adh)
+        .then((res) => {
+          setAlertOpen(true);
+          setAlertMsg(res.data.succee);
+          setAlertType('success')
+          setLoading(false);
+          setTimeout(() => {
+            onClose();
+            setAlertOpen(false);
+          }, 3000);
+        }).catch((err) => {
+          console.log(err);
+        });
       }
       
     }
