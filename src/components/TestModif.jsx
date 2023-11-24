@@ -70,25 +70,25 @@ function TestModif({value, onClose=()=>{}, title}) {
     try {
       const result = await getAllAdhNoInsc();
       const adherent = result.data.adherents
-      console.log(adherent[adherent.length - 1].id_Adh);
+      // console.log(adherent[adherent.length - 1].id_Adh);
       console.log(adherent.length);
-      if (adherent.length<= 0){
-          setNumAdh('AFF00001')
-      }else {
-          var max  = adherent[adherent.length - 1].id_Adh
-          var reference = ''
-          var number = ''
-          for(var i=0;i<max.length;i++){
-              if(isNaN(max[i])){
-                  reference+=max[i]
-              }else{
-                  number+=max[i]
-              }
-          }
-        const num = parseInt(number) + 1
-        console.log(num);
-          // setNumAdh((num<10000)?(num<1000)?(num<100)?(num<10) ? reference+'0000'+num :reference+'000'+num : reference+'00'+num : reference+'0'+num : reference+num)
-      }
+      // if (adherent.length<= 0){
+      //     setNumAdh('AFF00001')
+      // }else {
+      //     var max  = adherent[adherent.length - 1].id_Adh
+      //     var reference = ''
+      //     var number = ''
+      //     for(var i=0;i<max.length;i++){
+      //         if(isNaN(max[i])){
+      //             reference+=max[i]
+      //         }else{
+      //             number+=max[i]
+      //         }
+      //     }
+      //   const num = parseInt(number) + 1
+      //   console.log(num);
+      //     // setNumAdh((num<10000)?(num<1000)?(num<100)?(num<10) ? reference+'0000'+num :reference+'000'+num : reference+'00'+num : reference+'0'+num : reference+num)
+      // }
     } catch (err) {
       console.log(err);
     }
