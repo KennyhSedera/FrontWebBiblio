@@ -5,6 +5,8 @@ import { MdClose } from 'react-icons/md'
 import Autocomplete from './drowpDown/Autocomplete'
 import { getAllAdhNoInsc } from '../services/adherentService'
 import { getAllType } from '../services/typeAdhService'
+import Testdropdown from './dropdownsearch/Testdropdown'
+import InputImg from './inputImg/InputImg'
 // import Button from './Button'
 
 function TestModif({value, onClose=()=>{}, title}) {
@@ -19,6 +21,7 @@ function TestModif({value, onClose=()=>{}, title}) {
   const [genre, setGenre] = useState('Homme')
   const [file, setFile] = React.useState(null);
   const [typeAdh, setTypeAdh] = useState([]);
+  const [searchValue, setSearchValue] = useState(null);
   
   
   const [fileError, setFileError] = React.useState('');
