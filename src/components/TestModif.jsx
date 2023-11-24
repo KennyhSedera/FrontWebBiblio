@@ -3,28 +3,24 @@ import '../index.css'
 import Input from './Input'
 import { MdClose } from 'react-icons/md'
 import Autocomplete from './drowpDown/Autocomplete'
-import { createAdh, getAllAdh, getAllAdhNoInsc, updatedAdh } from '../services/adherentService'
-import { getAllType } from '../services/typeAdhService'
 import Testdropdown from './dropdownsearch/Testdropdown'
 import InputImg from './inputImg/InputImg'
 import DatePickerInput from './datepicker/DatePikers'
 import Button from './Button'
 import Alert from './alert/Alert'
+import { createLivre, updateLivre } from '../services/livreService'
 
 function TestModif({value, onClose=()=>{}, title}) {
-  const [numadh, setNumAdh] = useState('')
-  const [nomadh, setNomAdh] = useState('')
-  const [prenomadh, setPrenomAdh] = useState('')
-  const [teladh, setTelAdh] = useState('')
-  const [adressadh, setAdressAdh] = useState('')
-  const [quartieradh, setQuartierAdh] = useState('')
-  const [nationaliteadh, setNationaliteAdh] = useState('')
-  const [lieunaissadh, setLieuNaiss] = useState('')
-  const [genre, setGenre] = useState('Homme')
+  const [titrelivre, setTitreLivre] = useState('')
+  const [auteurlivre, setAuteurLivre] = useState('')
+  const [collectionlivre, setCollectionLivre] = useState('')
+  const [editionlivre, setEditionLivre] = useState('')
+  const [notationlivre, setNotationLivre] = useState('')
+  const [nbpagelivre, setNbPageLivre] = useState('')
+  const [formatlivre, setFormatLivre] = useState('')
+  const [emplacementlivre, setEmplacementLivre] = useState('Jeune')
   const [file, setFile] = React.useState(null);
-  const [typeAdh, setTypeAdh] = useState([]);
-  const [searchValue, setSearchValue] = useState(null);
-  const [datenaiss, setDateNaiss] = useState(new Date());
+  const [dateeditionlivre, setDateEdition] = React.useState(new Date());
   const [btnTitle, setBtnTitle] = React.useState('Enregistrer');
   const [loading, setLoading] = React.useState(false);
   const [alertOpen, setAlertOpen] = useState(false)
@@ -32,73 +28,33 @@ function TestModif({value, onClose=()=>{}, title}) {
   const [alertType, setAlertType] = useState('success')
   const [idUser, setIdUser] = useState('success')
   
-  const [fileError, setFileError] = React.useState('');
-  const [typeError, setTypeError] = useState('');
-  const [numadhErr, setNumAdhErr] = useState('')
-  const [nomadhErr, setNomAdhErr] = useState('')
-  const [prenomadhErr, setPrenomAdhErr] = useState('')
-  const [teladhErr, setTelAdhErr] = useState('')
-  const [adressadhErr, setAdressAdhErr] = useState('')
-  const [quartieradhErr, setQuartierAdhErr] = useState('')
-  const [nationaliteadhErr, setNationaliteAdhErr] = useState('')
-  const [lieunaissadhErr, setLieuNaissErr] = useState('')
+  const [fileError, setFileError] = useState('');
+  const [titrelivreErr, settitrelivreErr] = useState('')
+  const [auteurlivreErr, setauteurlivreErr] = useState('')
+  const [collectionlivreErr, setcollectionlivreErr] = useState('')
+  const [editionlivreErr, seteditionlivreErr] = useState('')
+  const [notationlivreErr, setnotationlivreErr] = useState('')
+  const [nbpagelivreErr, setnbpagelivreErr] = useState('')
+  const [formatlivreErr, setformatlivreErr] = useState('')
     useEffect(() => {
         if (value) {
-            setNomAdh(value.nom_Adh)
-            setNumAdh(value.id_Adh)
-            setPrenomAdh(value.prenom_Adh)
-            setTelAdh(value.tel_Adh)
-            setAdressAdh(value.adresse_Adh)
-            setQuartierAdh(value.quartier_Adh)
-            setNationaliteAdh(value.nationalite_Adh)
-            setLieuNaiss(value.lieunaiss_Adh)
-            setGenre(value.genre_Adh || 'Homme')
-            setDateNaiss(value.naissance_Adh)
+            setTitreLivre(value.titre_livre)
+            setAuteurLivre(value.auteur_livre)
+            setCollectionLivre(value.collection_livre)
+            setEditionLivre(value.edition_livre)
+            setNotationLivre(value.notation_livre)
+            setFormatLivre(value.format_livre)
+            setNbPageLivre(value.nationalite_Adh)
+            setEmplacementLivre(value.lieunaiss_Adh || 'Jeune')
+            setDateEdition(value.naissance_Adh)
             setBtnTitle('Modifier')
         }
     }, [value])
   
   
   useEffect(() => {
-    getAdhAll();
-    getTypeAdhAll();
     getUserLocal();
   }, []);
-  
-  const getAdhAll = async () => {
-    try {
-      const result = await getAllAdh();
-      const adherent = result.data.adherents
-      if (adherent.length<= 0){
-          setNumAdh('AFF00001')
-      }else {
-          var max  = adherent[adherent.length - 1].id_Adh
-          var reference = ''
-          var number = ''
-          for(var i=0;i<max.length;i++){
-              if(isNaN(max[i])){
-                  reference+=max[i]
-              }else{
-                  number+=max[i]
-              }
-          }
-        const num = parseInt(number) + 1
-        setNumAdh((num<10000)?(num<1000)?(num<100)?(num<10) ? reference+'0000'+num :reference+'000'+num : reference+'00'+num : reference+'0'+num : reference+num)
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-  
-  const getTypeAdhAll = async () => {
-    try {
-      const result = await getAllType();
-      const types = result.data.types.map((type) => ({id:type.id_TypeAdh, title:type.nom_TypeAdh}));
-      setTypeAdh(types);
-    } catch (err) {
-      console.log(err);
-    }
-  };
     
   const getUserLocal = () => {
     const storedUser = localStorage.getItem('User');
@@ -109,56 +65,42 @@ function TestModif({value, onClose=()=>{}, title}) {
       console.log('Aucun utilisateur trouvé dans le localStorage.');
     }
   }
-  
-  const handleSearchValueChange = (newValue) => {
-    setSearchValue(newValue);
-    setTypeError('')
-  };
-  
-  const handelResetValueType = () => {
-    setSearchValue(null);
-  };
+
  const validate = () => {
-    if (numadh ==='') {
-      setNumAdhErr('Cette champ ne doit pas être vide!')
-    } else if (nomadh ==='') {
-      setNomAdhErr( 'Cette champ ne doit pas être vide!' )
-    }else if (prenomadh ==='') {
-      setPrenomAdhErr( 'Cette champ ne doit pas être vide!' )
-    }else if (teladh ==='') {
-      setTelAdhErr( 'Cette champ ne doit pas être vide!' )
-    }else if (adressadh ==='') {
-      setAdressAdhErr( 'Cette champ ne doit pas être vide!' )
-    }else if (quartieradh ==='') {
-      setQuartierAdhErr( 'Cette champ ne doit pas être vide!' )
-    }else if (nationaliteadh ==='') {
-      setNationaliteAdhErr( 'Cette champ ne doit pas être vide!' )
-    }else if (lieunaissadh ==='') {
-      setLieuNaissErr( 'Cette champ ne doit pas être vide!' )
+    if (titrelivre ==='') {
+      settitrelivreErr( 'Cette champ ne doit pas être vide!' )
+    }else if (auteurlivre ==='') {
+      setauteurlivreErr( 'Cette champ ne doit pas être vide!' )
+    }else if (collectionlivre ==='') {
+      setcollectionlivreErr( 'Cette champ ne doit pas être vide!' )
+    }else if (editionlivre ==='') {
+      seteditionlivreErr( 'Cette champ ne doit pas être vide!' )
+    }else if (notationlivre ==='') {
+      setnotationlivreErr( 'Cette champ ne doit pas être vide!' )
+    }else if (formatlivre ==='') {
+      setformatlivreErr( 'Cette champ ne doit pas être vide!' )
+    }else if (nbpagelivre ==='') {
+      setnbpagelivreErr( 'Cette champ ne doit pas être vide!' )
     } else if (file === null && btnTitle === 'Enregistrer') {
       setFileError('Choisissez une image!')
-    } else if (searchValue === null && btnTitle === 'Enregistrer') {
-      setTypeError('Choisissez le type d\'adhérent!')
     } else {
       const formData = new FormData();
-      formData.append("photo_adh", file);
-      formData.append("id_Adh", numadh);
-      formData.append("nom_Adh", nomadh);
-      formData.append("prenom_Adh", prenomadh);
-      formData.append("adresse_Adh", adressadh);
-      formData.append("quartier_Adh", quartieradh);
-      formData.append("tel_Adh", teladh);
-      formData.append("nationalite_Adh", nationaliteadh);
-      formData.append("lieunaiss_Adh", lieunaissadh);
-      formData.append("naissance_Adh", datenaiss);
-      formData.append("genre_Adh", genre);
-      formData.append("id_TypeAdh", searchValue);
-      formData.append("id_User", idUser);
+      formData.append("photo_livre", file);
+      formData.append("titre_livre", titrelivre);
+      formData.append("auteur_livre", auteurlivre);
+      formData.append("collection_livre", collectionlivre);
+      formData.append("edition_livre", editionlivre);
+      formData.append("notation_livre",notationlivre);
+      formData.append("format_livre", formatlivre);
+      formData.append("nb_page_livre", nbpagelivre);
+      formData.append("emplacement_livre", emplacementlivre);
+      formData.append("date_edition_livre", dateeditionlivre);
+      formData.append("date_enregistrement_livre", new Date);
       if (!loading) {
         setLoading(true);
       }
       if (btnTitle === 'Enregistrer') {
-        createAdh(formData)
+        createLivre(formData)
         .then((res) => {
           setAlertOpen(true);
           setAlertMsg(res.data.succee);
@@ -170,31 +112,31 @@ function TestModif({value, onClose=()=>{}, title}) {
           }, 3000);
         }).catch((err) => {
           console.log(err);
-        });
+        }); 
       } else {
       const formData = {
-        nom_Adh: nomadh,
-        prenom_Adh: prenomadh,
-        adresse_Adh: adressadh,
-        quartier_Adh: quartieradh,
-        tel_Adh: teladh,
-        nationalite_Adh: nationaliteadh,
-        lieunaiss_Adh: lieunaissadh,
-        genre_Adh: genre,
+        titre_livre: titrelivre,
+        auteur_livre: auteurlivre,
+        collection_livr: collectionlivre,
+        edition_livre: editionlivre,
+        notation_livre: notationlivre,
+        format_livre: formatlivre,
+        nb_page_livre: nbpagelivre,
+        emplacement_livre: emplacementlivre,
       }
-        updatedAdh(formData, value.id_Adh)
+        updateLivre(formData)
         .then((res) => {
           setAlertOpen(true);
           setAlertMsg(res.data.succee);
           setAlertType('success')
           setLoading(false);
           setTimeout(() => {
-            onClose();
-            setAlertOpen(false);
+          onClose();
+          setAlertOpen(false);
           }, 3000);
         }).catch((err) => {
           console.log(err);
-        });
+        }); 
       }
       
     }
@@ -217,135 +159,117 @@ function TestModif({value, onClose=()=>{}, title}) {
                 onClick={onClose}><MdClose size={20} 
             /></span>
         </div>
-        <div style={{
-            minHeight: 200, display: 'flex',
-            justifyContent: 'space-around', flexWrap: 'wrap',
-            paddingBlock: 10, paddingInline: 10,
-          }}>
-            <div style={{ width: '32%', }}>
-              <Input
-                onChange={e=>setNumAdh(e.target.value)}
-                placeholder='Numéro ...'
-                value={numadh}
-                readOnly
-                error={numadhErr}
-              />
+            <div style={{
+                minHeight: 200, display: 'flex',
+                justifyContent: 'space-around', flexWrap: 'wrap',
+                paddingBlock: 10, paddingInline: 10,
+            }}>
+                <div style={{ width: '32%', }}>
+                    <Input
+                        onChange={e=>{
+                          setTitreLivre(e.target.value)
+                          settitrelivreErr('')
+                        }}
+                        error={titrelivreErr}
+                        value={titrelivre}
+                        placeholder='Entrez la titre du livre'
+                        bgcolor='white'
+                    />
+                </div>
+                <div style={{ width: '32%', }}>
+                    <Input
+                        onChange={e=>{
+                          setAuteurLivre(e.target.value)
+                          setauteurlivreErr('')
+                        }}
+                        error={auteurlivreErr}
+                        value={auteurlivre}
+                        placeholder="Entrez l'auteur du livre"
+                        bgcolor='white'
+                    />
+                </div>
+                <div style={{ width: '32%', }}>
+                    <Input
+                        onChange={e=>{
+                          setCollectionLivre(e.target.value)
+                          setcollectionlivreErr('')
+                        }}
+                        error={collectionlivreErr}
+                        value={collectionlivre}
+                        placeholder='Entrez collection du livre'
+                        bgcolor='white'
+                    />
+                </div>
+                <div style={{ width: '32%', }}>
+                    <Input
+                        onChange={e=>{
+                          setEditionLivre(e.target.value)
+                          seteditionlivreErr('')
+                        }}
+                        error={editionlivreErr}
+                        value={editionlivre}
+                        placeholder='Entrez edition du livre'
+                        bgcolor='white'
+                    />
+                </div>
+                <div style={{ width: '32%', }}>
+                  <DatePickerInput
+                    onDateChange={setDateEdition}
+                    value={dateeditionlivre}
+                  />
+                </div>
+                <div style={{ width: '32%', }}>
+                    <Input
+                        onChange={e=>{
+                          setNotationLivre(e.target.value)
+                          setnotationlivreErr('')
+                        }}
+                        value={notationlivre}
+                        error={notationlivreErr}
+                        placeholder='Entrez notation du livre'
+                        bgcolor='white'
+                    />
+                </div>
+                <div style={{ width: '32%', }}>
+                    <Input
+                        onChange={e=>{
+                          setFormatLivre(e.target.value)
+                          setformatlivreErr('')
+                        }}
+                        error={formatlivreErr}
+                        value={formatlivre}
+                        placeholder='Entrez format du livre'
+                    />
+                </div>
+                <div style={{ width: '32%', }}>
+                    <Input
+                        onChange={e=>{
+                          setNbPageLivre(e.target.value)
+                          setnbpagelivreErr('')
+                        }}
+                        type='number'
+                        error={nbpagelivreErr}
+                        value={nbpagelivre}
+                        placeholder='Entrez le nombre de page'
+                        bgcolor='white'
+                    />
+                </div>
+                <div style={{ width: '32%', }}>
+                    <Autocomplete
+                      items={['Jeune', 'Adulte']}
+                      placeholder='Emplacement livre ...'
+                      selected={emplacementlivre}
+                      setSelected={setEmplacementLivre}
+                    />
+                </div>
+                <div style={{ width: '32%', marginBottom: 20, }}>
+                    <InputImg
+                        setFile={setFile}
+                        handelChange={()=>setFileError('')}
+                        error={fileError}
+                    />
+                </div>
             </div>
-            <div style={{ width: '32%', }}>
-              <Input
-                onChange={e => {
-                  setNomAdh(e.target.value);
-                  setNomAdhErr('')
-                }}
-                placeholder='Entrer nom adhérent ...'
-                value={nomadh}
-                error={nomadhErr}
-              />
-            </div>
-            <div style={{ width: '32%', }}>
-              <Input
-                onChange={e => {
-                  setPrenomAdh(e.target.value);
-                  setPrenomAdhErr('')
-                }}
-                placeholder='Entrer prénom adhérent ...'
-                value={prenomadh}
-                error={prenomadhErr}
-              />
-            </div>
-            <div style={{ width: '32%', }}>
-              <Autocomplete
-                items={['Homme', 'Femme']}
-                placeholder='Genre adhérent ...'
-                selected={genre}
-                setSelected={setGenre}
-              />
-              </div>
-              <div style={{ width: '32%', }}>
-              <Input
-                onChange={e => {
-                  setTelAdh(e.target.value)
-                  setTelAdhErr('')
-                }}
-                name="teladh"
-                type='number'
-                placeholder='Entrer num telephone Adhérent ...'
-                pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
-                value={teladh}
-                error={teladhErr}
-              />
-            </div>
-            <div style={{ width: '32%', }}>
-              <Input
-                onChange={e => {
-                  setAdressAdh(e.target.value)
-                  setAdressAdhErr('')
-                }}
-                name="addressadh"
-                placeholder='Entrer adresse Adhérent ...'
-                value={adressadh}
-                error={adressadhErr}
-              />
-            </div>
-            <div style={{ width: '32%', }}>
-              <Input
-                onChange={e => {
-                  setQuartierAdh(e.target.value)
-                  setQuartierAdhErr('')
-                }}
-                name="quartieradh"
-                placeholder='Entrer quartier Adhérent ...'
-                value={quartieradh}
-                error={quartieradhErr}
-              />
-            </div>
-            <div style={{ width: '32%', }}>
-              <Input
-                onChange={e => {
-                  setNationaliteAdh(e.target.value)
-                  setNationaliteAdhErr('')
-                }}
-                name="nationaliteadh"
-                placeholder='Entrer nationalite Adhérent ...'
-                value={nationaliteadh}
-                error={nationaliteadhErr}
-              />
-            </div>
-            {!value && <div style={{ width: '32%', marginBottom: 20, }}>
-                <InputImg
-                  setFile={setFile}
-                  error={fileError}
-                  handelChange={()=>setFileError('')}
-                />
-            </div>}
-            {!value && <div style={{ width: '32%', }}>
-              <DatePickerInput
-                onDateChange={setDateNaiss}
-                placeholder="Date de naissance"
-                date={datenaiss}
-              />
-            </div>}
-            <div style={{ width: '32%', }}>
-              <Input
-                onChange={e => {
-                  setLieuNaiss(e.target.value)
-                  setLieuNaissErr('')
-                }}
-                placeholder='Entrer lieu de naissance adhérent ...'
-                value={lieunaissadh}
-                error={lieunaissadhErr}
-              />
-            </div>
-            {!value && <div style={{ width: '32%' }}>
-              <Testdropdown
-                placeholder='Types adhérent ...'
-                data={typeAdh}
-                onSelectId={handleSearchValueChange}
-                onResetId={handelResetValueType}
-                error={typeError}
-              />
-            </div>}
-      </div>
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
             <div style={{ width: '50%', position:'relative' }}>
               <Button

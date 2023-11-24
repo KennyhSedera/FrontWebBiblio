@@ -8,6 +8,7 @@ import Modal from '../../components/modal/Modal';
 // import moment from 'moment'
 import AddLivre from '../../components/AddLivre';
 import BookView from '../../components/book/BookView';
+import TestModif from '../../components/TestModif';
 
 
 export default function LivreRow() {
@@ -167,8 +168,11 @@ export default function LivreRow() {
                 </div>
             </div>
             <Modal open={open} >
-                <AddLivre title={title} onClose={handleClose} value={value} />
+                <TestModif title={title} onClose={handleClose} value={value} />
             </Modal>
+            {/* <Modal open={open} >
+                <AddLivre title={title} onClose={handleClose} value={value} />
+            </Modal> */}
         </MainLayout>
     );
 }
