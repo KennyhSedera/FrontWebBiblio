@@ -138,17 +138,18 @@ function BtnTop({theme=false}) {
     const [openLogout, setOpenLogout] = useState(false)
     const [showMenu, setShowMenu] = useState(false)
     const [showNotification, setShowNotification] = useState(false)
+    const [user, setUser] = useState([])
 
     useEffect(() => {
-        setDark(theme)
         getUserLocal()
+        setDark(theme)
     }, [theme])
 
     const getUserLocal = () => {
         const storedUser = localStorage.getItem('User');
         if (storedUser) {
         const parsedUser = JSON.parse(storedUser);
-        console.log(parsedUser); // Ici, vous obtiendrez de nouveau l'objet user
+        setUser(parsedUser); // Ici, vous obtiendrez de nouveau l'objet user
         } else {
         console.log('Aucun utilisateur trouvé dans le localStorage.');
         }
@@ -184,7 +185,7 @@ function BtnTop({theme=false}) {
                     setShowNotification(false),
                     setShowMenu(!showMenu)
                 )}
-                src='me.jpg' alt="pdp"
+                src={getImg(user.user_profil)} alt="pdp"
                 style={{
                     width: '100%',
                     height: '100%',
@@ -221,7 +222,7 @@ function BtnTop({theme=false}) {
                     }}
                 >
                     <img
-                        src='me.jpg' alt=""
+                        src={getImg(user.user_profil)} alt=""
                         style={{
                             width: 60,
                             height: 60,
@@ -231,7 +232,7 @@ function BtnTop({theme=false}) {
                             boxShadow: '2px 2px 10px #000000e0'
                         }}
                       />
-                      <span style={{fontSize:18, fontWeight:600}}>Kennyh Sedera</span>
+                      <span style={{fontSize:18, fontWeight:600}}>{user.user_name}</span>
                 </div>
                 {list.map((item, i) => (
                     <div
