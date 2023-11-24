@@ -25,7 +25,7 @@ function TestModif({value, onClose=()=>{}, title}) {
   
   
   const [fileError, setFileError] = React.useState('');
-  const [typeError, setTypeError] = useState('null');
+  const [typeError, setTypeError] = useState('');
     useEffect(() => {
         if (value) {
             setNomAdh(value.nom_Adh)
@@ -76,6 +76,7 @@ function TestModif({value, onClose=()=>{}, title}) {
       const result = await getAllType();
       const types = result.data.types.map((type) => ({id:type.id_TypeAdh, title:type.nom_TypeAdh}));
       setTypeAdh(types);
+      console.log(types);
     } catch (err) {
       console.log(err);
     }
@@ -195,7 +196,7 @@ function TestModif({value, onClose=()=>{}, title}) {
                   handelChange={()=>setFileError('')}
                 />
             </div>
-            <div style={{ width: '88%' }}>
+            <div style={{ width: '32%' }}>
               <Testdropdown
                 placeholder='Types adhérent ...'
                 data={typeAdh}
