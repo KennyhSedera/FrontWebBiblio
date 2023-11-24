@@ -235,7 +235,7 @@ function BtnTop({theme=false}) {
                             boxShadow: '2px 2px 10px #000000e0'
                         }}
                       />
-                      <span style={{fontSize:18, fontWeight:600}}>{user.user_name}</span>
+                      <span style={{fontSize:18, fontWeight:600, textTransform:'capitalize'}}>{user.user_name}</span>
                 </div>
                 {list.map((item, i) => (
                     <div
