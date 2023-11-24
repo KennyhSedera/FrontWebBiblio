@@ -1,6 +1,9 @@
 import React from 'react';
 import './book.css';
-import { FaEye, FaRegEdit, FaTrashAlt } from 'react-icons/fa';
+import {
+    // FaEye,
+    FaRegEdit, FaTrashAlt
+} from 'react-icons/fa';
 import { getImg } from '../../services/getImg';
 
 const BookView = ({item, editItem=()=>{}, deleteItem=()=>{}}) => {
@@ -43,11 +46,11 @@ const BookView = ({item, editItem=()=>{}, deleteItem=()=>{}}) => {
                     color="red"
                     onClick={() => deleteItem(item)}
                 />
-                <FaEye
+                {/* <FaEye
                     style={{ cursor: 'pointer' }}
                     color="grey"
                     onClick={() => editItem(item)}
-                />
+                /> */}
                 <FaRegEdit
                     style={{ cursor: 'pointer' }}
                     color="blue"
