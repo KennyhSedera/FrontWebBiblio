@@ -136,9 +136,9 @@ function TestModif({value, onClose=()=>{}, title}) {
       setNationaliteAdhErr( 'Cette champ ne doit pas être vide!' )
     }else if (lieunaissadh ==='') {
       setLieuNaissErr( 'Cette champ ne doit pas être vide!' )
-    } else if (file === null) {
+    } else if (file === null && btnTitle === 'Enregistrer') {
       setFileError('Choisissez une image!')
-    } else if (searchValue === null) {
+    } else if (searchValue === null && btnTitle === 'Enregistrer') {
       setTypeError('Choisissez le type d\'adhérent!')
     } else {
       const formData = new FormData();
@@ -302,20 +302,20 @@ function TestModif({value, onClose=()=>{}, title}) {
                 error={nationaliteadhErr}
               />
             </div>
-            <div style={{ width: '32%', marginBottom: 20, }}>
+            {!value && <div style={{ width: '32%', marginBottom: 20, }}>
                 <InputImg
                   setFile={setFile}
                   error={fileError}
                   handelChange={()=>setFileError('')}
                 />
-            </div>
-            <div style={{ width: '32%', }}>
+            </div>}
+            {!value && <div style={{ width: '32%', }}>
               <DatePickerInput
                 onDateChange={setDateNaiss}
                 placeholder="Date de naissance"
                 date={datenaiss}
               />
-            </div>
+            </div>}
             <div style={{ width: '32%', }}>
               <Input
                 onChange={e => {
@@ -327,7 +327,7 @@ function TestModif({value, onClose=()=>{}, title}) {
                 error={lieunaissadhErr}
               />
             </div>
-            <div style={{ width: '32%' }}>
+            {!value && <div style={{ width: '32%' }}>
               <Testdropdown
                 placeholder='Types adhérent ...'
                 data={typeAdh}
@@ -335,7 +335,7 @@ function TestModif({value, onClose=()=>{}, title}) {
                 onResetId={handelResetValueType}
                 error={typeError}
               />
-            </div>
+            </div>}
       </div>
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
             <div style={{ width: '50%', position:'relative' }}>
