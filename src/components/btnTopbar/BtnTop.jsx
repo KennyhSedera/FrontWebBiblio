@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import Modal from '../modal/Modal'
 import Button from '../Button'
 // import { FaMoon } from 'react-icons/fa'
@@ -13,7 +13,6 @@ import { notification } from '../../services/notificationService'
 import moment from 'moment/moment'
 import { getImg } from '../../services/getImg'
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
-import { useMemo } from 'react'
 
 const queryClient = new QueryClient();
 
@@ -26,7 +25,7 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
   const navigate = useNavigate();
     const { data, error } = useQuery('myData', fetchData);
     
-     const countUnread = useMemo(() => {
+    const countUnread = useMemo(() => {
         if (data && Array.isArray(data)) {
             return data.filter(item => item.readAt === null).length;
         }

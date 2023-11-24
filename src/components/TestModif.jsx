@@ -3,18 +3,26 @@ import '../index.css'
 import Input from './Input'
 import { MdClose } from 'react-icons/md'
 import Autocomplete from './drowpDown/Autocomplete'
+import { getAllAdhNoInsc } from '../services/adherentService'
+import { getAllType } from '../services/typeAdhService'
 // import Button from './Button'
 
 function TestModif({value, onClose=()=>{}, title}) {
-    const [numadh, setNumAdh] = useState('')
-    const [nomadh, setNomAdh] = useState('')
-    const [prenomadh, setPrenomAdh] = useState('')
-    const [teladh, setTelAdh] = useState('')
-    const [adressadh, setAdressAdh] = useState('')
-    const [quartieradh, setQuartierAdh] = useState('')
-    const [nationaliteadh, setNationaliteAdh] = useState('')
-    const [lieunaissadh, setLieuNaiss] = useState('')
-    const [genre, setGenre] = useState('Homme')
+  const [numadh, setNumAdh] = useState('')
+  const [nomadh, setNomAdh] = useState('')
+  const [prenomadh, setPrenomAdh] = useState('')
+  const [teladh, setTelAdh] = useState('')
+  const [adressadh, setAdressAdh] = useState('')
+  const [quartieradh, setQuartierAdh] = useState('')
+  const [nationaliteadh, setNationaliteAdh] = useState('')
+  const [lieunaissadh, setLieuNaiss] = useState('')
+  const [genre, setGenre] = useState('Homme')
+  const [file, setFile] = React.useState(null);
+  const [typeAdh, setTypeAdh] = useState([]);
+  
+  
+  const [fileError, setFileError] = React.useState('');
+  const [typeError, setTypeError] = useState('null');
     useEffect(() => {
         if (value) {
             setNomAdh(value.nom_Adh)
@@ -28,7 +36,57 @@ function TestModif({value, onClose=()=>{}, title}) {
             setGenre(value.genre_Adh || 'Homme')
         }
     }, [value])
+  
+  
+  useEffect(() => {
+    getTypeAdhAll();
+    getAdhAll();
+  }, []);
+  
+  const getAdhAll = async () => {
+    try {
+      const result = await getAllAdhNoInsc();
+      const adherent = result.data.adherents
+      if (adherent.length<= 0){
+          setNumAdh('AFF00001')
+      }else {
+          var max  = adherent[adherent.length - 1].id_Adh
+          var reference = ''
+          var number = ''
+          for(var i=0;i<max.length;i++){
+              if(isNaN(max[i])){
+                  reference+=max[i]
+              }else{
+                  number+=max[i]
+              }
+          }
+          const num = parseInt(number)+1
+          setNumAdh((num<10000)?(num<1000)?(num<100)?(num<10) ? reference+'0000'+num :reference+'000'+num : reference+'00'+num : reference+'0'+num : reference+num)
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
+  const getTypeAdhAll = async () => {
+    try {
+      const result = await getAllType();
+      const types = result.data.types.map((type) => ({id:type.id_TypeAdh, title:type.nom_TypeAdh}));
+      setTypeAdh(types);
+    } catch (err) {
+      console.log(err);
+    }
+  };
     
+  const handleSearchValueChange = (newValue) => {
+    setSearchValue(newValue);
+    setTypeError('')
+  };
+  
+  const handelResetValueType = () => {
+    setSearchValue(null);
+  };
+
   return (
       <div className="modalcard"
           style={{
@@ -58,7 +116,7 @@ function TestModif({value, onClose=()=>{}, title}) {
                 placeholder='Numéro ...'
                 value={numadh}
                 readOnly
-                // error={error.numadh}
+                // error={numadhErr}
               />
             </div>
             <div style={{ width: '32%', }}>
@@ -66,7 +124,7 @@ function TestModif({value, onClose=()=>{}, title}) {
                 onChange={e=>setNomAdh(e.target.value)}
                 placeholder='Entrer nom adhérent ...'
                 value={nomadh}
-                // error={error.numadh}
+                // error={nomadhErr}
               />
             </div>
             <div style={{ width: '32%', }}>
@@ -74,7 +132,7 @@ function TestModif({value, onClose=()=>{}, title}) {
                 onChange={e=>setPrenomAdh(e.target.value)}
                 placeholder='Entrer prénom adhérent ...'
                 value={prenomadh}
-                // error={error.nomadh}
+                // error={prenomadhErr}
               />
             </div>
             <div style={{ width: '32%', }}>
@@ -93,6 +151,7 @@ function TestModif({value, onClose=()=>{}, title}) {
                 placeholder='Entrer num telephone Adhérent ...'
                 pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
                 value={teladh}
+                // error={teladhErr}
               />
             </div>
             <div style={{ width: '32%', }}>
@@ -124,6 +183,22 @@ function TestModif({value, onClose=()=>{}, title}) {
                 onChange={e=>setLieuNaiss(e.target.value)}
                 placeholder='Entrer lieu de naissance adhérent ...'
                 value={lieunaissadh}
+              />
+            </div>
+            <div style={{ width: '32%', marginBottom: 20, }}>
+                <InputImg
+                  setFile={setFile}
+                  error={fileError}
+                  handelChange={()=>setFileError('')}
+                />
+            </div>
+            <div style={{ width: '88%' }}>
+              <Testdropdown
+                placeholder='Types adhérent ...'
+                data={typeAdh}
+                onSelectId={handleSearchValueChange}
+                onResetId={handelResetValueType}
+                error={typeError}
               />
             </div>
         </div>
