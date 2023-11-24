@@ -39,13 +39,15 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
             top: 5,
         }}>
             <div style={{ display: 'flex', flexDirection: 'row-reverse', gap: 15, cursor: 'pointer', }}>
-                <div style={{
+                {data && <div style={{
                     position: 'absolute', width: 20, height: 20,
                     borderRadius: 50, background: 'red', top: -5, color: 'white',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  }}><span style={{ fontSize: 10 }}>{
-                        data ? data.length > 15 ? '15+':data.length:0
-                      }</span></div>
+                }}>
+                    <span style={{ fontSize: 10 }}>
+                      { data ? data.length > 15 ? '15+':data.length:0 }
+                    </span>
+                </div>}
                 <div style={{
                         background: '#00000067',
                         borderRadius: 50, marginRight: 8,
