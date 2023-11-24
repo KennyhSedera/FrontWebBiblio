@@ -61,8 +61,8 @@ function TestModif({value, onClose=()=>{}, title}) {
   
   
   useEffect(() => {
-    getTypeAdhAll();
     getAdhAll();
+    getTypeAdhAll();
     getUserLocal();
   }, []);
   
@@ -70,6 +70,8 @@ function TestModif({value, onClose=()=>{}, title}) {
     try {
       const result = await getAllAdhNoInsc();
       const adherent = result.data.adherents
+      console.log(adherent[adherent.length - 1].id_Adh);
+      console.log(adherent.length);
       if (adherent.length<= 0){
           setNumAdh('AFF00001')
       }else {
