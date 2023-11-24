@@ -33,7 +33,17 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
     }, [data]);
 
   if (error) {
-    return <div>Error: {error.message}</div>;
+      return (
+          <div style={{
+                background: '#00000067',
+                borderRadius: 50, marginRight: 8,
+                width: 40, height: 40, flexDirection: 'row-reverse',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+            }}
+          >
+            <FiBell color='white' size={22} />
+          </div>
+      )
   }
 
   return (
