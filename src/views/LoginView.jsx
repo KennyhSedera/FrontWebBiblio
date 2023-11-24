@@ -139,6 +139,8 @@ function LoginView() {
                     setOpenDialog(true)
                     setDialogMsg(res.data.error)
                 } else {
+                    const user = JSON.parse(res.data.user)
+                    localStorage.setItem('User', JSON.stringify(user));
                     setLoanding1(false)
                     navigate('/accueil');
                 }

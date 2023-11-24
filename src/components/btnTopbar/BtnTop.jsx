@@ -141,7 +141,18 @@ function BtnTop({theme=false}) {
 
     useEffect(() => {
         setDark(theme)
+        getUserLocal()
     }, [theme])
+
+    const getUserLocal = () => {
+        const storedUser = localStorage.getItem('User');
+        if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        console.log(parsedUser); // Ici, vous obtiendrez de nouveau l'objet user
+        } else {
+        console.log('Aucun utilisateur trouvé dans le localStorage.');
+        }
+    }
 
     const navigate = useNavigate();
     const handleLogout = () => {
