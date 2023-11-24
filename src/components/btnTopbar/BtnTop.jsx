@@ -13,6 +13,7 @@ import { notification } from '../../services/notificationService'
 import moment from 'moment/moment'
 import { getImg } from '../../services/getImg'
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
+import { useMemo } from 'react'
 
 const queryClient = new QueryClient();
 
@@ -23,7 +24,14 @@ const fetchData = async () => {
 
 const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification}) => {
   const navigate = useNavigate();
-  const { data, error } = useQuery('myData', fetchData);
+    const { data, error } = useQuery('myData', fetchData);
+    
+     const countUnread = useMemo(() => {
+        if (data && Array.isArray(data)) {
+            return data.filter(item => item.readAt === null).length;
+        }
+        return 0; // Retourne 0 si les données ne sont pas chargées ou ne sont pas sous forme de tableau
+    }, [data]);
 
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -39,13 +47,13 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
             top: 5,
         }}>
             <div style={{ display: 'flex', flexDirection: 'row-reverse', gap: 15, cursor: 'pointer', }}>
-                {data.length !== 0 ? <div style={{
+                {countUnread !== 0 ? <div style={{
                     position: 'absolute', width: 20, height: 20,
                     borderRadius: 50, background: 'red', top: -5, color: 'white',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                 }}>
                     <span style={{ fontSize: 10 }}>
-                      { data ? data.length > 15 ? '15+':data.length:0 }
+                      { countUnread > 15 ? '15+' : countUnread }
                     </span>
                 </div>:null}
                 <div style={{
