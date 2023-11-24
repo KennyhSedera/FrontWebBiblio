@@ -44,9 +44,9 @@ function TestModif({value, onClose=()=>{}, title}) {
             setEditionLivre(value.edition_livre)
             setNotationLivre(value.notation_livre)
             setFormatLivre(value.format_livre)
-            setNbPageLivre(value.nationalite_Adh)
-            setEmplacementLivre(value.lieunaiss_Adh || 'Jeune')
-            setDateEdition(value.naissance_Adh)
+            setNbPageLivre(value.nb_page_livre)
+            setEmplacementLivre(value.emplacement_livre || 'Jeune')
+            setDateEdition(value.date_edition_livre)
             setBtnTitle('Modifier')
         }
     }, [value])
@@ -124,7 +124,7 @@ function TestModif({value, onClose=()=>{}, title}) {
         nb_page_livre: nbpagelivre,
         emplacement_livre: emplacementlivre,
       }
-        updateLivre(formData)
+        updateLivre(formData, value.id_livre)
         .then((res) => {
           setAlertOpen(true);
           setAlertMsg(res.data.succee);
@@ -216,6 +216,7 @@ function TestModif({value, onClose=()=>{}, title}) {
                   <DatePickerInput
                     onDateChange={setDateEdition}
                     value={dateeditionlivre}
+                    placeholder='Date édition livre ...'
                   />
                 </div>
                 <div style={{ width: '32%', }}>
