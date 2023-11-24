@@ -224,7 +224,10 @@ function TestModif({value, onClose=()=>{}, title}) {
             </div>
             <div style={{ width: '32%', }}>
               <Input
-                onChange={e=>setNomAdh(e.target.value)}
+                onChange={e => {
+                  setNomAdh(e.target.value);
+                  setNomAdhErr('')
+                }}
                 placeholder='Entrer nom adhérent ...'
                 value={nomadh}
                 error={nomadhErr}
@@ -232,7 +235,10 @@ function TestModif({value, onClose=()=>{}, title}) {
             </div>
             <div style={{ width: '32%', }}>
               <Input
-                onChange={e=>setPrenomAdh(e.target.value)}
+                onChange={e => {
+                  setPrenomAdh(e.target.value);
+                  setPrenomAdhErr('')
+                }}
                 placeholder='Entrer prénom adhérent ...'
                 value={prenomadh}
                 error={prenomadhErr}
@@ -248,7 +254,10 @@ function TestModif({value, onClose=()=>{}, title}) {
               </div>
               <div style={{ width: '32%', }}>
               <Input
-                onChange={e=>setTelAdh(e.target.value)}
+                onChange={e => {
+                  setTelAdh(e.target.value)
+                  setTelAdhErr('')
+                }}
                 name="teladh"
                 type='number'
                 placeholder='Entrer num telephone Adhérent ...'
@@ -259,7 +268,10 @@ function TestModif({value, onClose=()=>{}, title}) {
             </div>
             <div style={{ width: '32%', }}>
               <Input
-                onChange={e=>setAdressAdh(e.target.value)}
+                onChange={e => {
+                  setAdressAdh(e.target.value)
+                  setAdressAdhErr('')
+                }}
                 name="addressadh"
                 placeholder='Entrer adresse Adhérent ...'
                 value={adressadh}
@@ -268,7 +280,10 @@ function TestModif({value, onClose=()=>{}, title}) {
             </div>
             <div style={{ width: '32%', }}>
               <Input
-                onChange={e=>setQuartierAdh(e.target.value)}
+                onChange={e => {
+                  setQuartierAdh(e.target.value)
+                  setQuartierAdhErr('')
+                }}
                 name="quartieradh"
                 placeholder='Entrer quartier Adhérent ...'
                 value={quartieradh}
@@ -277,7 +292,10 @@ function TestModif({value, onClose=()=>{}, title}) {
             </div>
             <div style={{ width: '32%', }}>
               <Input
-                onChange={e=>setNationaliteAdh(e.target.value)}
+                onChange={e => {
+                  setNationaliteAdh(e.target.value)
+                  setNationaliteAdhErr('')
+                }}
                 name="nationaliteadh"
                 placeholder='Entrer nationalite Adhérent ...'
                 value={nationaliteadh}
@@ -300,7 +318,10 @@ function TestModif({value, onClose=()=>{}, title}) {
             </div>
             <div style={{ width: '32%', }}>
               <Input
-                onChange={e=>setLieuNaiss(e.target.value)}
+                onChange={e => {
+                  setLieuNaiss(e.target.value)
+                  setLieuNaissErr('')
+                }}
                 placeholder='Entrer lieu de naissance adhérent ...'
                 value={lieunaissadh}
                 error={lieunaissadhErr}
