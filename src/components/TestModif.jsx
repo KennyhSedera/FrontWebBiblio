@@ -3,7 +3,7 @@ import '../index.css'
 import Input from './Input'
 import { MdClose } from 'react-icons/md'
 import Autocomplete from './drowpDown/Autocomplete'
-import { getAllAdhNoInsc } from '../services/adherentService'
+import { createAdh, getAllAdhNoInsc, updatedAdh } from '../services/adherentService'
 import { getAllType } from '../services/typeAdhService'
 import Testdropdown from './dropdownsearch/Testdropdown'
 import InputImg from './inputImg/InputImg'
@@ -96,7 +96,6 @@ function TestModif({value, onClose=()=>{}, title}) {
       const result = await getAllType();
       const types = result.data.types.map((type) => ({id:type.id_TypeAdh, title:type.nom_TypeAdh}));
       setTypeAdh(types);
-      console.log(types);
     } catch (err) {
       console.log(err);
     }
@@ -180,8 +179,6 @@ function TestModif({value, onClose=()=>{}, title}) {
           setAlertOpen(true);
           setAlertMsg(res.data.succee);
           setAlertType('success')
-          setInput(inputs);
-          setError(inputs);
           setLoading(false);
           setTimeout(() => {
             onClose();
