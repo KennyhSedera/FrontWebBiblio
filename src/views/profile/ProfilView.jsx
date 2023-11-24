@@ -5,12 +5,12 @@ import { IoIosImages } from 'react-icons/io';
 import Button from '../../components/Button';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
 import { useLocation, useNavigate } from 'react-router-dom';
+import { getImg } from '../../services/getImg';
 
 function ProfilView() {
     const location = useLocation();
     const navigate = useNavigate();
     const { user } = location.state || {};
-    console.log({data:user});
 
     const [file, setFile] = useState('')
     const handleChange = (event) => {
@@ -45,7 +45,7 @@ function ProfilView() {
             </div>
             <div className="profilebody">
                 <div className="profileimg">
-                    <img src={file ? file : "me.jpg"} alt="" /> 
+                    <img src={file ? file : getImg(user.user_profil)} alt="" /> 
                     <div className="card"></div>
                     <div className="card2"></div>
                     {!file && <div className="icon">
