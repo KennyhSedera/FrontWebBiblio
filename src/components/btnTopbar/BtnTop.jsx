@@ -81,9 +81,10 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                   display: 'flex',
                   justifyContent:'space-between',
                   padding: 5,
-                  fontSize: 20,
+                  fontSize: 22,
                   fontWeight: 700,
                   marginBottom: 2,
+                  paddingLeft: 10,
               }}>
                   <span>Notifications</span>
                   <MdClose
