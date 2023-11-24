@@ -120,7 +120,6 @@ function TestModif({value, onClose=()=>{}, title}) {
     setSearchValue(null);
   };
  const validate = () => {
-  setLoading(true)
     if (numadh ==='') {
       setNumAdhErr('Cette champ ne doit pas être vide!')
     } else if (nomadh ==='') {
