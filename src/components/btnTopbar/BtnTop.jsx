@@ -163,7 +163,7 @@ function BtnTop({theme=false}) {
         navigate('/')
     }
     const list = [
-        {title:'Voir votre profil', icon: ImUser, onClick:()=>{navigate('/profile')}},
+        {title:'Voir votre profil', icon: ImUser, onClick:()=>{navigate('/profile', { state: { user: user } })}},
         {title:'Notification', icon: FiBell, onClick:()=>{navigate('/notification')}},
         {title:'Se deconnecter', icon: TbLogout, onClick:()=>{setOpenLogout(true)}}
     ]

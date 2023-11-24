@@ -4,10 +4,13 @@ import './profile.css';
 import { IoIosImages } from 'react-icons/io';
 import Button from '../../components/Button';
 import { MdKeyboardArrowLeft } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function ProfilView() {
+    const location = useLocation();
     const navigate = useNavigate();
+    const { user } = location.state || {};
+    console.log({data:user});
 
     const [file, setFile] = useState('')
     const handleChange = (event) => {
