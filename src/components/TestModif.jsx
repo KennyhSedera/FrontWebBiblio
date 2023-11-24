@@ -263,13 +263,13 @@ function TestModif({value, onClose=()=>{}, title}) {
                       setSelected={setEmplacementLivre}
                     />
                 </div>
-                <div style={{ width: '32%', marginBottom: 20, }}>
+                {!value && <div style={{ width: '32%', marginBottom: 20, }}>
                     <InputImg
                         setFile={setFile}
                         handelChange={()=>setFileError('')}
                         error={fileError}
                     />
-                </div>
+                </div>}
             </div>
       <div style={{ display: 'flex', justifyContent: 'space-around' }}>
             <div style={{ width: '50%', position:'relative' }}>
