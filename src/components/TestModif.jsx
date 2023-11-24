@@ -173,6 +173,16 @@ function TestModif({value, onClose=()=>{}, title}) {
           console.log(err);
         });
       } else {
+        const formData = new FormData();
+        formData.append("id_Adh", numadh);
+        formData.append("nom_Adh", nomadh);
+        formData.append("prenom_Adh", prenomadh);
+        formData.append("adresse_Adh", adressadh);
+        formData.append("quartier_Adh", quartieradh);
+        formData.append("tel_Adh", teladh);
+        formData.append("nationalite_Adh", nationaliteadh);
+        formData.append("lieunaiss_Adh", lieunaissadh);
+        formData.append("genre_Adh", genre);
         updatedAdh(formData, value.id_Adh)
         .then((res) => {
           setAlertOpen(true);
