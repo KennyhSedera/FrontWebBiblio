@@ -173,30 +173,30 @@ function TestModif({value, onClose=()=>{}, title}) {
           console.log(err);
         });
       } else {
-        const formData = new FormData();
-        formData.append("id_Adh", numadh);
-        formData.append("nom_Adh", nomadh);
-        formData.append("prenom_Adh", prenomadh);
-        formData.append("adresse_Adh", adressadh);
-        formData.append("quartier_Adh", quartieradh);
-        formData.append("tel_Adh", teladh);
-        formData.append("nationalite_Adh", nationaliteadh);
-        formData.append("lieunaiss_Adh", lieunaissadh);
-        formData.append("genre_Adh", genre);
-        console.log({nom:nomadh, id:value.id_Adh});
-        updatedAdh(formData, value.id_Adh)
-        .then((res) => {
-          setAlertOpen(true);
-          setAlertMsg(res.data.succee);
-          setAlertType('success')
-          setLoading(false);
-          setTimeout(() => {
-            onClose();
-            setAlertOpen(false);
-          }, 3000);
-        }).catch((err) => {
-          console.log(err);
-        });
+      const formData = {
+        nom_Adh: nomadh,
+        prenom_Adh: prenomadh,
+        adresse_Adh: adressadh,
+        quartier_Adh: quartieradh,
+        tel_Adh: teladh,
+        nationalite_Adh: nationaliteadh,
+        lieunaiss_Adh: lieunaissadh,
+        genre_Adh: genre,
+      }
+        console.log({DATA:formData, id:value.id_Adh});
+        // updatedAdh(formData, value.id_Adh)
+        // .then((res) => {
+        //   setAlertOpen(true);
+        //   setAlertMsg(res.data.succee);
+        //   setAlertType('success')
+        //   setLoading(false);
+        //   setTimeout(() => {
+        //     onClose();
+        //     setAlertOpen(false);
+        //   }, 3000);
+        // }).catch((err) => {
+        //   console.log(err);
+        // });
       }
       
     }
