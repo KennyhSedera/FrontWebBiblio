@@ -183,6 +183,7 @@ function TestModif({value, onClose=()=>{}, title}) {
         formData.append("nationalite_Adh", nationaliteadh);
         formData.append("lieunaiss_Adh", lieunaissadh);
         formData.append("genre_Adh", genre);
+        console.log({nom:nomadh, id:value.id_Adh});
         updatedAdh(formData, value.id_Adh)
         .then((res) => {
           setAlertOpen(true);
