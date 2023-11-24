@@ -3,7 +3,7 @@ import '../index.css'
 import Input from './Input'
 import { MdClose } from 'react-icons/md'
 import Autocomplete from './drowpDown/Autocomplete'
-import { createAdh, getAllAdhNoInsc, updatedAdh } from '../services/adherentService'
+import { createAdh, getAllAdh, getAllAdhNoInsc, updatedAdh } from '../services/adherentService'
 import { getAllType } from '../services/typeAdhService'
 import Testdropdown from './dropdownsearch/Testdropdown'
 import InputImg from './inputImg/InputImg'
@@ -68,9 +68,10 @@ function TestModif({value, onClose=()=>{}, title}) {
   
   const getAdhAll = async () => {
     try {
-      const result = await getAllAdhNoInsc();
+      const result = await getAllAdh();
       const adherent = result.data.adherents
       // console.log(adherent[adherent.length - 1].id_Adh);
+      console.log(adherent);
       console.log(adherent.length);
       // if (adherent.length<= 0){
       //     setNumAdh('AFF00001')
