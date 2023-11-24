@@ -110,6 +110,7 @@ function LoginView() {
                             setAlertType('success');
                             setInput(inputs);
                             setFile(null);
+                            handleBack()
                             setTimeout(() => {
                                 setOpenAlert(false);
                             }, 3000);
