@@ -30,6 +30,7 @@ function TestModif({value, onClose=()=>{}, title}) {
   const [alertOpen, setAlertOpen] = useState(false)
   const [alertMsg, setAlertMsg] = useState('')
   const [alertType, setAlertType] = useState('success')
+  const [idUser, setIdUser] = useState('success')
   
   
   const [fileError, setFileError] = React.useState('');
@@ -53,6 +54,8 @@ function TestModif({value, onClose=()=>{}, title}) {
             setNationaliteAdh(value.nationalite_Adh)
             setLieuNaiss(value.lieunaiss_Adh)
             setGenre(value.genre_Adh || 'Homme')
+            setDateNaiss(value.naissance_Adh)
+            setBtnTitle('Modifier')
         }
     }, [value])
   
@@ -60,6 +63,7 @@ function TestModif({value, onClose=()=>{}, title}) {
   useEffect(() => {
     getTypeAdhAll();
     getAdhAll();
+    getUserLocal();
   }, []);
   
   const getAdhAll = async () => {
@@ -98,6 +102,16 @@ function TestModif({value, onClose=()=>{}, title}) {
     }
   };
     
+  const getUserLocal = () => {
+    const storedUser = localStorage.getItem('User');
+      if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setIdUser(parsedUser.id_user); // Ici, vous obtiendrez de nouveau l'objet user
+    } else {
+      console.log('Aucun utilisateur trouvé dans le localStorage.');
+    }
+  }
+  
   const handleSearchValueChange = (newValue) => {
     setSearchValue(newValue);
     setTypeError('')
@@ -108,74 +122,77 @@ function TestModif({value, onClose=()=>{}, title}) {
   };
  const validate = () => {
   setLoading(true)
-    // if (input.numadh ==='') {
-    //   setError(prevState => ({ ...prevState, [numadh]: 'Cette champ ne doit pas être vide!' }))
-    // } else if (input.nomadh ==='') {
-    //   setError(prevState => ({ ...prevState, [name.nomadh]: 'Cette champ ne doit pas être vide!' }))
-    // }else if (input.prenomadh ==='') {
-    //   setError(prevState => ({ ...prevState, [name.prenomadh]: 'Cette champ ne doit pas être vide!' }))
-    // }else if (input.teladh ==='') {
-    //   setError(prevState => ({ ...prevState, [name.teladh]: 'Cette champ ne doit pas être vide!' }))
-    // }else if (input.addressadh ==='') {
-    //   setError(prevState => ({ ...prevState, [name.addressadh]: 'Cette champ ne doit pas être vide!' }))
-    // }else if (input.quartieradh ==='') {
-    //   setError(prevState => ({ ...prevState, [name.quartieradh]: 'Cette champ ne doit pas être vide!' }))
-    // }else if (input.nationaliteadh ==='') {
-    //   setError(prevState => ({ ...prevState, [name.nationaliteadh]: 'Cette champ ne doit pas être vide!' }))
-    // }else if (input.lieunaissadh ==='') {
-    //   setError(prevState => ({ ...prevState, [name.lieunaissadh]: 'Cette champ ne doit pas être vide!' }))
-    // } else if (file === null) {
-    //   setFileError('Choisissez une image!')
-    // } else {
-    //   const formData = new FormData();
-    //   formData.append("photo_adh", file);
-    //   formData.append("nom_Adh", input.nomadh);
-    //   formData.append("prenom_Adh", input.prenomadh);
-    //   formData.append("adresse_Adh", input.addressadh);
-    //   formData.append("quartier_Adh", input.quartieradh);
-    //   formData.append("tel_Adh", input.teladh);
-    //   formData.append("nationalite_Adh", input.nationaliteadh);
-    //   formData.append("lieunaiss_Adh", input.lieunaissadh);
-    //   formData.append("naissance_Adh", datenaiss);
-    //   formData.append("genre_Adh", genre);
-    //   if (!loading) {
-    //     setLoading(true);
-    //   }
-    //   if (btnTitle === 'Enregistrer') {
-    //     createAdh(formData)
-    //     .then((res) => {
-    //       setAlertOpen(true);
-    //       setAlertMsg(res.data.succee);
-    //       setAlertType('success')
-    //       setInput(inputs);
-    //       setError(inputs);
-    //       setLoading(false);
-    //       setTimeout(() => {
-    //         onClose();
-    //         setAlertOpen(false);
-    //       }, 3000);
-    //     }).catch((err) => {
-    //       console.log(err);
-    //     });
-    //   } else {
-    //     updatedAdh(formData, value.id_Adh)
-    //     .then((res) => {
-    //       setAlertOpen(true);
-    //       setAlertMsg(res.data.succee);
-    //       setAlertType('success')
-    //       setInput(inputs);
-    //       setError(inputs);
-    //       setLoading(false);
-    //       setTimeout(() => {
-    //         onClose();
-    //         setAlertOpen(false);
-    //       }, 3000);
-    //     }).catch((err) => {
-    //       console.log(err);
-    //     });
-    //   }
+    if (numadh ==='') {
+      setNumAdhErr('Cette champ ne doit pas être vide!')
+    } else if (nomadh ==='') {
+      setNomAdhErr( 'Cette champ ne doit pas être vide!' )
+    }else if (prenomadh ==='') {
+      setPrenomAdhErr( 'Cette champ ne doit pas être vide!' )
+    }else if (teladh ==='') {
+      setTelAdhErr( 'Cette champ ne doit pas être vide!' )
+    }else if (adressadh ==='') {
+      setAdressAdhErr( 'Cette champ ne doit pas être vide!' )
+    }else if (quartieradh ==='') {
+      setQuartierAdhErr( 'Cette champ ne doit pas être vide!' )
+    }else if (nationaliteadh ==='') {
+      setNationaliteAdhErr( 'Cette champ ne doit pas être vide!' )
+    }else if (lieunaissadh ==='') {
+      setLieuNaissErr( 'Cette champ ne doit pas être vide!' )
+    } else if (file === null) {
+      setFileError('Choisissez une image!')
+    } else if (searchValue === null) {
+      setTypeError('Choisissez le type d\'adhérent!')
+    } else {
+      const formData = new FormData();
+      formData.append("photo_adh", file);
+      formData.append("id_Adh", numadh);
+      formData.append("nom_Adh", nomadh);
+      formData.append("prenom_Adh", prenomadh);
+      formData.append("adresse_Adh", adressadh);
+      formData.append("quartier_Adh", quartieradh);
+      formData.append("tel_Adh", teladh);
+      formData.append("nationalite_Adh", nationaliteadh);
+      formData.append("lieunaiss_Adh", lieunaissadh);
+      formData.append("naissance_Adh", datenaiss);
+      formData.append("genre_Adh", genre);
+      formData.append("id_TypeAdh", searchValue);
+      formData.append("id_User", idUser);
+      if (!loading) {
+        setLoading(true);
+      }
+      if (btnTitle === 'Enregistrer') {
+        createAdh(formData)
+        .then((res) => {
+          setAlertOpen(true);
+          setAlertMsg(res.data.succee);
+          setAlertType('success')
+          setLoading(false);
+          setTimeout(() => {
+            onClose();
+            setAlertOpen(false);
+          }, 3000);
+        }).catch((err) => {
+          console.log(err);
+        });
+      } else {
+        updatedAdh(formData, value.id_Adh)
+        .then((res) => {
+          setAlertOpen(true);
+          setAlertMsg(res.data.succee);
+          setAlertType('success')
+          setInput(inputs);
+          setError(inputs);
+          setLoading(false);
+          setTimeout(() => {
+            onClose();
+            setAlertOpen(false);
+          }, 3000);
+        }).catch((err) => {
+          console.log(err);
+        });
+      }
       
-    // }
+    }
   }
   return (
       <div className="modalcard"
