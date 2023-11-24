@@ -158,6 +158,7 @@ function BtnTop({theme=false}) {
     const navigate = useNavigate();
     const handleLogout = () => {
         navigate('/')
+        localStorage.removeItem('User')
     }
     const list = [
         {title:'Voir votre profil', icon: ImUser, onClick:()=>{navigate('/profile')}},
@@ -269,12 +270,12 @@ function BtnTop({theme=false}) {
                     </div>
                     <div to='/' style={{ width: '42%', textDecoration: 'none' }}>
                         <Button
-                        small
-                        title='Deconnecter'
-                        color='#00b2fee1'
-                        textcolor='white'
-                        textsize={15}
-                        onClick={handleLogout}
+                            small
+                            title='Deconnecter'
+                            color='#00b2fee1'
+                            textcolor='white'
+                            textsize={15}
+                            onClick={handleLogout}
                         />
                     </div>
                 </div>
