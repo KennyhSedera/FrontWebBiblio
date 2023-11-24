@@ -70,8 +70,6 @@ function TestModif({value, onClose=()=>{}, title}) {
     try {
       const result = await getAllAdh();
       const adherent = result.data.adherents
-      console.log(adherent);
-      console.log(adherent.length);
       if (adherent.length<= 0){
           setNumAdh('AFF00001')
       }else {
@@ -86,8 +84,7 @@ function TestModif({value, onClose=()=>{}, title}) {
               }
           }
         const num = parseInt(number) + 1
-        console.log(num);
-          // setNumAdh((num<10000)?(num<1000)?(num<100)?(num<10) ? reference+'0000'+num :reference+'000'+num : reference+'00'+num : reference+'0'+num : reference+num)
+        setNumAdh((num<10000)?(num<1000)?(num<100)?(num<10) ? reference+'0000'+num :reference+'000'+num : reference+'00'+num : reference+'0'+num : reference+num)
       }
     } catch (err) {
       console.log(err);
