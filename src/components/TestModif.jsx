@@ -83,8 +83,9 @@ function TestModif({value, onClose=()=>{}, title}) {
                   number+=max[i]
               }
           }
-          const num = parseInt(number)+1
-          setNumAdh((num<10000)?(num<1000)?(num<100)?(num<10) ? reference+'0000'+num :reference+'000'+num : reference+'00'+num : reference+'0'+num : reference+num)
+        const num = parseInt(number) + 1
+        console.log(num);
+          // setNumAdh((num<10000)?(num<1000)?(num<100)?(num<10) ? reference+'0000'+num :reference+'000'+num : reference+'00'+num : reference+'0'+num : reference+num)
       }
     } catch (err) {
       console.log(err);
