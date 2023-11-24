@@ -157,8 +157,8 @@ function BtnTop({theme=false}) {
 
     const navigate = useNavigate();
     const handleLogout = () => {
-        navigate('/')
         localStorage.removeItem('User')
+        navigate('/')
     }
     const list = [
         {title:'Voir votre profil', icon: ImUser, onClick:()=>{navigate('/profile')}},
