@@ -41,18 +41,18 @@ const BookView = ({item, editItem=()=>{}, deleteItem=()=>{}}) => {
                     Auteur: <strong style={{ fontSize: 16 }}>{item.auteur_livre}</strong>
                 </div>
                 <div className="action">
-                <FaTrashAlt
+                {item.status_livre==='Dispo' && <FaTrashAlt
                     style={{ cursor: 'pointer' }}
                     color="red"
                     onClick={() => deleteItem(item)}
-                />
+                />}
                 {/* <FaEye
                     style={{ cursor: 'pointer' }}
                     color="grey"
                     onClick={() => editItem(item)}
                 /> */}
                 <FaRegEdit
-                    style={{ cursor: 'pointer' }}
+                    style={{ cursor: 'pointer', marginRight:5 }}
                     color="blue"
                     onClick={() => editItem(item)}
                 />

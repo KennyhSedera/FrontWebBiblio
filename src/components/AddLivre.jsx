@@ -93,7 +93,7 @@ function AddLivre({value, onClose=()=>{}, title}) {
       formData.append("nb_page_livre", nbpagelivre);
       formData.append("emplacement_livre", emplacementlivre);
       formData.append("date_edition_livre", dateeditionlivre);
-      formData.append("date_enregistrement_livre", new Date);
+      formData.append("date_enregistrement_livre", new Date());
       formData.append("userId", idUser);
       if (!loading) {
         setLoading(true);

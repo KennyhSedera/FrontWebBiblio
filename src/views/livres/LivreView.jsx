@@ -5,10 +5,8 @@ import { deleteLivre, getAllLivre } from '../../services/livreService';
 import DialogDelete from '../../components/DialogDelete';
 import MainLayout from '../../components/layout/MainLayout';
 import Modal from '../../components/modal/Modal';
-// import moment from 'moment'
 import AddLivre from '../../components/AddLivre';
 import BookView from '../../components/book/BookView';
-import TestModif from '../../components/TestModif';
 
 
 export default function LivreRow() {
@@ -42,7 +40,7 @@ export default function LivreRow() {
     const handleOnChange = (e) => {
         const { name, value } = e.target;
         setInput(prevState => ({ ...prevState, [name]: value }));
-
+        console.log(input)
         const filteredLivres = initialLivres.filter((item) => {
             return value.toLowerCase() === ''
                 ? item

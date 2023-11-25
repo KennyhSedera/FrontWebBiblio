@@ -1,109 +1,81 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './style.css'
-// import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-// import { Pie } from 'react-chartjs-2';
 import MainLayout from '../components/layout/MainLayout';
 import Chart from 'react-google-charts';
-
-// ChartJS.register(ArcElement, Tooltip, Legend);
-
+import { countEmpByEmpLivre, countEmpruntByDate } from '../services/empruntService';
+import moment from 'moment';
 
 function StatistiqueView() {
-//     const data = {
-//         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-//         datasets: [
-//             {
-//                 label: '# of Votes',
-//                 data: [12, 19, 3, 5, 2, 3],
-//                 backgroundColor: [
-//                     'rgba(255, 99, 132, 0.2)',
-//                     'rgba(54, 162, 235, 0.2)',
-//                     'rgba(255, 206, 86, 0.2)',
-//                     'rgba(75, 192, 192, 0.2)',
-//                     'rgba(153, 102, 255, 0.2)',
-//                     'rgba(255, 159, 64, 0.2)',
-//                 ],
-//                 borderColor: [
-//                     'rgba(255, 99, 132, 1)',
-//                     'rgba(54, 162, 235, 1)',
-//                     'rgba(255, 206, 86, 1)',
-//                     'rgba(75, 192, 192, 1)',
-//                     'rgba(153, 102, 255, 1)',
-//                     'rgba(255, 159, 64, 1)',
-//                 ],
-//                 borderWidth: 1,
-//             },
-//         ],
-//     }
-    
-//     return (
-//         <MainLayout title={'Statistique'} overflow>
-//             <div style={{
-//                 width: '100%',
-//                 display: 'flex',
-//                 justifyContent: 'space-around',
-//                 flexWrap:'wrap'
-//             }}>
-//                 <div style={{width:'48%'}}>
-//                     <Pie data={data} />
-//                 </div>
-//             </div>
-//         </MainLayout >
-    //     )
-     const data = [
-    ['Emplacement', 'Total emprunt'],
-    ['Adulte', 3],
-    ['Jeune', 2],
-  ];
+  const [chartData, setChartData] = useState([]);
+  const [LinechartData, setLineChartData] = useState([]);
+
+  useEffect(() => {
+    countEmpByEmpLivre()
+    .then((res) => {
+      const formattedData = formatDataForChart(res.data.emprunt);
+      setChartData(formattedData);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }, []);
+
+  const formatDataForChart = data => {
+    const chartData = [
+      [ 'Emplacement', 'Total' ],
+      ...data.map(item => [ item.livre.emplacement_livre, item.total ]),
+    ];
+    return chartData;
+  };
+
+  useEffect(() => {
+    countEmpruntByDate()
+    .then((res) => {
+      const formattedData = formatDataForLineChart(res.data.emprunt);
+      setLineChartData(formattedData);
+    }).catch((err) => {
+      console.log(err);
+    });
+  }, []);
+
+  const formatDataForLineChart = data => {
+    const chartData = [
+      [ 'Date', 'Total' ],
+      ...data.map(item => [moment(item.Date).format('DD MMM'), item.total ]),
+    ];
+    return chartData;
+  };
 
   return (
-      <MainLayout title={'Statistique'} overflow>
-        <Chart
-            width={'500px'}
-            height={'300px'}
-            chartType="PieChart"
-            loader={<div>Loading Chart</div>}
-            data={data}
-            options={{
-                title: 'Comparaison total emprunt par emplacement livre',
-                is3D: true,
-                backgroundColor: 'transparent', // Changer la couleur de fond du graphique
-            }}
-        />
-          {/* <Chart
+    <MainLayout title={'Statistique'} overflow>
+      <Chart
+        width={'500px'}
+        height={'300px'}
+        chartType="PieChart"
+        loader={<div>Loading Chart</div>}
+        data={chartData}
+        options={{
+          // title: 'Comparaison total emprunt par emplacement livre',
+          is3D: true,
+          backgroundColor: 'transparent',
+        }}
+      />
+      <Chart
         width={'500px'}
         height={'300px'}
         chartType="LineChart"
         loader={<div>Loading Chart</div>}
-        data={data}
+        data={LinechartData}
         options={{
-          title: 'Données depuis la base de données',
-          backgroundColor: '#f7f7f7', // Changer la couleur de fond du graphique
+          // title: 'Données depuis la base de données',
+          backgroundColor: 'transparent',
           hAxis: {
-            title: 'X-axis Title',
+            title: 'Date',
           },
           vAxis: {
-            title: 'Y-axis Title',
+            title: 'Total',
           },
         }}
-      /> */}
-      {/* <Chart
-        width={'500px'}
-        height={'300px'}
-        chartType="BarChart"
-        loader={<div>Loading Chart</div>}
-        data={data}
-        options={{
-          title: 'Données depuis la base de données',
-          backgroundColor: '#f7f7f7', // Changer la couleur de fond du graphique
-          hAxis: {
-            title: 'X-axis Title',
-          },
-          vAxis: {
-            title: 'Y-axis Title',
-          },
-        }}
-      /> */}
+      />
     </MainLayout>
   );
 }
@@ -113,9 +85,9 @@ export default StatistiqueView
 // // Fonction pour récupérer les données de l'API
 // const fetchDataFromAPI = async () => {
 //   try {
-//     const response = await fetch('URL_DE_VOTRE_API');
+//     const response = await fetch('http://localhost:1142/countEmpByEmpLivre');
 //     if (response.ok) {
-//       const data = await response.json();
+//       const data = await response.json()
 //       return data; // Retourne les données de l'API
 //     } else {
 //       throw new Error('Erreur lors de la récupération des données');
@@ -169,6 +141,40 @@ export default StatistiqueView
 //           is3D: true,
 //         }}
 //       />
+          {/* <Chart
+        width={'500px'}
+        height={'300px'}
+        chartType="LineChart"
+        loader={<div>Loading Chart</div>}
+        data={data}
+        options={{
+          title: 'Données depuis la base de données',
+          backgroundColor: '#f7f7f7', // Changer la couleur de fond du graphique
+          hAxis: {
+            title: 'X-axis Title',
+          },
+          vAxis: {
+            title: 'Y-axis Title',
+          },
+        }}
+      /> */}
+      {/* <Chart
+        width={'500px'}
+        height={'300px'}
+        chartType="BarChart"
+        loader={<div>Loading Chart</div>}
+        data={data}
+        options={{
+          title: 'Données depuis la base de données',
+          backgroundColor: '#f7f7f7', // Changer la couleur de fond du graphique
+          hAxis: {
+            title: 'X-axis Title',
+          },
+          vAxis: {
+            title: 'Y-axis Title',
+          },
+        }}
+      /> */}
 //     </div>
 //   );
 // };

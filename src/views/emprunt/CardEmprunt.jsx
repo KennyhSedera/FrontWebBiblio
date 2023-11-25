@@ -5,7 +5,7 @@ import { getImg } from '../../services/getImg'
 
 function CardEmprunt({data}) {
 
-  const str = data.inscriptionadherent.adherent.prenom_Adh;
+  const str = data.adherent.prenom_Adh;
 
   const pseudo = str.split(' ');
     
@@ -13,7 +13,7 @@ function CardEmprunt({data}) {
       <div className='cardemprunt'>
         <img
             className='imgadh'
-            src={getImg(data.inscriptionadherent.adherent.photo_Adh)}
+            src={getImg(data.adherent.photo_Adh)}
             alt="adhimg"
         />
           <div style={{
@@ -22,7 +22,7 @@ function CardEmprunt({data}) {
               fontWeight: '800',
               fontSize: 18,
               marginBottom: 20,
-          }}>{data.inscriptionadherent.adherent.id_Adh}</div>
+          }}>{data.adherent.id_Adh}</div>
           <div style={{width:'calc(100% - 115px)', fontSize:18, paddingInline:5, overflowWrap:'break-word'}}>
             <div style={{fontWeight:'600'}}>{pseudo[pseudo.length - 1]}</div>
           </div>

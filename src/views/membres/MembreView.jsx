@@ -7,7 +7,6 @@ import Modal from '../../components/modal/Modal';
 import AddAdh from '../../components/AddAdh';
 import DialogDelete from '../../components/DialogDelete';
 import Alert from '../../components/alert/Alert'
-import TestModif from '../../components/TestModif';
 
 export default function MembreView() {
     const [membres, setMembres] = React.useState([]);

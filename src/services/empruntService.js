@@ -13,5 +13,11 @@ exports.getAllEmpruntEnCours = () => {
     return Api.Api().get('empruntEnCours')
 }
 exports.retourEmprunt = (data) => {
-    return Api.Api().get('retourEmprunt', data)
+    return Api.Api().post('retourEmprunt', data)
+}
+exports.countEmpByEmpLivre = () => {
+    return Api.Api().get('countEmpByEmpLivre')
+}
+exports.countEmpruntByDate = () => {
+    return Api.Api().get('countEmpruntByDate')
 }

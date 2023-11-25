@@ -5,8 +5,6 @@ import Testdropdown from './dropdownsearch/Testdropdown'
 import { livreDispo } from '../services/livreService'
 import InputDuree from './inputDuree/InputDuree'
 import { createEmprunt } from '../services/empruntService'
-import AlertMessage from './AlertMessage'
-import { getAllAdhInscrit } from '../services/membreService'
 import Alert from './alert/Alert'
 import { getAllAdhNoEmp } from '../services/adherentService'
 
@@ -46,7 +44,7 @@ function EmpruntBook({ title, onClose = () => { }, value, }) {
   const getAdhAll = async () => {
     try {
       const result = await getAllAdhNoEmp();
-      const adherent = result.data.adherents.map((Adh) => ({id:Adh.id_InscritAdh, title:Adh.adherent.nom_Adh + ' ' + Adh.adherent.prenom_Adh}));
+      const adherent = result.data.adherents.map((Adh) => ({id:Adh.id_Adh, title:Adh.nom_Adh + ' ' + Adh.prenom_Adh}));
       setAdh(adherent);
     } catch (err) {
       console.log(err);
@@ -75,7 +73,7 @@ function EmpruntBook({ title, onClose = () => { }, value, }) {
 
   const Values = {
     id_Livre: selectedLivreId,
-    id_AdhInsc: selectedAdhId,
+    id_Adh: selectedAdhId,
     duree_Emprunt: duree,
     userId: idUser,
   }

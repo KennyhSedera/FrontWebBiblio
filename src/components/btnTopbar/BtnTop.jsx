@@ -9,7 +9,7 @@ import { FiBell } from 'react-icons/fi'
 import { ImUser } from 'react-icons/im'
 import { useNavigate } from 'react-router-dom'
 import './btntop.css'
-import { notification } from '../../services/notificationService'
+import { notification, readNotificationUser } from '../../services/notificationService'
 import moment from 'moment/moment'
 import { getImg } from '../../services/getImg'
 import { QueryClient, QueryClientProvider, useQuery } from 'react-query';
@@ -21,7 +21,7 @@ const fetchData = async () => {
   return response.data.notification;
 };
 
-const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification}) => {
+const MyComponent = ({id, setShowMenu, showNotification, setShowNotification}) => {
   const navigate = useNavigate();
     const { data, error } = useQuery('myData', fetchData);
     
@@ -31,20 +31,33 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
         }
         return 0; // Retourne 0 si les données ne sont pas chargées ou ne sont pas sous forme de tableau
     }, [data]);
+    
+    if (error) {
+        return (
+            <div style={{
+                    background: '#00000067',
+                    borderRadius: 50, marginRight: 8,
+                    width: 40, height: 40, flexDirection: 'row-reverse',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                }}
+            >
+                <FiBell color='white' size={22} />
+            </div>
+        )
+    }
 
-  if (error) {
-      return (
-          <div style={{
-                background: '#00000067',
-                borderRadius: 50, marginRight: 8,
-                width: 40, height: 40, flexDirection: 'row-reverse',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-            }}
-          >
-            <FiBell color='white' size={22} />
-          </div>
-      )
-  }
+    const readNotification = (data) => {
+        if (data.readAt) {
+            navigate('/reservation', { state: { data: data } })
+        } else {
+            readNotificationUser({ id_Notification: data.id_Notification, id_User: id })
+            .then(() => {
+                navigate('/reservation', { state: { data: data } })
+            }).catch((err) => {
+                console.log(err);
+            });
+        }
+    }
 
   return (
     
@@ -71,10 +84,10 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                         width: 40, height: 40, flexDirection: 'row-reverse',
                         display: 'flex', alignItems: 'center', justifyContent: 'center',
                     }}
-                    onClick={() =>( 
-                        setShowNotification(!showNotification),
+                    onClick={() =>{
+                        setShowNotification(!showNotification)
                         setShowMenu(false)
-                    )}
+                    }}
                 >
                     <FiBell color='white' size={22} />
                 </div>
@@ -115,13 +128,14 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                         className='listnotification'
                         key={item.id_Notification}
                         onClick={() => {
-                            navigate('/reservation', { state: { data: item } })
+                            readNotification(item)
                         }}
                         style={{position:'relative',}}
                     >
                         <div style={{
                         }}>     
                             <img
+                                alt='pdp'
                                 src={getImg(item.reservationLivre.adherent.photo_Adh)}
                                 style={{
                                     width: 50,
@@ -145,7 +159,18 @@ const MyComponent = ({dark, setShowMenu, showNotification, setShowNotification})
                                 color: item.readAt ? 'black' : '#1e88e5',
                             }}>{moment(item.date_Notification).format('DD MMM YYYY')}</span>
                         </div>
-                        {!item.readAt && <MdCircle size={8} color='#1e88e5' style={{position:'absolute', right:2, top:25}} />}
+                        {!item.readAt ? <MdCircle size={8} color='#1e88e5' style={{position:'absolute', right:5, top:25}} />:
+                        <img
+                            src={getImg(item.user.user_Profil)} alt="pdp"
+                            style={{
+                                width: 16,
+                                height: 16,
+                                borderRadius: 50,
+                                position: 'absolute',
+                                right: 5,
+                                bottom: 5
+                            }}
+                        />}
                     </div>  
                 ))}
             </div>:null}
@@ -189,7 +214,7 @@ function BtnTop({theme=false}) {
     <div style={{ display: 'flex', gap: 10, alignItems: 'center', marginRight:5 }}>
         <QueryClientProvider client={queryClient}>
               <MyComponent
-                  dark={dark}
+                  id={user.id_user}
                   setShowMenu={setShowMenu}
                   showNotification={showNotification}
                   setShowNotification={setShowNotification}
@@ -202,10 +227,10 @@ function BtnTop({theme=false}) {
             borderRadius: 50,
         }}>
             <img
-                onClick={() => (
-                    setShowNotification(false),
+                onClick={() => {
+                    setShowNotification(false)
                     setShowMenu(!showMenu)
-                )}
+                }}
                 src={getImg(user.user_profil)} alt="pdp"
                 style={{
                     width: '100%',
