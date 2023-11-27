@@ -105,10 +105,9 @@ function ReservationView() {
                     }}>
                         <div style={{
                             width:'50%',
-                            minHeight: 200,
-                            padding: 10,
+                            minHeight:200,
                         }}>
-                            <div style={{width:100, backgroundColor:'red', height:100}}>
+                            <div style={{width:'100%'}}>
                                 <BookView item={data.reservationLivre.livre} />
                             </div>
                             

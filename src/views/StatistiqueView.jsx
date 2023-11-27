@@ -52,6 +52,7 @@ function StatistiqueView() {
         alignItems:'flex-start', flexWrap:'wrap'
       }}>
         <div style={{width:'50%', backgroundColor:'red'}}>
+          <div style={{textAlign:'center', fontWeight:700, fontSize:25}}>Comparaison d'emprunt par emplacement livre</div>
           <Chart
             width={'100%'}
             height={'300px'}
@@ -65,6 +66,7 @@ function StatistiqueView() {
           />
         </div>
         <div style={{width:'50%', backgroundColor:'blue'}}>
+          <div style={{textAlign:'center', fontWeight:700, fontSize:25}}>Total emprunt par jour.</div>
           <Chart
             width={'100%'}
             height={'300px'}
