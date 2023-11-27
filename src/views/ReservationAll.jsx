@@ -61,7 +61,9 @@ function ReservationAll() {
             }}
           />
         </div>
-        <div className='reservationcontent' style={{ height: '75%' }}>
+        <div className='reservationcontent' style={{
+          height: '80%', marginTop:10,
+        }}>
           <div className='reservationcontent-inner'>
             <div style={{
               marginInline: 10,
