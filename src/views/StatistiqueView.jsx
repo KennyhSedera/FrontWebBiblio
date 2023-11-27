@@ -51,33 +51,39 @@ function StatistiqueView() {
         width: '100%', height: '100%', display: 'flex',
         alignItems:'flex-start', flexWrap:'wrap'
       }}>
-        <Chart
-          width={'450px'}
-          height={'300px'}
-          chartType="PieChart"
-          loader={<div>Loading Chart</div>}
-          data={chartData}
-          options={{
-            is3D: true,
-            backgroundColor: 'red',
-          }}
-        />
-        <Chart
-          width={'450px'}
-          height={'300px'}
-          chartType="LineChart"
-          loader={<div>Loading Chart</div>}
-          data={LinechartData}
-          options={{
-            backgroundColor: 'blue',
-            hAxis: {
-              title: 'Date',
-            },
-            vAxis: {
-              title: 'Total',
-            },
-          }}
-        />
+        <div style={{width:'50%', backgroundColor:'red'}}>
+          <Chart
+            width={'100%'}
+            height={'300px'}
+            chartType="PieChart"
+            loader={<div>Loading Chart</div>}
+            data={chartData}
+            options={{
+              is3D: true,
+              backgroundColor: 'red',
+            }}
+          />
+        </div>
+        <div style={{width:'50%', backgroundColor:'blue'}}>
+          <Chart
+            width={'100%'}
+            height={'300px'}
+            chartType="LineChart"
+            loader={<div>Loading Chart</div>}
+            data={LinechartData}
+            options={{
+              backgroundColor: 'blue',
+              hAxis: {
+                title: 'Date',
+              },
+              vAxis: {
+                title: 'Total',
+              },
+            }}
+          />
+        </div>
+        
+        
       </div>
       
     </MainLayout>
