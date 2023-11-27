@@ -64,7 +64,6 @@ function ReservationAll() {
         <div className='reservationcontent' style={{ height: '75%' }}>
           <div className='reservationcontent-inner'>
             <div style={{
-              height: '100%',
               marginInline: 10,
               marginTop: 8,
               padding: 5,
