@@ -60,7 +60,7 @@ function StatistiqueView() {
             data={chartData}
             options={{
               is3D: true,
-              backgroundColor: 'red',
+              backgroundColor: 'transparent',
             }}
           />
         </div>
@@ -72,7 +72,7 @@ function StatistiqueView() {
             loader={<div>Loading Chart</div>}
             data={LinechartData}
             options={{
-              backgroundColor: 'blue',
+              backgroundColor: 'transparent',
               hAxis: {
                 title: 'Date',
               },
