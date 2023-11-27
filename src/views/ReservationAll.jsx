@@ -67,7 +67,6 @@ function ReservationAll() {
               height: '100%',
               marginInline: 10,
               marginTop: 8,
-              overflowY: 'auto',
               padding: 5,
               display: 'flex',
               flexWrap: 'wrap',
