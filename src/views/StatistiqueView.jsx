@@ -52,24 +52,24 @@ function StatistiqueView() {
         alignItems:'flex-start', flexWrap:'wrap'
       }}>
         <Chart
-          width={'50%'}
+          width={'500px'}
           height={'300px'}
           chartType="PieChart"
           loader={<div>Loading Chart</div>}
           data={chartData}
           options={{
             is3D: true,
-            backgroundColor: 'transparent',
+            backgroundColor: 'red',
           }}
         />
         <Chart
-          width={'50%'}
+          width={'500px'}
           height={'300px'}
           chartType="LineChart"
           loader={<div>Loading Chart</div>}
           data={LinechartData}
           options={{
-            backgroundColor: 'transparent',
+            backgroundColor: 'blue',
             hAxis: {
               title: 'Date',
             },
