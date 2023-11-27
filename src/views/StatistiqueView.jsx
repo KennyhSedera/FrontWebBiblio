@@ -52,7 +52,7 @@ function StatistiqueView() {
         alignItems:'flex-start', flexWrap:'wrap'
       }}>
         <Chart
-          width={'500px'}
+          width={'400px'}
           height={'300px'}
           chartType="PieChart"
           loader={<div>Loading Chart</div>}
@@ -63,7 +63,7 @@ function StatistiqueView() {
           }}
         />
         <Chart
-          width={'500px'}
+          width={'400px'}
           height={'300px'}
           chartType="LineChart"
           loader={<div>Loading Chart</div>}
