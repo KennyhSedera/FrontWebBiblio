@@ -56,7 +56,7 @@ function InscriptionView() {
         const filteredMembres = initialMembres.filter((item) => {
             return value.toLowerCase() === ''
                 ? item :
-                item.id_InscritAdh.toLowerCase().includes(value.toLowerCase()) ||
+                item.id_Adh.toLowerCase().includes(value.toLowerCase()) ||
                 item.adherent.nom_Adh.toLowerCase().includes(value.toLowerCase()) ||
                 item.adherent.prenom_Adh.toLowerCase().includes(value.toLowerCase()) ||
                 item.adherent.adresse_Adh.toLowerCase().includes(value.toLowerCase())

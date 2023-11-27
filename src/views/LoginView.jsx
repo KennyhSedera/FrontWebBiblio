@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Input from '../components/Input';
 import Button from '../components/Button';
 import { ImMail4, } from 'react-icons/im'
@@ -16,6 +16,17 @@ import { useNavigate } from 'react-router-dom';
 import AlertDialog from '../components/AlertDialog';
 
 function LoginView() {
+    useEffect(() => {
+        getUserLocal()
+    }, [])
+
+    const getUserLocal = () => {
+        const storedUser = localStorage.getItem('User');
+        if (storedUser) {
+            navigate('/accueil')
+        }
+    }
+
     const inputs = {
         email: '', passwordconf:'', emaillogin: '', passlogin:'', fileerror:'',
         phone: '', username: '', adresse: '', password: '',

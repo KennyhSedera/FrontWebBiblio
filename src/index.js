@@ -21,6 +21,7 @@ import EmpruntEnCours from './views/emprunt/EmpruntEnCours';
 import App from './App';
 import NotificationView from './views/NotificationView';
 import ReservationView from './views/ReservationView';
+import ReservationAll from './views/ReservationAll';
 
 const router = createBrowserRouter([
   {
@@ -86,6 +87,10 @@ const router = createBrowserRouter([
   {
     path: "/reservation",
     element: <ReservationView />
+  },
+  {
+    path: "/reservationall",
+    element: <ReservationAll />
   },
 ])
 

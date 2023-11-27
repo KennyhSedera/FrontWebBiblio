@@ -57,7 +57,7 @@ function EmpruntEnCours() {
   
   return (
     <MainLayout 
-      search title='Livre Emprunter'
+      search title='Liste emprunts en cours'
       btn handleOnChange={handleOnChange}
       handleClickListItem={handleClickListItem}
       nextPage={nextPage} prevPage={prevPage}
@@ -78,9 +78,9 @@ function EmpruntEnCours() {
               return input.search.toLowerCase() === '' ?
                 item : (
                   item.livre.titre_livre.toLowerCase().includes(input.search.toLowerCase()) ||
-                  item.inscriptionadherent.id_InscritAdh.toLowerCase().includes(input.search.toLowerCase()) ||
-                  item.inscriptionadherent.adherent.nom_Adh.toLowerCase().includes(input.search.toLowerCase()) ||
-                  item.inscriptionadherent.adherent.prenom_Adh.toLowerCase().includes(input.search.toLowerCase())
+                  item.adherent.id_Adh.toLowerCase().includes(input.search.toLowerCase()) ||
+                  item.adherent.nom_Adh.toLowerCase().includes(input.search.toLowerCase()) ||
+                  item.adherent.prenom_Adh.toLowerCase().includes(input.search.toLowerCase())
                 )
             })
             .map((item) => (

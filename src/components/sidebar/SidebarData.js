@@ -54,6 +54,7 @@ export const SidebarData = [
         icon: <IoIcons.IoIosPaper />
       }
     ] },
-    { id: 5, title: 'Statistique', path: '/statistique', icon: <FaIcons.FaChartPie />, link:true },
+    { id: 5, title: 'Réservation', icon: <FaIcons.FaBook />, path: '/reservationAll', link:true },
+    { id: 6, title: 'Statistique', path: '/statistique', icon: <FaIcons.FaChartPie />, link:true },
     { id: 7, title: 'Utilisateur', path: '/utilisateur', icon: <FaIcons.FaUserAlt />, link:true },
 ];

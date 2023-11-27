@@ -1,7 +1,7 @@
 const { default: Api } = require("./Api")
 
 exports.countEmprunt = () => {
-    return Api.Api().get('totalEmprunt')
+    return Api.Api().get('countEmprunt')
 }
 exports.createEmprunt = (data) => {
     return Api.Api().post('emprunt', data)

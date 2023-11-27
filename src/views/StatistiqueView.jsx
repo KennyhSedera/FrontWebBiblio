@@ -40,7 +40,7 @@ function StatistiqueView() {
   const formatDataForLineChart = data => {
     const chartData = [
       [ 'Date', 'Total' ],
-      ...data.map(item => [moment(item.Date).format('DD MMM'), item.total ]),
+      ...data.map(item => [item.Date, item.total ]),
     ];
     return chartData;
   };

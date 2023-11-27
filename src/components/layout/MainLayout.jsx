@@ -1,12 +1,13 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './mainlayout.css'
 import SubMenu from '../sidebar/SubMenu';
-import { SidebarData } from '../sidebar/SidebarData';
 import BtnTop from '../btnTopbar/BtnTop';
 import Search from '../inputSearch/Search';
 import Background from './Background';
 import { MdOutlineKeyboardArrowLeft, MdOutlineKeyboardArrowRight } from 'react-icons/md';
 import { FaPlus } from 'react-icons/fa';
+import { SidebarDataUser } from '../sidebar/SideBarDataUser';
+import { SidebarData } from '../sidebar/SidebarData';
 
 function MainLayout({
     children, 
@@ -21,6 +22,21 @@ function MainLayout({
     currentPage,
     nbPage,
 }) {
+    const [user, setUser] = useState([])
+
+    useEffect(() => {
+        getUserLocal()
+    }, [])
+
+    const getUserLocal = () => {
+        const storedUser = localStorage.getItem('User');
+        if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+        setUser(parsedUser); 
+        } else {
+        console.log('Aucun utilisateur trouvé dans le localStorage.');
+        }
+    }
     return (
         <Background>
             <div className="layoutcontainer">
@@ -42,7 +58,9 @@ function MainLayout({
                     </div>
                     <div className='sidebarscroll'>
                         <div className='sidebarscroll-inner' style={{paddingInline:10}}>
-                            {SidebarData.map((item, index) => {
+                            {user.user_role !== 'admin' ? SidebarDataUser.map((item, index) => {
+                            return <SubMenu item={item} key={index} />;
+                            }):SidebarData.map((item, index) => {
                             return <SubMenu item={item} key={index} />;
                             })}
                         </div>
@@ -128,7 +146,7 @@ function MainLayout({
                             
                             {children}
                             
-                            {btnAdd && <div style={{
+                            {user.user_role !== 'admin' && btnAdd && <div style={{
                                 position: 'absolute', top: '82.5%', left: '92%',
                                 display: 'flex', width:60, height:60, borderRadius:50,
                                 fontSize: 18, justifyContent:'center', alignItems:'center',

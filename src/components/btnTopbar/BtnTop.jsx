@@ -178,8 +178,7 @@ const MyComponent = ({id, setShowMenu, showNotification, setShowNotification}) =
   );
 };
 
-function BtnTop({theme=false}) {
-    const [dark, setDark] = useState(false)
+function BtnTop() {
     const [openLogout, setOpenLogout] = useState(false)
     const [showMenu, setShowMenu] = useState(false)
     const [showNotification, setShowNotification] = useState(false)
@@ -187,16 +186,15 @@ function BtnTop({theme=false}) {
 
     useEffect(() => {
         getUserLocal()
-        setDark(theme)
-    }, [theme])
+    }, [])
 
     const getUserLocal = () => {
         const storedUser = localStorage.getItem('User');
         if (storedUser) {
         const parsedUser = JSON.parse(storedUser);
-        setUser(parsedUser); // Ici, vous obtiendrez de nouveau l'objet user
+        setUser(parsedUser);
         } else {
-        console.log('Aucun utilisateur trouvé dans le localStorage.');
+            navigate('/')
         }
     }
 
@@ -207,7 +205,7 @@ function BtnTop({theme=false}) {
     }
     const list = [
         {title:'Voir votre profil', icon: ImUser, onClick:()=>{navigate('/profile', { state: { user: user } })}},
-        {title:'Notification', icon: FiBell, onClick:()=>{navigate('/notification')}},
+        // {title:'Notification', icon: FiBell, onClick:()=>{navigate('/notification')}},
         {title:'Se deconnecter', icon: TbLogout, onClick:()=>{setOpenLogout(true)}}
     ]
   return (
@@ -296,8 +294,8 @@ function BtnTop({theme=false}) {
         </div>
         <Modal open={openLogout}>
             <div style={{
-                background: dark ? '#001a28dd' : '#ffffffe8', width: 380, minHeight: 100, padding: 10,
-                borderRadius: 15, color: dark ? 'white' : 'black', fontSize: 18, fontWeight: 600,
+                background: '#ffffffe8', width: 380, minHeight: 100, padding: 10,
+                borderRadius: 15, color: 'black', fontSize: 18, fontWeight: 600,
             }}>
                 <div style={{ marginLeft: 10, fontSize:22 }}>
                     <span>Deconnexion ?</span>

@@ -48,7 +48,7 @@ function EmpruntView() {
   
   return (
     <MainLayout 
-      search title='Livre Emprunter'
+      search title='Liste Emprunts'
       btn handleOnChange={handleOnChange}
       handleClickListItem={handleClickListItem}
       nextPage={nextPage} prevPage={prevPage}
@@ -70,9 +70,9 @@ function EmpruntView() {
               return input.search.toLowerCase() === '' ?
                 item : (
                   item.livre.titre_livre.toLowerCase().includes(input.search.toLowerCase()) ||
-                  item.inscriptionadherent.adherent.id_Adh.toLowerCase().includes(input.search.toLowerCase()) ||
-                  item.inscriptionadherent.adherent.nom_Adh.toLowerCase().includes(input.search.toLowerCase()) ||
-                  item.inscriptionadherent.adherent.prenom_Adh.toLowerCase().includes(input.search.toLowerCase())
+                  item.adherent.id_Adh.toLowerCase().includes(input.search.toLowerCase()) ||
+                  item.adherent.nom_Adh.toLowerCase().includes(input.search.toLowerCase()) ||
+                  item.adherent.prenom_Adh.toLowerCase().includes(input.search.toLowerCase())
                 )
             })
             .map((item) => (

@@ -7,11 +7,13 @@ import { countEmprunt } from '../../services/empruntService';
 import { countAdh } from '../../services/adherentService';
 import CardDashboard from './CardDashboard';
 import MainLayout from '../../components/layout/MainLayout';
+import { countReservation } from '../../services/reservationService';
 
 export default function DashboardView() {
     const [livre, setLivre] = React.useState(0);
     const [membre, setMembre] = React.useState(0);
     const [emprunt, setEmprunt] = React.useState(0);
+    const [reservation, setReservation] = React.useState(0);
 
     React.useEffect(() => {
         countLivre()
@@ -28,7 +30,13 @@ export default function DashboardView() {
             });
         countEmprunt()
             .then((res) => {
-                setEmprunt(res.data.total)
+                setEmprunt(res.data.emprunt[0].total)
+            }).catch((err) => {
+                console.log(err);
+            });
+        countReservation()
+            .then((res) => {
+                setReservation(res.data.total[0].total)
             }).catch((err) => {
                 console.log(err);
             });
@@ -36,14 +44,14 @@ export default function DashboardView() {
     }, [])
 
     const cards = [
-        { title: 'Membres', route: '/membre', total: membre, color: 'green', icon: 'graduate.gif' },
-        { title: 'Livres', route: '/livre', total: livre, color: '#ff0000bb', icon: 'dictionary.gif' },
-        { title: 'Emprunts', route: '/emprunt', total: emprunt, color: 'blue', icon: 'science-fiction.gif' },
-        { title: 'Utilisateurs', route: '/user', total: 500, color: 'orange', icon: 'pie-chart.gif' },
-        { title: 'Statistiques', route: '/statistique', color: 'blue', icon: 'pie-chart (1).gif' },
-        { title: 'Demandes', route: '/demande', color: 'orange', icon: 'rocket.gif' },
-        { title: 'Status', route: '/status', color: 'green', icon: 'profile.gif' },
-        { title: 'Profile', route: '/profile', color: '#ff0000bb', icon: 'profile.gif' },
+        { title: 'Adhérents', route: '/membre', total: membre, icon: 'graduate.gif' },
+        { title: 'Livres', route: '/livre', total: livre, icon: 'dictionary.gif' },
+        { title: 'Emprunts', route: '/emprunt', total: emprunt, icon: 'science-fiction.gif' },
+        { title: 'Resérvations', route: '/reservation', total: reservation, icon: 'dictionary.gif' },
+        { title: 'Statistiques', route: '/statistique', icon: 'pie-chart (1).gif' },
+        { title: 'Utilisateurs', route: '/utilisateur', icon: 'profile.gif' },
+        { title: 'Status', route: '/status', icon: 'profile.gif' },
+        { title: 'Profile', route: '/profile', icon: 'profile.gif' },
     ]
     return (
         <MainLayout title='Tableau de bord' overflow>

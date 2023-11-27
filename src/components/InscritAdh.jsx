@@ -16,8 +16,8 @@ function InscritAdh({ title, onClose = () => { } }) {
 
   const [searchValue, setSearchValue] = useState(null);
   const [searchValueAdh, setSearchValueAdh] = useState(null);
-  const [adhError, setAdhError] = useState('null');
-  const [typeError, setTypeError] = useState('null');
+  const [adhError, setAdhError] = useState('');
+  const [typeError, setTypeError] = useState('');
 
   useEffect(() => {
     getTypeAdhAll();
@@ -78,19 +78,25 @@ function InscritAdh({ title, onClose = () => { } }) {
   }
  
   const validate = () => {
-    setLoading(true)
-    inscription(datas)
-    .then((res) => {
-      setAlertOpen(true);
-      setAlertMsg(res.data.succee);
-      setAlertType('success')
-      setTimeout(() => {
-        setAlertOpen(false)
-        setLoading(false)
-      }, 3000);
-    }).catch((err) => {
-      console.log(err);
-    });
+    if (searchValueAdh===null) {
+      setAdhError('Séléctonnez un adhérent ...')
+    } else if (searchValue===null) {
+      setTypeError('Séléctonnez un type ...')
+    } else {
+      setLoading(true)
+      inscription(datas)
+      .then((res) => {
+        setAlertOpen(true);
+        setAlertMsg(res.data.succee);
+        setAlertType('success')
+        setTimeout(() => {
+          setAlertOpen(false)
+          setLoading(false)
+        }, 3000);
+      }).catch((err) => {
+        console.log(err);
+      });
+    }
   };
   
   const [alertOpen, setAlertOpen] = useState(false)
@@ -152,7 +158,7 @@ function InscritAdh({ title, onClose = () => { } }) {
         <Button
           onClick={validate}
           small
-          width={'88%'}
+          width={'70%'}
           color='#00b2fee1'
           title={btnTitle}
           textsize={15}

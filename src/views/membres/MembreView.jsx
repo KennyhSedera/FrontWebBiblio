@@ -59,7 +59,8 @@ export default function MembreView() {
         const filteredMembres = initialMembres.filter((item) => {
             return value.toLowerCase() === ''
                 ? item
-                : item.nom_Adh.toLowerCase().includes(value.toLowerCase()) ||
+                : item.id_Adh.toLowerCase().includes(value.toLowerCase()) ||
+                  item.nom_Adh.toLowerCase().includes(value.toLowerCase()) ||
                   item.prenom_Adh.toLowerCase().includes(value.toLowerCase()) ||
                   item.adresse_Adh.toLowerCase().includes(value.toLowerCase()) ||
                   item.quartier_Adh.toLowerCase().includes(value.toLowerCase()) ||
