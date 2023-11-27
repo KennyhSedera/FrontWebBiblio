@@ -49,7 +49,7 @@ function ReservationAll() {
             style={{ cursor:'pointer' }}
             onClick={()=>navigate('/accueil')}
           />
-          <span style={{ fontSize: 25, fontWeight: 700 }}>Réservation</span>
+          <span style={{ fontSize: 25, fontWeight: 700 }}>Liste Réservations</span>
           <img
             src={getImg(user.user_profil)}
             alt='pdp'
