@@ -5,11 +5,17 @@ import { MdCircle, MdKeyboardArrowLeft } from 'react-icons/md';
 import { getImg } from '../services/getImg';
 import { reservation } from '../services/reservationService';
 import moment from 'moment';
-import Button from '../components/Button';
+import Search from '../components/inputSearch/Search';
+import InputDuree from '../components/inputDuree/InputDuree';
+import { createEmprunt } from '../services/empruntService';
+import Alert from '../components/alert/Alert';
 
 function ReservationAll() {
   const [user, setUser] = useState([])
   const [data, setData] = useState([])
+  const [initialData, setInitialData] = useState([])
+  const [duree, setDuree] = useState(null)
+  const [showForme, setShowForme] = useState(false)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -30,10 +36,63 @@ function ReservationAll() {
     reservation()
     .then((res) => {
       setData(res.data.reservations)
+      setInitialData(res.data.reservations)
     }).catch((err) => {
       console.log(err);
     });
   }
+  const handleOnChange = (e) => {
+    const { value } = e.target;
+    const filteredData = initialData.filter((item) => {
+        return value.toLowerCase() === ''
+            ? item
+            : item.livre.titre_livre.toLowerCase().includes(value.toLowerCase()) ||
+              item.livre.auteur_livre.toLowerCase().includes(value.toLowerCase()) ||
+              item.adherent.id_Adh.toLowerCase().includes(value.toLowerCase()) ||
+              item.adherent.nom_Adhe.toLowerCase().includes(value.toLowerCase()) ||
+              item.adherent.prenom_Adh.toLowerCase().includes(value.toLowerCase()) ||
+              item.date_Reservation.toLowerCase().includes(value.toLowerCase());
+    });
+
+    setData(filteredData);
+  }
+  const handleDureeChange = (duree) => {
+    setDuree(duree);
+  };
+  
+  const validate = (data) => {
+    const Values = {
+      id_Livre: data.livre.id_Livre,
+      id_Adh: data.adherent.id_Adh,
+      duree_Emprunt: duree,
+      userId: user.id_User,
+    }
+    createEmprunt(Values)
+    .then((res) => {
+      if (res.data.error) {
+        setOpenAlert(true)
+        setAlertMsg(res.data.error)
+        setAlertType('error')
+        setTimeout(() => {
+          setOpenAlert(false)
+        }, 3000);
+      } else {
+        setOpenAlert(true)
+        setAlertMsg(res.data.succee)
+        setAlertType('success')
+        setTimeout(() => {
+          setOpenAlert(false)
+          setShowForme(false)
+        }, 3000);
+      }
+    }).catch((err) => {
+      console.log(err)
+    });
+  }
+
+  const [openAlert, setOpenAlert] = useState(false);
+  const [alertMsg, setAlertMsg] = useState('');
+  const [alertType, setAlertType] = useState('success')
   return (
     <Background>
       <div style={{
@@ -44,11 +103,23 @@ function ReservationAll() {
         zIndex: 1,
       }}>
         <div style={{display:'flex', alignItems:'flex-start', position:'relative', paddingTop:15, justifyContent:'space-between', paddingInline:10}}>
-          <MdKeyboardArrowLeft
-            size={30}
-            style={{ cursor:'pointer' }}
-            onClick={()=>navigate('/accueil')}
-          />
+          <div>
+            <MdKeyboardArrowLeft
+              size={30}
+              style={{ cursor:'pointer' }}
+              onClick={()=>navigate('/accueil')}
+            />
+            <div style={{
+              height: 40,
+              marginLeft: 15,
+              display: 'flex',
+              justifyContent:'flex-start'
+            }}>
+              <Search
+                onChange={handleOnChange}
+              />
+            </div>
+          </div>
           <span style={{ fontSize: 25, fontWeight: 700 }}>Liste Réservations</span>
           <img
             src={getImg(user.user_profil)}
@@ -87,25 +158,26 @@ function ReservationAll() {
                 position: 'relative',
                 cursor: 'pointer',
               }} key={item.id_Reservation}>
-                <div>
-                  <img
-                    alt='pdp'
-                    src={getImg(item.adherent.photo_Adh)}
-                    style={{
-                      width: 50,
-                      height: 50,
-                      borderRadius: 50,
-                      objectFit: 'cover',
-                    }}
-                  />
-                </div>
-                <div style={{
-                  marginTop:5
-                }}>
-                  <span style={{ fontWeight: 700 }}>{item.adherent.nom_Adh + ' ' + item.adherent.prenom_Adh}</span> a réservé(e) la livre :
-                  <span style={{ fontWeight: 700 }}>{' ' + item.livre.titre_livre}</span> le
-                  <span style={{ fontWeight: 700 }}>{' ' + moment(item.date_Reservation).format('DD MMM YYYY')}</span>.
-                </div>
+                {showForme?<>
+                  <div>
+                    <img
+                      alt='pdp'
+                      src={getImg(item.adherent.photo_Adh)}
+                      style={{
+                        width: 50,
+                        height: 50,
+                        borderRadius: 50,
+                        objectFit: 'cover',
+                      }}
+                    />
+                  </div>
+                  <div style={{
+                    marginTop:5
+                  }}>
+                    <span style={{ fontWeight: 700 }}>{item.adherent.nom_Adh + ' ' + item.adherent.prenom_Adh}</span> a réservé(e) la livre :
+                    <span style={{ fontWeight: 700 }}>{' ' + item.livre.titre_livre}</span> le
+                    <span style={{ fontWeight: 700 }}>{' ' + moment(item.date_Reservation).format('DD MMM YYYY')}</span>.
+                  </div>
                 {!item.readAt ?
                   <div style={{
                     position: 'absolute',
@@ -117,7 +189,7 @@ function ReservationAll() {
                     color: 'white',
                     borderRadius: 5,
                     fontWeight: 700,
-                  }} >
+                  }} onClick={()=>setShowForme(true)}>
                     Emprunter
                   </div> : user ?
                   <img
@@ -132,6 +204,22 @@ function ReservationAll() {
                     }}
                   /> : null
                 }
+                </> : <div>
+                    <InputDuree onDureeChange={handleDureeChange} />
+                    <div style={{
+                      position: 'absolute',
+                      right: 5,
+                      bottom: 2,
+                      backgroundColor: '#1e88e5',
+                      paddingBlock: 6,
+                      paddingInline: 10,
+                      color: 'white',
+                      borderRadius: 5,
+                      fontWeight: 700,
+                    }} onClick={()=>validate(item)}>
+                      Enregistrer
+                    </div>
+                </div>}
               </div>
               ))}
             </div>
@@ -139,6 +227,8 @@ function ReservationAll() {
           
         </div>
       </div>
+      
+      <Alert open={openAlert} Message={alertMsg} type={alertType} />
     </Background>
   )
 }

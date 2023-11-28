@@ -103,6 +103,37 @@ function AdherentOne() {
             </div>
             <div className="flip-card-back">
               <div className="flipcardfrontinner">
+                <div className="front-header">
+                    <div style={{
+                      textAlign: 'center',
+                      wordWrap:'break-word',
+                      width: 'calc(30%)',
+                    }}><img style={{width:120, height:120}} src='logo.png' /></div>
+                    <div className="header-right">
+                     <div style={{
+                        margin: 10,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems:'center',
+                        gap: 5,
+                        fontSize: 16,
+                        fontWeight:600,
+                      }}>
+                        <strong style={{fontSize:20}}> {type} </strong>
+                        <div><strong>Année: </strong> {moment(data.date_InscritAdh).format('YYYY')}</div>
+                        <div><strong>N°:</strong> {adh.id_Adh}</div>
+                      </div>
+                    </div>
+                    <img className='img' src={getImg(adh.photo_Adh)} alt="photoAdh" />
+                  </div>
+                <div style={{fontSize:16, width:'calc(100% - 180px)'}}>
+                  <div><strong>Nom</strong>: {adh.nom_Adh}</div>
+                  <div><strong>Prénom</strong>: {adh.prenom_Adh}</div>
+                  <div><strong>Né(e) le</strong>: {moment(adh.naissance_Adh).format('DD / MM / YYYY')}</div>
+                  <div><strong>Adresse</strong>: {adh.adresse_Adh}</div>
+                  <div><strong>Date</strong>: {moment(data.date_InscritAdh).format('DD / MM / YYYY')}</div>
+                </div>
+                <div style={{fontSize:16}}><strong>Visa du Responsable</strong></div>
               </div>
             </div>
           </div>

@@ -59,10 +59,12 @@
     cursor: pointer;
 }
 .iconback {
-    right: 6px;
+    right: -6px;
+    top:-10px
 }
 .iconback2 {
-    left: 6px;
+    left: -6px;
+    top:-10px
 }
 .iconback:hover {
     background: #f53a3afd;
@@ -71,7 +73,6 @@
 .flipcardfrontinner .img {
     width: 180px !important;
     height: 130px;
-    border-radius: 10px;
     object-fit: cover;
     transform-style: preserve-3d;
     box-shadow: 2px 2px 10px #4a4a4a,
