@@ -59,6 +59,18 @@ function UserView() {
 
     setUsers(filteredUsers);
   };
+  const CardUser = (data) => {
+    return (
+      <div style={{
+        width: '100%',
+        height: '100%',
+        backgroundColor: 'red',
+        borderRadius: 10,
+      }}>
+        {data.user_Name}
+      </div>
+    )
+  }
   return (
     <MainLayout
       handleOnChange={handleOnChange}
@@ -68,18 +80,32 @@ function UserView() {
       nbPage={nbPage} currentPage={currentPage}
     >
       
-      <div
-        style={{
-          width: '100%',
-          height: 'calc(100% - 20px)',
-          borderRadius: 10,
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: 10,
-          paddingBlock:2,
-        }}
-      >
-        {console.log(users)}
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <div style={{ height: 400, width: '100%' }}>
+          <div className='contentBook' style={{
+            display: 'flex', flexDirection: 'column', fontSize: 14, color: dark ? 'white' : 'black',
+            gap: 5, borderRadius: 20, paddingInline: 10,
+          }}>
+            <div style={{
+              perspective: '1000px', display: 'flex', alignItems: 'center',
+              flexWrap: 'wrap', justifyContent: 'flex-start', gap: 10,
+              paddingInline: '3%',
+            }}>
+              {data.length > 0 ? data
+                .map((item) => (
+                  <CardUser data={item} />
+                )) : (
+                <div style={{
+                  width:'100%',
+                  textAlign: 'center',
+                  fontSize: 20,
+                  fontWeight: 800,
+                  marginTop:50
+                }}>Aucun utilisateur enregistrer .</div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </MainLayout>
   )
