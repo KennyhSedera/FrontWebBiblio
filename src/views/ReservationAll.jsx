@@ -16,6 +16,7 @@ function ReservationAll() {
   const [initialData, setInitialData] = useState([])
   const [duree, setDuree] = useState(null)
   const [showForme, setShowForme] = useState(true)
+  const [id, setId] = useState(true)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -189,7 +190,10 @@ function ReservationAll() {
                     color: 'white',
                     borderRadius: 5,
                     fontWeight: 700,
-                  }} onClick={()=>setShowForme(true)}>
+                    }} onClick={() => {
+                      setShowForme(true)
+                      setId(item.id_Reservation)
+                    }}>
                     Emprunter
                   </div> : user ?
                   <img
@@ -204,7 +208,7 @@ function ReservationAll() {
                     }}
                   /> : null
                 }
-                </> : <div>
+                </> : item.id_Reservation === id?<div>
                     <InputDuree onDureeChange={handleDureeChange} />
                     <div style={{
                       position: 'absolute',
@@ -219,7 +223,56 @@ function ReservationAll() {
                     }} onClick={()=>validate(item)}>
                       Enregistrer
                     </div>
-                </div>}
+                </div>:<>
+                  <div>
+                    <img
+                      alt='pdp'
+                      src={getImg(item.adherent.photo_Adh)}
+                      style={{
+                        width: 50,
+                        height: 50,
+                        borderRadius: 50,
+                        objectFit: 'cover',
+                      }}
+                    />
+                  </div>
+                  <div style={{
+                    marginTop:5
+                  }}>
+                    <span style={{ fontWeight: 700 }}>{item.adherent.nom_Adh + ' ' + item.adherent.prenom_Adh}</span> a réservé(e) la livre :
+                    <span style={{ fontWeight: 700 }}>{' ' + item.livre.titre_livre}</span> le
+                    <span style={{ fontWeight: 700 }}>{' ' + moment(item.date_Reservation).format('DD MMM YYYY')}</span>.
+                  </div>
+                {!item.readAt ?
+                  <div style={{
+                    position: 'absolute',
+                    right: 5,
+                    bottom: 2,
+                    backgroundColor: '#1e88e5',
+                    paddingBlock: 6,
+                    paddingInline: 10,
+                    color: 'white',
+                    borderRadius: 5,
+                    fontWeight: 700,
+                    }} onClick={() => {
+                      setShowForme(true)
+                      setId(item.id_Reservation)
+                    }}>
+                    Emprunter
+                  </div> : user ?
+                  <img
+                    src={getImg(item.user.user_profil)} alt="pdp"
+                    style={{
+                      width: 16,
+                      height: 16,
+                      borderRadius: 50,
+                      position: 'absolute',
+                      right: 5,
+                      bottom: 5
+                    }}
+                  /> : null
+                }
+                </>}
               </div>
               ))}
             </div>
