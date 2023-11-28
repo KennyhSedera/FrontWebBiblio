@@ -45,14 +45,14 @@ function ReservationAll() {
   const handleOnChange = (e) => {
     const { value } = e.target;
     const filteredData = initialData.filter((item) => {
-        return value.toLowerCase() === ''
-            ? item
-            : item.livre.titre_livre.toLowerCase().includes(value.toLowerCase()) ||
-              item.livre.auteur_livre.toLowerCase().includes(value.toLowerCase()) ||
-              item.adherent.id_Adh.toLowerCase().includes(value.toLowerCase()) ||
-              item.adherent.nom_Adhe.toLowerCase().includes(value.toLowerCase()) ||
-              item.adherent.prenom_Adh.toLowerCase().includes(value.toLowerCase()) ||
-              item.date_Reservation.toLowerCase().includes(value.toLowerCase());
+      return value.toLowerCase() === ''
+        ? item
+        : item.livre.titre_livre.toLowerCase().includes(value.toLowerCase()) ||
+          item.livre.auteur_livre.toLowerCase().includes(value.toLowerCase()) ||
+          item.adherent.id_Adh.toLowerCase().includes(value.toLowerCase()) ||
+          item.adherent.nom_Adhe.toLowerCase().includes(value.toLowerCase()) ||
+          item.adherent.prenom_Adh.toLowerCase().includes(value.toLowerCase()) ||
+          item.date_Reservation.toLowerCase().includes(value.toLowerCase());
     });
 
     setData(filteredData);
