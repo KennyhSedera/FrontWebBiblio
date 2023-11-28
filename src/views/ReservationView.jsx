@@ -5,6 +5,7 @@ import { MdKeyboardArrowLeft } from 'react-icons/md';
 import { getImg } from '../services/getImg';
 import { readReservationUser } from '../services/reservationService';
 import '../components/book/book.css';
+import moment from 'moment';
 
 function ReservationView() {
     const location = useLocation();
@@ -42,7 +43,8 @@ function ReservationView() {
                 className={`book ${coverZIndex === -1 ? 'hide-cover' : ''}`}
                 key={item.id_livre}
                 onMouseEnter={setCoverZIndexWithDelay}
-                onMouseLeave={()=>setTimeout(() => setCoverZIndex(1), 901)}
+                onMouseLeave={() => setTimeout(() => setCoverZIndex(1), 901)}
+                style={{width: 400}}
             >
                 <div className="cover">
                     <img
@@ -125,7 +127,14 @@ function ReservationView() {
                                     borderRadius: 50,
                                     objectFit: 'cover',
                                 }}
-                            />
+                        />
+                        <div>
+                            <div><span>Nom: </span>{ data.reservationLivre.adherent.nom_Adh }</div>
+                            <div><span>Prénom: </span>{ data.reservationLivre.adherent.prenom_Adh }</div>
+                            <div><span>Adresse: </span>{ data.reservationLivre.adherent.adresse_Adh }</div>
+                            <div><span>Date réservation: </span>{ moment(data.date_Reservation).format('DD MMM YYYY') }</div>
+                            <div><span>Date récupéretion: </span>{ moment(data.date_Emprunter).format('DD MMM YYYY') }</div>
+                        </div>
                         </div>
                     </div>
             </div>
