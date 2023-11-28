@@ -59,10 +59,12 @@
     cursor: pointer;
 }
 .iconback {
+    position:'absolute';
     right: -6px;
     top:-65px
 }
 .iconback2 {
+    position:'absolute';
     left: -6px;
     top:-65px
 }
