@@ -50,7 +50,7 @@ export default function DashboardView() {
         { title: 'Resérvations', route: '/reservation', total: reservation, icon: 'dictionary.gif' },
         { title: 'Statistiques', route: '/statistique', icon: 'pie-chart (1).gif' },
         { title: 'Utilisateurs', route: '/utilisateur', icon: 'profile.gif' },
-        { title: 'Status', route: '/status', icon: 'profile.gif' },
+        // { title: 'Status', route: '/status', icon: 'profile.gif' },
         { title: 'Profile', route: '/profile', icon: 'profile.gif' },
     ]
     return (
