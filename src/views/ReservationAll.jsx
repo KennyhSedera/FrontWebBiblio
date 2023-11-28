@@ -15,7 +15,7 @@ function ReservationAll() {
   const [data, setData] = useState([])
   const [initialData, setInitialData] = useState([])
   const [duree, setDuree] = useState(null)
-  const [showForme, setShowForme] = useState(false)
+  const [showForme, setShowForme] = useState(true)
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -103,7 +103,7 @@ function ReservationAll() {
         zIndex: 1,
       }}>
         <div style={{display:'flex', alignItems:'flex-start', position:'relative', paddingTop:15, justifyContent:'space-between', paddingInline:10}}>
-          <div>
+          <div style={{display:'flex', alignItems: 'center'}}>
             <MdKeyboardArrowLeft
               size={30}
               style={{ cursor:'pointer' }}
