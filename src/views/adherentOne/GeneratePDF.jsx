@@ -58,13 +58,13 @@ const MyPDFDocument = ({data, adh, type}) => (
             </View>
             <Image source={getImg(adh.photo_Adh)} style={styles.img} />
           </View>
-        </View>
-        <View style={styles.content}>
-          <Text style={{fontSize:10}}><Text style={{fontSize:10, fontWeight:700}}>Nom</Text>: {adh.nom_Adh}</Text>
-          <Text style={{fontSize:10}}><Text style={{fontSize:10, fontWeight:700}}>Prénom</Text>: {adh.prenom_Adh}</Text>
-          <Text style={{fontSize:10}}><Text style={{fontSize:10, fontWeight:700}}>Né(e) le</Text>: {moment(adh.naissance_Adh).format('DD / MM / YYYY')}</Text>
-          <Text style={{fontSize:10}}><Text style={{fontSize:10, fontWeight:700}}>Adresse</Text>: {adh.adresse_Adh}</Text>
-          <Text style={{fontSize:10}}><Text style={{fontSize:10, fontWeight:700}}>Date</Text>: {moment(data.date_InscritAdh).format('DD / MM / YYYY')}</Text>
+          <View style={{}}>
+            <Text style={{fontSize:10}}><Text style={{fontSize:10, fontWeight:700}}>Nom</Text>: {adh.nom_Adh}</Text>
+            <Text style={{fontSize:10}}><Text style={{fontSize:10, fontWeight:700}}>Prénom</Text>: {adh.prenom_Adh}</Text>
+            <Text style={{fontSize:10}}><Text style={{fontSize:10, fontWeight:700}}>Né(e) le</Text>: {moment(adh.naissance_Adh).format('DD / MM / YYYY')}</Text>
+            <Text style={{fontSize:10}}><Text style={{fontSize:10, fontWeight:700}}>Adresse</Text>: {adh.adresse_Adh}</Text>
+            <Text style={{fontSize:10}}><Text style={{fontSize:10, fontWeight:700}}>Date</Text>: {moment(data.date_InscritAdh).format('DD / MM / YYYY')}</Text>
+          </View>
         </View>
       </View>
     </Page>
