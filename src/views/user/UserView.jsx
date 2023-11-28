@@ -83,7 +83,7 @@ function UserView() {
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <div style={{ height: 400, width: '100%' }}>
           <div className='contentBook' style={{
-            display: 'flex', flexDirection: 'column', fontSize: 14, color: dark ? 'white' : 'black',
+            display: 'flex', flexDirection: 'column', fontSize: 14, color: 'black',
             gap: 5, borderRadius: 20, paddingInline: 10,
           }}>
             <div style={{
@@ -91,7 +91,7 @@ function UserView() {
               flexWrap: 'wrap', justifyContent: 'flex-start', gap: 10,
               paddingInline: '3%',
             }}>
-              {data.length > 0 ? data
+              {users.length > 0 ? users
                 .map((item) => (
                   <CardUser data={item} />
                 )) : (
