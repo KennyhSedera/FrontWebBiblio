@@ -15,7 +15,7 @@ export default function DashboardView() {
     const [emprunt, setEmprunt] = React.useState(0);
     const [reservation, setReservation] = React.useState(0);
 
-    const [user, setUser] = React.useState([])
+    // const [user, setUser] = React.useState([])
     
     React.useEffect(() => {
         countLivre()
@@ -51,31 +51,75 @@ export default function DashboardView() {
         { title: 'Resérvations', route: '/reservation', total: reservation, icon: 'dictionary.gif' },
         { title: 'Statistiques', route: '/statistique', icon: 'pie-chart (1).gif' },
         { title: 'Utilisateurs', route: '/utilisateur', icon: 'profile.gif' },
-        { title: 'Profile', route: '/profile', icon: 'profile.gif' },
+        // { title: 'Profile', route: '/profile', icon: 'profile.gif' },
     ]
     const card2s = [
         { title: 'Adhérents', route: '/membre', total: membre, icon: 'graduate.gif' },
         { title: 'Livres', route: '/livre', total: livre, icon: 'dictionary.gif' },
         { title: 'Emprunts', route: '/emprunt', total: emprunt, icon: 'science-fiction.gif' },
         { title: 'Resérvations', route: '/reservation', total: reservation, icon: 'dictionary.gif' },
-        { title: 'Profile', route: '/profile', icon: 'profile.gif' },
+        // { title: 'Profile', route: '/profile', icon: 'profile.gif' },
     ]
     
     const [cards, setCards] = React.useState(card1s)
-
-    React.useEffect(() => {
-        getUserLocal()
-    }, [])
 
     const getUserLocal = () => {
         const storedUser = localStorage.getItem('User');
         if (storedUser) {
         const parsedUser = JSON.parse(storedUser);
-            setUser(parsedUser);
+            // setUser(parsedUser);
             if (parsedUser.user_role === 'admin') {
                 setCards(card1s)
+        countLivre()
+            .then((res) => {
+                setLivre(res.data.total)
+            }).catch((err) => {
+                console.log(err);
+            });
+        countAdh()
+            .then((res) => {
+                setMembre(res.data.total)
+            }).catch((err) => {
+                console.log(err);
+            });
+        countEmprunt()
+            .then((res) => {
+                setEmprunt(res.data.emprunt[0].total)
+            }).catch((err) => {
+                console.log(err);
+            });
+        countReservation()
+            .then((res) => {
+                setReservation(res.data.total[0].total)
+            }).catch((err) => {
+                console.log(err);
+            });
             } else {
                 setCards(card2s)
+        countLivre()
+            .then((res) => {
+                setLivre(res.data.total)
+            }).catch((err) => {
+                console.log(err);
+            });
+        countAdh()
+            .then((res) => {
+                setMembre(res.data.total)
+            }).catch((err) => {
+                console.log(err);
+            });
+        countEmprunt()
+            .then((res) => {
+                setEmprunt(res.data.emprunt[0].total)
+            }).catch((err) => {
+                console.log(err);
+            });
+        countReservation()
+            .then((res) => {
+                setReservation(res.data.total[0].total)
+            }).catch((err) => {
+                console.log(err);
+            });
             }
         } 
     }
