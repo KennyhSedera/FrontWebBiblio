@@ -15,6 +15,45 @@ export default function DashboardView() {
     const [emprunt, setEmprunt] = React.useState(0);
     const [reservation, setReservation] = React.useState(0);
 
+    const [user, setUser] = React.useState([])
+    
+    const card1s = [
+        { title: 'Adhérents', route: '/membre', total: membre, icon: 'graduate.gif' },
+        { title: 'Livres', route: '/livre', total: livre, icon: 'dictionary.gif' },
+        { title: 'Emprunts', route: '/emprunt', total: emprunt, icon: 'science-fiction.gif' },
+        { title: 'Resérvations', route: '/reservation', total: reservation, icon: 'dictionary.gif' },
+        { title: 'Statistiques', route: '/statistique', icon: 'pie-chart (1).gif' },
+        { title: 'Utilisateurs', route: '/utilisateur', icon: 'profile.gif' },
+        // { title: 'Status', route: '/status', icon: 'profile.gif' },
+        { title: 'Profile', route: '/profile', icon: 'profile.gif' },
+    ]
+    const card2s = [
+        { title: 'Adhérents', route: '/membre', total: membre, icon: 'graduate.gif' },
+        { title: 'Livres', route: '/livre', total: livre, icon: 'dictionary.gif' },
+        { title: 'Emprunts', route: '/emprunt', total: emprunt, icon: 'science-fiction.gif' },
+        { title: 'Resérvations', route: '/reservation', total: reservation, icon: 'dictionary.gif' },
+        { title: user.user_name, route: '/profile', icon: 'profile.gif' },
+    ]
+    
+    const [cards, setCards] = React.useState(card1s)
+
+    React.useEffect(() => {
+        getUserLocal()
+    }, [])
+
+    const getUserLocal = () => {
+        const storedUser = localStorage.getItem('User');
+        if (storedUser) {
+        const parsedUser = JSON.parse(storedUser);
+            setUser(parsedUser);
+            if (parsedUser.user_role === 'admin') {
+                setCards(card1s)
+            } else {
+                setCards(card2s)
+            }
+        } 
+    }
+
     React.useEffect(() => {
         countLivre()
             .then((res) => {
@@ -43,16 +82,6 @@ export default function DashboardView() {
 
     }, [])
 
-    const cards = [
-        { title: 'Adhérents', route: '/membre', total: membre, icon: 'graduate.gif' },
-        { title: 'Livres', route: '/livre', total: livre, icon: 'dictionary.gif' },
-        { title: 'Emprunts', route: '/emprunt', total: emprunt, icon: 'science-fiction.gif' },
-        { title: 'Resérvations', route: '/reservation', total: reservation, icon: 'dictionary.gif' },
-        { title: 'Statistiques', route: '/statistique', icon: 'pie-chart (1).gif' },
-        { title: 'Utilisateurs', route: '/utilisateur', icon: 'profile.gif' },
-        // { title: 'Status', route: '/status', icon: 'profile.gif' },
-        { title: 'Profile', route: '/profile', icon: 'profile.gif' },
-    ]
     return (
         <MainLayout title='Tableau de bord' overflow>
                 <div style={{

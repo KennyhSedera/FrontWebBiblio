@@ -44,7 +44,7 @@ function ReservationView() {
                 key={item.id_livre}
                 onMouseEnter={setCoverZIndexWithDelay}
                 onMouseLeave={() => setTimeout(() => setCoverZIndex(1), 901)}
-                style={{width: 400}}
+                style={{width: 200}}
             >
                 <div className="cover">
                     <img
@@ -60,9 +60,9 @@ function ReservationView() {
                 </div>
                 <div className="last-page">
                     <div style={{fontSize:14}}>Title:</div>
-                    <span>{item.titre_livre}</span>
-                    <div style={{ fontWeight: 500, fontSize: 16, marginTop: 5 }}>
-                        Auteur: <strong style={{ fontSize: 16 }}>{item.auteur_livre}</strong>
+                    <span>{item.titre_Livre}</span>
+                    <div style={{ fontWeight: 500, fontSize: 14, marginTop: 5 }}>
+                        Auteur: <strong style={{ fontSize: 14 }}>{item.auteur_livre}</strong>
                     </div>
                     <div className="nbpage" style={{ paddingInline: 5 }}>
                     <strong>{item.nb_page_livre} </strong>pages
@@ -97,26 +97,30 @@ function ReservationView() {
                             style={{ position: 'absolute', left: 10, cursor:'pointer' }}
                             onClick={()=>navigate('/accueil')}
                         />
-                        <span style={{ fontSize: 25, fontWeight: 700 }}>Réservation</span>
+                        <span style={{ fontSize: 30, fontWeight: 700 }}>Réservation</span>
                     </div>
                     <div style={{
                         display: 'flex',
                         flexDirection: 'row',
                         alignItems: 'flex-start',
                         justifyContent: 'space-between',
+                        marginTop: 40,
                     }}>
                         <div style={{
                             width:'50%',
-                            minHeight:200,
+                            minHeight: 200,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
                         }}>
-                            <div style={{width:'100%'}}>
-                                <BookView item={data.reservationLivre.livre} />
-                            </div>
-                            
+                            <BookView item={data.reservationLivre.livre} />
                         </div>
                         <div style={{
-                            width:'50%', 
-                            minHeight:200,
+                            width: '50%', 
+                            minHeight: 200,
+                            display: 'flex',
+                            alignItems: 'center',
+                            flexDirection:'column',
                         }}>
                             <img 
                                 src={getImg(data.reservationLivre.adherent.photo_Adh)}
@@ -127,14 +131,14 @@ function ReservationView() {
                                     borderRadius: 50,
                                     objectFit: 'cover',
                                 }}
-                        />
-                        <div>
-                            <div><span>Nom: </span>{ data.reservationLivre.adherent.nom_Adh }</div>
-                            <div><span>Prénom: </span>{ data.reservationLivre.adherent.prenom_Adh }</div>
-                            <div><span>Adresse: </span>{ data.reservationLivre.adherent.adresse_Adh }</div>
-                            <div><span>Date réservation: </span>{ moment(data.date_Reservation).format('DD MMM YYYY') }</div>
-                            <div><span>Date récupéretion: </span>{ moment(data.date_Emprunter).format('DD MMM YYYY') }</div>
-                        </div>
+                            />
+                            <strong style={{fontSize:18, marginTop: 5}}>{ data.reservationLivre.adherent.nom_Adh }</strong>
+                            <strong style={{fontSize:18}}>{ data.reservationLivre.adherent.prenom_Adh }</strong>
+                            <div style={{fontSize:14, marginTop:5}}>
+                                <div><strong>Adresse: </strong>{ data.reservationLivre.adherent.adresse_Adh }</div>
+                                <div><strong>Date réservation: </strong>{ moment(data.reservationLivre.date_reservation).format('DD MMM YYYY') }</div>
+                                <div><strong>Date récupéretion: </strong>{ moment(data.reservationLivre.date_emprunter).format('DD MMM YYYY') }</div>
+                            </div>
                         </div>
                     </div>
             </div>

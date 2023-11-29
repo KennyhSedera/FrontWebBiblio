@@ -3,7 +3,6 @@ import './style.css'
 import MainLayout from '../components/layout/MainLayout';
 import Chart from 'react-google-charts';
 import { countEmpByEmpLivre, countEmpruntByDate } from '../services/empruntService';
-import moment from 'moment';
 
 function StatistiqueView() {
   const [chartData, setChartData] = useState([]);
@@ -52,7 +51,7 @@ function StatistiqueView() {
         alignItems:'flex-start', flexWrap:'wrap'
       }}>
         <div style={{width:'50%'}}>
-          <div style={{textAlign:'center', fontWeight:700, fontSize:25}}>Comparaison d'emprunt par emplacement livre</div>
+          <div style={{textAlign:'center', fontWeight:700, fontSize:19}}>Comparaison d'emprunt par emplacement livre</div>
           <Chart
             width={'100%'}
             height={'300px'}
@@ -66,7 +65,7 @@ function StatistiqueView() {
           />
         </div>
         <div style={{width:'50%'}}>
-          <div style={{textAlign:'center', fontWeight:700, fontSize:25}}>Total emprunt par jour.</div>
+          <div style={{textAlign:'center', fontWeight:700, fontSize:19}}>Total emprunt par jour.</div>
           <Chart
             width={'100%'}
             height={'300px'}

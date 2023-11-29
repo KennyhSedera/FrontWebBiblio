@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import MainLayout from '../../components/layout/MainLayout'
 import { getAllUsers } from '../../services/userService';
 import { useEffect } from 'react';
+import CardUser from './CardUser'
 
 function UserView() {
   const [users, setUsers] = useState([]);
@@ -59,18 +60,6 @@ function UserView() {
 
     setUsers(filteredUsers);
   };
-  const CardUser = (data) => {
-    return (
-      <div style={{
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'red',
-        borderRadius: 10,
-      }}>
-        {data.user_Name}
-      </div>
-    )
-  }
   return (
     <MainLayout
       handleOnChange={handleOnChange}
@@ -93,7 +82,7 @@ function UserView() {
             }}>
               {users.length > 0 ? users
                 .map((item) => (
-                  <CardUser data={item} />
+                  <CardUser item={item} onClose={getUserDB()} />
                 )) : (
                 <div style={{
                   width:'100%',

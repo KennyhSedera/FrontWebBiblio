@@ -3,7 +3,7 @@ import Background from '../components/layout/Background';
 import { useNavigate } from 'react-router-dom';
 import { MdCircle, MdKeyboardArrowLeft } from 'react-icons/md';
 import { getImg } from '../services/getImg';
-import { reservation } from '../services/reservationService';
+import { readReservationUser, reservation } from '../services/reservationService';
 import moment from 'moment';
 import Search from '../components/inputSearch/Search';
 import InputDuree from '../components/inputDuree/InputDuree';
@@ -63,7 +63,7 @@ function ReservationAll() {
   
   const validate = (data) => {
     const Values = {
-      id_Livre: data.livre.id_Livre,
+      id_Livre: data.livre.id_livre,
       id_Adh: data.adherent.id_Adh,
       duree_Emprunt: duree,
       userId: user.id_User,
@@ -80,10 +80,12 @@ function ReservationAll() {
       } else {
         setOpenAlert(true)
         setAlertMsg(res.data.succee)
+        readReservationUser({id_Reservation:id, userId:user.id_user})
         setAlertType('success')
         setTimeout(() => {
           setOpenAlert(false)
-          setShowForme(false)
+          setShowForme(true)
+          getReservation()
         }, 3000);
       }
     }).catch((err) => {
@@ -180,6 +182,25 @@ function ReservationAll() {
                     <span style={{ fontWeight: 700 }}>{' ' + moment(item.date_Reservation).format('DD MMM YYYY')}</span>.
                   </div>
                 {!item.readAt ?
+                 <div>
+                  <div style={{
+                    position: 'absolute',
+                    right: 5,
+                    bottom: 2,
+                    backgroundColor: '#ff3b3bc5',
+                    paddingBlock: 6,
+                    paddingInline: 10,
+                    color: 'white',
+                    borderRadius: 5,
+                    fontWeight: 700,
+                    marginRight: 5,
+                    }} onClick={() => {
+                      setShowForme(true)
+                      setId(null)
+                    }}
+                  >
+                    Annuler
+                  </div>
                   <div style={{
                     position: 'absolute',
                     right: 5,
@@ -191,10 +212,12 @@ function ReservationAll() {
                     borderRadius: 5,
                     fontWeight: 700,
                     }} onClick={() => {
-                      setShowForme(true)
+                      setShowForme(false)
                       setId(item.id_Reservation)
-                    }}>
+                      }}
+                    >
                     Emprunter
+                  </div>
                   </div> : user ?
                   <img
                     src={getImg(item.user.user_profil)} alt="pdp"
@@ -244,6 +267,25 @@ function ReservationAll() {
                     <span style={{ fontWeight: 700 }}>{' ' + moment(item.date_Reservation).format('DD MMM YYYY')}</span>.
                   </div>
                 {!item.readAt ?
+                <div>
+                  <div style={{
+                    position: 'absolute',
+                    right: 5,
+                    bottom: 2,
+                    backgroundColor: '#ff3b3bc5',
+                    paddingBlock: 6,
+                    paddingInline: 10,
+                    color: 'white',
+                    borderRadius: 5,
+                    fontWeight: 700,
+                    marginRight: 5,
+                    }} onClick={() => {
+                      setShowForme(true)
+                      setId(null)
+                    }}
+                  >
+                    Annuler
+                  </div>
                   <div style={{
                     position: 'absolute',
                     right: 5,
@@ -255,10 +297,12 @@ function ReservationAll() {
                     borderRadius: 5,
                     fontWeight: 700,
                     }} onClick={() => {
-                      setShowForme(true)
+                      setShowForme(false)
                       setId(item.id_Reservation)
-                    }}>
+                      }}
+                    >
                     Emprunter
+                  </div>
                   </div> : user ?
                   <img
                     src={getImg(item.user.user_profil)} alt="pdp"
