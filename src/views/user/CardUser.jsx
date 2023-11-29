@@ -32,9 +32,9 @@ function CardUser({item, onclose=()=>{}}) {
         <span className="tHover"></span>
         <span className="tHover"></span>
         <span className="tHover"></span>
+        {/* <span className="tHover"></span>
         <span className="tHover"></span>
-        <span className="tHover"></span>
-        <span className="tHover"></span>
+        <span className="tHover"></span> */}
         <div className='tBox'>
           <img
             src={getImg(item.user_profil)}
