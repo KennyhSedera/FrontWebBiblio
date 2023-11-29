@@ -8,7 +8,6 @@ import { countAdh } from '../../services/adherentService';
 import CardDashboard from './CardDashboard';
 import MainLayout from '../../components/layout/MainLayout';
 import { countReservation } from '../../services/reservationService';
-import { getImg } from '../../services/getImg'
 
 export default function DashboardView() {
     const [livre, setLivre] = React.useState(0);
@@ -17,7 +16,6 @@ export default function DashboardView() {
     const [reservation, setReservation] = React.useState(0);
 
     const [user, setUser] = React.useState([])
-    console.log(user.user_name);
     
     const card1s = [
         { title: 'Adhérents', route: '/membre', total: membre, icon: 'graduate.gif' },
@@ -26,14 +24,14 @@ export default function DashboardView() {
         { title: 'Resérvations', route: '/reservation', total: reservation, icon: 'dictionary.gif' },
         { title: 'Statistiques', route: '/statistique', icon: 'pie-chart (1).gif' },
         { title: 'Utilisateurs', route: '/utilisateur', icon: 'profile.gif' },
-        { title: user.user_name, route: '/profile', icon: getImg(user.user_profil) },
+        { title: 'Profile', route: '/profile', icon: 'profile.gif' },
     ]
     const card2s = [
         { title: 'Adhérents', route: '/membre', total: membre, icon: 'graduate.gif' },
         { title: 'Livres', route: '/livre', total: livre, icon: 'dictionary.gif' },
         { title: 'Emprunts', route: '/emprunt', total: emprunt, icon: 'science-fiction.gif' },
         { title: 'Resérvations', route: '/reservation', total: reservation, icon: 'dictionary.gif' },
-        { title: user.user_name, route: '/profile', icon: getImg(user.user_profil) },
+        { title: 'Profile', route: '/profile', icon: 'profile.gif' },
     ]
     
     const [cards, setCards] = React.useState(card1s)
