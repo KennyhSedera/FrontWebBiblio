@@ -131,7 +131,7 @@ export default function DashboardView() {
                     display: 'flex', alignItems: 'flex-start',
                     justifyContent: 'space-around', flexWrap: 'wrap',
                 }}>
-                    {cards.map((item, i) => (
+                    {card1s.map((item, i) => (
                         <Link className='carddashboard' style={{
                             width: '24%', color: 'white',
                             height: 225, fontSize: 24,
