@@ -45,7 +45,7 @@ function CardUser({item, onclose=()=>{}}) {
             <div style={{fontSize:16}}><strong>Email: </strong>{item.user_email}</div>
             <div style={{fontSize:16}}><strong>Contact: </strong>{item.user_contact}</div>
           </div>
-          <div style={{ width: '80%' }}>
+          <div style={{ width: '80%', zIndex:99 }}>
             <Button
               title={'Valider'}
               color={'#1e88e5'}
