@@ -136,8 +136,8 @@ function ReservationView() {
                             <strong style={{fontSize:18}}>{ data.reservationLivre.adherent.prenom_Adh }</strong>
                             <div style={{fontSize:14, marginTop:5}}>
                                 <div><strong>Adresse: </strong>{ data.reservationLivre.adherent.adresse_Adh }</div>
-                                <div><strong>Date réservation: </strong>{ moment(data.reservationLivre.date_reservation).format('DD MMM YYYY') }</div>
-                                <div><strong>Date récupéretion: </strong>{ moment(data.reservationLivre.date_emprunter).format('DD MMM YYYY') }</div>
+                                <div><strong>Date réservation: </strong>{ moment(data.reservationLivre.date_Reservation).format('DD MMM YYYY') }</div>
+                                <div><strong>Date récupéretion: </strong>{ moment(data.reservationLivre.date_Emprunter).format('DD MMM YYYY') }</div>
                             </div>
                         </div>
                     </div>
