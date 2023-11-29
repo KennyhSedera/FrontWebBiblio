@@ -17,6 +17,7 @@ export default function DashboardView() {
     const [reservation, setReservation] = React.useState(0);
 
     const [user, setUser] = React.useState([])
+    console.log(user);
     
     const card1s = [
         { title: 'Adhérents', route: '/membre', total: membre, icon: 'graduate.gif' },
