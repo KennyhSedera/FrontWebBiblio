@@ -17,6 +17,33 @@ export default function DashboardView() {
 
     const [user, setUser] = React.useState([])
     
+    React.useEffect(() => {
+        countLivre()
+            .then((res) => {
+                setLivre(res.data.total)
+            }).catch((err) => {
+                console.log(err);
+            });
+        countAdh()
+            .then((res) => {
+                setMembre(res.data.total)
+            }).catch((err) => {
+                console.log(err);
+            });
+        countEmprunt()
+            .then((res) => {
+                setEmprunt(res.data.emprunt[0].total)
+            }).catch((err) => {
+                console.log(err);
+            });
+        countReservation()
+            .then((res) => {
+                setReservation(res.data.total[0].total)
+            }).catch((err) => {
+                console.log(err);
+            });
+
+    }, [])
     const card1s = [
         { title: 'Adhérents', route: '/membre', total: membre, icon: 'graduate.gif' },
         { title: 'Livres', route: '/livre', total: livre, icon: 'dictionary.gif' },
@@ -53,33 +80,6 @@ export default function DashboardView() {
         } 
     }
 
-    React.useEffect(() => {
-        countLivre()
-            .then((res) => {
-                setLivre(res.data.total)
-            }).catch((err) => {
-                console.log(err);
-            });
-        countAdh()
-            .then((res) => {
-                setMembre(res.data.total)
-            }).catch((err) => {
-                console.log(err);
-            });
-        countEmprunt()
-            .then((res) => {
-                setEmprunt(res.data.emprunt[0].total)
-            }).catch((err) => {
-                console.log(err);
-            });
-        countReservation()
-            .then((res) => {
-                setReservation(res.data.total[0].total)
-            }).catch((err) => {
-                console.log(err);
-            });
-
-    }, [])
 
     return (
         <MainLayout title='Tableau de bord' overflow>
