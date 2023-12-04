@@ -9,6 +9,17 @@ function CardEmprunt({data}) {
   const str = data.adherent.prenom_Adh;
 
   const pseudo = str.split(' ');
+  let date1 = new Date(data.retour_Emprunt);
+  let date2 = new Date();
+
+  // Comparaison des dates
+  if (date1 < date2) {
+      console.log("La date 1 est antérieure à la date 2");
+  } else if (date1 > date2) {
+      console.log("La date 1 est postérieure à la date 2");
+  } else {
+      console.log("Les dates sont égales");
+  }
     
   return (
       <div className='cardemprunt'>
