@@ -12,14 +12,6 @@ function CardEmprunt({data}) {
   let date1 = new Date(data.retour_Emprunt);
   let date2 = new Date();
 
-  // Comparaison des dates
-  if (date1 < date2) {
-      console.log("La date 1 est antérieure à la date 2");
-  } else if (date1 > date2) {
-      console.log("La date 1 est postérieure à la date 2");
-  } else {
-      console.log("Les dates sont égales");
-  }
     
   return (
       <div className='cardemprunt'>
@@ -44,7 +36,7 @@ function CardEmprunt({data}) {
             <div><strong>Début: </strong>{ moment(data.date_Emprunt).format('DD MMM YYYY ')}</div>
             <div><strong>Retour: </strong>{ moment(data.retour_Emprunt).format('DD MMM YYYY ')}</div>
           </div>
-          {data.retour_Emprunt > new Date() && <div style={{width:'60%', marginTop:18, marginLeft:'20%'}}>
+          {date1 > date2 && <div style={{width:'60%', marginTop:18, marginLeft:'20%'}}>
             <Button title='Retour' color='' textcolor='white' />
           </div>}
     </div>
