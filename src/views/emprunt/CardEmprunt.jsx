@@ -2,6 +2,7 @@ import React from 'react'
 import './cardemprunt.css'
 import moment from 'moment'
 import { getImg } from '../../services/getImg'
+import Button from '../../components/Button'
 
 function CardEmprunt({data}) {
 
@@ -31,6 +32,9 @@ function CardEmprunt({data}) {
             <div><strong>Auteur: </strong>{data.livre.auteur_livre}</div>
             <div><strong>Début: </strong>{ moment(data.date_Emprunt).format('DD MMM YYYY ')}</div>
             <div><strong>Retour: </strong>{ moment(data.retour_Emprunt).format('DD MMM YYYY ')}</div>
+          </div>
+          <div style={{width:'60%'}}>
+            <Button title='Retour' color='' textcolor='white' />
           </div>
     </div>
   )
