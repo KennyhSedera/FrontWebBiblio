@@ -5,14 +5,11 @@ import { getImg } from '../../services/getImg'
 import Button from '../../components/Button'
 
 function CardEmprunt({data}) {
-
   const str = data.adherent.prenom_Adh;
-
   const pseudo = str.split(' ');
   let date1 = new Date(data.retour_Emprunt);
   let date2 = new Date();
 
-    
   return (
       <div className='cardemprunt'>
         <img
@@ -36,7 +33,7 @@ function CardEmprunt({data}) {
             <div><strong>Début: </strong>{ moment(data.date_Emprunt).format('DD MMM YYYY ')}</div>
             <div><strong>Retour: </strong>{ moment(data.retour_Emprunt).format('DD MMM YYYY ')}</div>
           </div>
-          {date1 > date2 && <div style={{width:'60%', marginTop:18, marginLeft:'20%'}}>
+          {date1 > date2 && <div style={{width:'60%', marginTop:20, marginLeft:'20%'}}>
             <Button title='Retour' color='' textcolor='white' />
           </div>}
     </div>
