@@ -52,7 +52,7 @@ function CardEmprunt({ data }) {
                     height: 50, alignItems: 'center', fontWeight: 500,
                     marginBottom: 20, fontSize: 15,
                 }}>
-                    <span>Voulez-vous se deconnecter vraiment ?</span>
+                    <span>Voulez-vous enregistrer la retour du {data.livre.titre_livre} emprunté par {pseudo} le {moment(data.date_Emprunt).format('DD MMM YYYY ')} ?</span>
                 </div>
                 <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                     <div style={{ width: '42%', }}>
@@ -61,7 +61,7 @@ function CardEmprunt({ data }) {
                     <div to='/' style={{ width: '42%', textDecoration: 'none' }}>
                         <Button
                             small
-                            title='Deconnecter'
+                            title='Enregistrer'
                             color='#00b2fee1'
                             textcolor='white'
                             textsize={15}
