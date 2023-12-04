@@ -45,7 +45,7 @@ function CardEmprunt({ data }) {
                 borderRadius: 15, color: 'black', fontSize: 18, fontWeight: 600,
             }}>
                 <div style={{ marginLeft: 10, fontSize:22 }}>
-                    <span>Deconnexion ?</span>
+                    <span>Retour Emprunt ?</span>
                 </div>
                 <div style={{
                     justifyContent: 'center', display: 'flex',
@@ -65,7 +65,7 @@ function CardEmprunt({ data }) {
                             color='#00b2fee1'
                             textcolor='white'
                             textsize={15}
-                            onClick={handleLogout}
+                            // onClick={handleLogout}
                         />
                     </div>
                 </div>
