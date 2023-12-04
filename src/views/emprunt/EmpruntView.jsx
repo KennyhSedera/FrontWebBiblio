@@ -6,6 +6,7 @@ import { getAllEmprunt } from '../../services/empruntService';
 import CardEmprunt from './CardEmprunt';
 import Button from '../../components/Button';
 import moment from 'moment';
+import DialogRetour from '../../components/DialogRetour';
 
 function EmpruntView() {
   const [isOpen, setIsOpen] = useState(false);
@@ -108,7 +109,13 @@ function EmpruntView() {
       </Modal>
       
       <Modal open={openRetour}>
-        <div style={{
+        <DialogRetour
+          pseudo={pseudo}
+          livreEmp={livreEmp}
+          dateEmp={dateEmp}
+          onClose={()=>setOpenRetour(false)}
+        />
+        {/* <div style={{
             background: '#ffffffe8', width: 380, minHeight: 100, padding: 10,
             borderRadius: 15, color: 'black', fontSize: 18, fontWeight: 600,
         }}>
@@ -137,7 +144,7 @@ function EmpruntView() {
                     />
                 </div>
             </div>
-        </div>
+        </div> */}
       </Modal>
     </MainLayout>
   )
