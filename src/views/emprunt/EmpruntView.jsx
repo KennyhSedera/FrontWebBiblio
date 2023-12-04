@@ -4,9 +4,11 @@ import Modal from '../../components/modal/Modal'
 import EmpruntBook from '../../components/EmpruntBook'
 import { getAllEmprunt } from '../../services/empruntService';
 import CardEmprunt from './CardEmprunt';
+import Button from '../../components/Button';
 
 function EmpruntView() {
   const [isOpen, setIsOpen] = useState(false);
+  const [openRetour, setOpenRetour] = useState(false);
   const [emprunt, setEmprunt] = useState([])
   const [currentPage, setCurrentPage] = React.useState(1);
   const dataPerPage = 8;
@@ -45,7 +47,45 @@ function EmpruntView() {
     const { name, value } = e.target;
     setInput(prevState => ({ ...prevState, [name]: value }));
   }
-  
+  const handleRetour = (item) => {
+    setOpenRetour(true)
+    const str = item.adherent.prenom_Adh;
+    const pseudo = str.split(' ');
+    return (
+      <Modal open={openRetour}>
+        <div style={{
+            background: '#ffffffe8', width: 380, minHeight: 100, padding: 10,
+            borderRadius: 15, color: 'black', fontSize: 18, fontWeight: 600,
+        }}>
+            <div style={{ marginLeft: 10, fontSize:22 }}>
+                <span>Retour Emprunt ?</span>
+            </div>
+            <div style={{
+                justifyContent: 'center', display: 'flex',
+                height: 50, alignItems: 'center', fontWeight: 500,
+                marginBottom: 20, fontSize: 15,
+            }}>
+                <span>Voulez-vous enregistrer la retour du {item.livre.titre_livre} emprunté par {pseudo} le {moment(item.date_Emprunt).format('DD MMM YYYY ')} ?</span>
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-around' }}>
+                <div style={{ width: '42%', }}>
+                    <Button small onClick={() => setOpenRetour(false)} title='annuler' color='white' textcolor='black' textsize={15} />
+                </div>
+                <div to='/' style={{ width: '42%', textDecoration: 'none' }}>
+                    <Button
+                        small
+                        title='Enregistrer'
+                        color='#00b2fee1'
+                        textcolor='white'
+                        textsize={15}
+                        // onClick={handleLogout}
+                    />
+                </div>
+            </div>
+        </div>
+      </Modal>
+    )
+  }
   return (
     <MainLayout 
       search title='Liste Emprunts'
@@ -77,7 +117,7 @@ function EmpruntView() {
             })
             .map((item) => (
               <div key={item.id_Emprunt} style={{width:'calc(25% - 20px)', height:'calc(48% - 20px)'}}>
-                <CardEmprunt data={item} />
+                <CardEmprunt data={item} onClick={()=>handleRetour(item)} />
               </div>
             )) : (
             <div style={{
@@ -92,6 +132,7 @@ function EmpruntView() {
       <Modal open={isOpen} >
         <EmpruntBook onClose={()=>{setIsOpen(false); getAll()}} title='Emprunter' />
       </Modal>
+      
     </MainLayout>
   )
 }
