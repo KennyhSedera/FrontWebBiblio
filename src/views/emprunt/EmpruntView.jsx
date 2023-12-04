@@ -5,6 +5,7 @@ import EmpruntBook from '../../components/EmpruntBook'
 import { getAllEmprunt } from '../../services/empruntService';
 import CardEmprunt from './CardEmprunt';
 import Button from '../../components/Button';
+import moment from 'moment';
 
 function EmpruntView() {
   const [isOpen, setIsOpen] = useState(false);
