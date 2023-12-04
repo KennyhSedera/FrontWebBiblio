@@ -52,7 +52,14 @@ function EmpruntView() {
     setOpenRetour(true)
     const str = item.adherent.prenom_Adh;
     const pseudo = str.split(' ');
+    setPseudo(pseudo);
+    setDateEmp(item.date_Emprunt);
+    setLivreEmp(item.livre.titre_livre)
   }
+
+  const [pseudo, setPseudo]=useState('')
+  const [dateEmp, setDateEmp]=useState('')
+  const [livreEmp, setLivreEmp]=useState('')
   return (
     <MainLayout 
       search title='Liste Emprunts'
@@ -113,7 +120,7 @@ function EmpruntView() {
                 height: 50, alignItems: 'center', fontWeight: 500,
                 marginBottom: 20, fontSize: 15,
             }}>
-                {/* <span>Voulez-vous enregistrer la retour du {item.livre.titre_livre} emprunté par {pseudo} le {moment(item.date_Emprunt).format('DD MMM YYYY ')} ?</span> */}
+                <span>Voulez-vous enregistrer la retour du {livreEmp} emprunté par {pseudo} le {moment(dateEmp).format('DD MMM YYYY ')} ?</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                 <div style={{ width: '42%', }}>
