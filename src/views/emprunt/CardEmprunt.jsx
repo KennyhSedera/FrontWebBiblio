@@ -33,9 +33,9 @@ function CardEmprunt({data}) {
             <div><strong>Début: </strong>{ moment(data.date_Emprunt).format('DD MMM YYYY ')}</div>
             <div><strong>Retour: </strong>{ moment(data.retour_Emprunt).format('DD MMM YYYY ')}</div>
           </div>
-          <div style={{width:'60%', marginTop:18, marginLeft:'20%'}}>
+          {data.retour_Emprunt > new Date() && <div style={{width:'60%', marginTop:18, marginLeft:'20%'}}>
             <Button title='Retour' color='' textcolor='white' />
-          </div>
+          </div>}
     </div>
   )
 }
