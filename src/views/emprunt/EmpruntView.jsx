@@ -9,7 +9,7 @@ import moment from 'moment';
 
 function EmpruntView() {
   const [isOpen, setIsOpen] = useState(false);
-  const [openRetour, setOpenRetour] = useState(true);
+  const [openRetour, setOpenRetour] = useState(false);
   const [emprunt, setEmprunt] = useState([])
   const [currentPage, setCurrentPage] = React.useState(1);
   const dataPerPage = 8;
