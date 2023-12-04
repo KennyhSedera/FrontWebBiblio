@@ -14,7 +14,7 @@ function DialogRetour({livreEmp='', pseudo='', dateEmp=new Date(), onClick=()=>{
                 height: 50, alignItems: 'center', fontWeight: 500,
                 marginBottom: 20, fontSize: 15,
             }}>
-                <span>Voulez-vous enregistrer la retour du {livreEmp} emprunté par {pseudo} le {moment(dateEmp).format('DD MMM YYYY ')} ?</span>
+                <span>Voulez-vous enregistrer la retour du <strong>{livreEmp}</strong> emprunté par <strong>{pseudo}</strong> le <strong>{moment(dateEmp).format('DD MMM YYYY ')}</strong> ?</span>
             </div>
             <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                 <div style={{ width: '42%', }}>
